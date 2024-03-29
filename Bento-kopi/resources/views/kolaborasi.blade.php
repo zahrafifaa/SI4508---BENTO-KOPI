@@ -2,5 +2,5 @@
 
 
 @section('isiPage')
-    <h1>Halaman Menu</h1>
+    <h1>Halaman Kolaborasi</h1>
 @endsection
