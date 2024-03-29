@@ -1,0 +1,36 @@
+.product-table-container {
+    overflow-x: hidden; /* Mengatur overflow-x ke hidden untuk menyembunyikan konten yang melampaui batas area */
+    white-space: nowrap; /* Mengatur white-space ke nowrap untuk mencegah pemisahan konten ke baris baru */
+  }
+  
+  .product-table {
+    display: inline-block; /* Mengatur tampilan tabel produk ke inline-block agar dapat digeser */
+    white-space: normal; /* Mengatur white-space ke normal agar konten di dalamnya dapat kembali ke pengaturan default */
+  }
+  
+  .slide-button {
+    background-color: #f2f2f2; /* Warna latar belakang tombol */
+    border: none; /* Hapus border */
+    color: #000; /* Warna teks */
+    cursor: pointer;
+    padding: 10px;
+    position: absolute; /* Mengatur posisi tombol secara absolut */
+    top: 50%; /* Mengatur posisi vertikal ke tengah */
+    transform: translateY(-50%); /* Menggeser tombol ke atas agar berada di tengah vertikal */
+    z-index: 1; /* Mengatur z-index agar tombol tetap di atas tabel produk */
+  }
+  
+  .slide-button:hover {
+    background-color: #ddd; /* Warna latar belakang tombol saat dihover */
+  }
+  
+  /* Mengatur posisi tombol kiri */
+  .slide-button.left {
+    left: 0;
+  }
+  
+  /* Mengatur posisi tombol kanan */
+  .slide-button.right {
+    right: 0;
+  }
+  
