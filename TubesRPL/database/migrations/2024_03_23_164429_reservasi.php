@@ -12,10 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('Table_Info', function (Blueprint $table) {
-            $table->id('TableID')->primary();
-            $table->integer('Capacity');
-            $table->enum('TableArea',['Non Smoking','Smoking']);
+        Schema::create('Info_Reservasi', function (Blueprint $table) {
+            $table->bigIncrements('IDReservasi');
+            $table->string('Nama');
+            $table->string('No_Telp');
+            $table->date('Tanggal_Reservasi');
+            $table->time('Waktu_Reservasi');
+            $table->integer('Jumlah_Pengunjung');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::dropIfExists('Table_Info');
+        Schema::dropIfExists('Info_Reservasi');
     }
 };
