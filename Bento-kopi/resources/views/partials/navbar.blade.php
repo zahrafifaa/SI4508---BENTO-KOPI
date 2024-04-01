@@ -6,14 +6,14 @@
     </div>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li> <a class ="{{ ($title == "Beranda") ? 'active' : '' }}" href="/">Beranda</a></li>
-        <li> <a class="{{ ($title == "Menu") ? 'active' : '' }}" href="menu">Menu</a></li>
-        <li> <a class="{{ ($title == "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
-        <li> <a class="{{ ($title == "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
-        <li> <a class="{{ ($title == "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>
-        <li> <a class="{{ ($title == "Location") ? 'active' : '' }}" href="location">Location</a></li>
-        <li> <a class="{{ ($title == "Apply") ? 'active' : '' }}" href="apply">Apply</a></li>
-        <li> <a class="{{ ($title == "About") ? 'active' : '' }}" href="about">About us</a></li>
+        <li class="hoverG"> <a class ="{{ ($title == "Beranda") ? 'active' : '' }}" href="/">Beranda</a></li>
+        <li class="hoverG"> <a class="{{ ($title == "Menu") ? 'active' : '' }}" href="menu">Menu</a></li>
+        <li class="hoverG"> <a class="{{ ($title == "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
+        <li class="hoverG"> <a class="{{ ($title == "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
+        <li class="hoverG"> <a class="{{ ($title == "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>
+        <li class="hoverG"> <a class="{{ ($title == "Location") ? 'active' : '' }}" href="location">Location</a></li>
+        <li class="hoverG"> <a class="{{ ($title == "Apply") ? 'active' : '' }}" href="apply">Apply</a></li>
+        <li class="hoverG"> <a class="{{ ($title == "About") ? 'active' : '' }}" href="about">About us</a></li>
     </ul>
 
     <div class="col-md-2 text-end">
