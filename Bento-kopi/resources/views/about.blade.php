@@ -23,7 +23,7 @@
         <div class="descAbout">
             <h4 class="italic">Sejarah Bento Kopi</h4>
             <div>
-                <h1 class = "bold poppins">Berdiri dari tahun 2012, Kokoh hingga saat ini</h1>
+                <h1 class = "bold poppins">Dari tahun 2012, Berdiri kokoh hingga saat ini</h1>
                 <p class= "isi">Bermula dari ide cemerlang oleh seorang mahasiswa saat itu. Didasari oleh rasa prihatin terhadap keadaan mahasiswa yang sulit menemukan cafe sebagai 
                     tempat kumpul yang dapat digunakan sebagai media mengerjakan tugas dan berdiskusi dengan fasilitas yang ramah bagi mahasiswa.
                 </p>
