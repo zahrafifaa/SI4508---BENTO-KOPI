@@ -1,9 +1,7 @@
 <footer>
-    <div class="col mb-3">
-        <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
-            <b class="subIkon">BentoKopi</b>
-        </a>
-        <p class="ml-15 ">Bento Kopi adalah kafe yang menghadirkan pengalaman kuliner yang unik dan menyenangkan. Bento Kopi menawarkan lingkungan yang nyaman dan estetis bagi para pengunjung untuk menikmati waktu bersama keluarga dan teman-teman mereka.</p>
+    <div class="col mb-3 pl-60 item-center">
+        <h5 class="mt-3 mb-3 bold subIkon">BentoKopi</h5>
+        <p class="text-body-secondary text-start">Bento Kopi adalah kafe yang menghadirkan pengalaman kuliner yang unik dan menyenangkan. Bento Kopi menawarkan lingkungan yang nyaman dan estetis bagi para pengunjung untuk menikmati waktu bersama keluarga dan teman-teman mereka.</p>
     </div>
     
     <div class="col mb-3"></div>
@@ -16,7 +14,7 @@
         </ul>
     </div>
 
-    <div class="col mb-3 text-start">
+    <div class="col mb-3 text-start pr-60">
         <h5 class="mt-3 mb-3 bold">Kontak</h5>
         <ul class="nav flex-column ">
             <li class="nav-item mb-2 hoverU"><a href="https://wa.me/62895335021186" class="nav-link p-0 text-body-secondary text-start">+62 895-3350-21186</a></li>
