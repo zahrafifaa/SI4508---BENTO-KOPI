@@ -10,7 +10,7 @@
             <img class="gambar1" src="images/gambar1.png" alt="makanan">
         </div>
         <div class="descAbout">
-            <h4 class="italic">Modern Asian & Specialty Coffe</h4>
+            <h4 class="italic">Modern Asian & Specialty Coffe.</h4>
             <div>
                 <b class = "judul">Temukan Insiprasi Baru di Setiap Sudut Bento Kopi</b>
                 <p class= "isi">Nikmati pengalaman unik kami dalam menyajikan kopi berkualitas dan hidangan lezat. Temukan berbagia menu istimewa dan nikmati suasana yang menyenangkan bersama kami. Terima kasih telah berkunjung</p>
