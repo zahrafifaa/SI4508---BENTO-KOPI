@@ -42,11 +42,16 @@
                     </div>
                 @endforeach
                 <div class="col-grid">
-                     
-
-
-
-                
+                    <select class="form-select" aria-label="Default select example" onchange="location = this.value;">
+                        <option value="{{ route('showmenubycategory', ['kategori' => $categorynow]) }}"
+                            @if ($sort == 'null') selected @endif>Sort By</option>
+                        <option
+                            value="{{ route('sortshowmenubycategory', ['kategori' => $categorynow, 'option' => 'termurah']) }}"
+                            @if ($sort == 'termurah') selected @endif>Termurah</option>
+                        <option
+                            value="{{ route('sortshowmenubycategory', ['kategori' => $categorynow, 'option' => 'termahal']) }}"
+                            @if ($sort == 'termahal') selected @endif>Termahal</option>
+                    </select>
 
                 </div>
             </div>
