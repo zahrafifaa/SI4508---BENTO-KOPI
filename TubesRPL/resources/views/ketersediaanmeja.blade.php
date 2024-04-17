@@ -81,12 +81,15 @@
     </style>
 </head>
 <body>
-    <h1>Cek Ketersediaan Meja</h1>
-    <form action="reservation.php" method="GET">
-        <label for="tgl_reservasi">Tanggal Reservasi : </label>
-        <input type="date" id="tgl_reservasi" name="tgl_reservasi" required><br>
-        <label for="wkt_reservasi">Waktu Reservasi : </label>
-        <input type="time" id="wkt_reservasi" name="wkt_reservasi" required><br>
-        <button type="submit">Cek Ketersediaan</button>
+    <h1>Ketersediaan Meja</h1>
+    <p>Tanggal Reservasi: {{ $tgl_reservasi }}</p>
+    <p>Waktu Reservasi: {{ $wkt_reservasi }}</p>
+    
+    <h2>Jumlah Meja Tersedia:</h2>
+    <ul>
+        @foreach($tables as $table)
+            <li>Capacity: {{ $table->Capacity }}, Area: {{ $table->TableArea }}</li>
+        @endforeach
+    </ul>
 </body>
 </html>
