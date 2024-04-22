@@ -2,5 +2,5 @@
 
 
 @section('isiPage')
-    <h1>Halaman Menu</h1>
+    <h1>Halaman Menu Ya Bim</h1>
 @endsection

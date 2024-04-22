@@ -17,7 +17,7 @@
     <div class="preAbout mt-3">
         <div class="flexContainer">
             <div class="kotak2 flexContainer">
-                <img class="image2" src="images/bentoKopi.png" alt="makanan">
+                <img class="image2" src="images/bentoKopi1.png" alt="makanan">
             </div>
         </div>
         <div class="descAbout">
