@@ -11,16 +11,18 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li class="nav-item hoverG"> <a class ="{{ ($title === "Beranda") ? 'active' : '' }}" href="/">Beranda</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Menu") ? 'active' : '' }}" href="{{route('allmenu')}}">Menu</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Location") ? 'active' : '' }}" href="location">Location</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Apply") ? 'active' : '' }}" href="apply">Apply</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "About") ? 'active' : '' }}" href="about">About us</a></li>
-        </ul>
+        <div class="collapse navbar-collapse col-8" id="navbarNav">
+          <ul class="nav mb-2 justify-content-center mb-md-0">
+              <li class="nav-item hoverG"> <a class ="{{ ($title === "Beranda") ? 'active' : '' }}" href="/">Beranda</a></li>
+              <li class="nav-item hoverG"> <a class="{{ ($title === "Menu") ? 'active' : '' }}" href="{{route('allmenu')}}">Menu</a></li>
+              <li class="nav-item hoverG"> <a class="{{ ($title === "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
+              <li class="nav-item hoverG"> <a class="{{ ($title === "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
+              <li class="nav-item hoverG"> <a class="{{ ($title === "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>
+              <li class="nav-item hoverG"> <a class="{{ ($title === "Location") ? 'active' : '' }}" href="location">Location</a></li>
+              <li class="nav-item hoverG"> <a class="{{ ($title === "Apply") ? 'active' : '' }}" href="apply">Apply</a></li>
+              <li class="nav-item hoverG"> <a class="{{ ($title === "About") ? 'active' : '' }}" href="about">About us</a></li>
+          </ul>
+        </div>
 
         <div class="col-md-2 text-end">
             <li class="cart">
@@ -33,33 +35,48 @@
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                 </svg>
-            </li>
-            <ul class="nav navbar-nav ms-auto">
-                @auth
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Welcome back, {{ auth()->user()->username }}
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <form action="/logout" method="post">
-                      @csrf
-                      <button type="submit" class="dropdown-item"><a>Logout</a></button>
-                    </form>
-                </ul>
-              </li>
-                @else
-                <li class="nav-item hoverG">
-                  <a href="/login" class="nav-link {{ ( $title === "Login") ? 'active' : '' }}"><i class="bi bi-box-arrow-in-right"></i>
-                    Login</a>
-                </li>
-                @endauth
-              </ul>
-            
+            </li>            
         </div>
-        <div class="line"></div>
+
+        <ul class="nav navbar-nav ms-auto">
+          @auth
+           @if (auth()->user()->username === 'App')
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome back, {{ auth()->user()->username }}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
+              <li><hr class="dropdown-divider"></li>
+                <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="dropdown-item"><a>Logout</a></button>
+                </form>
+            </ul>
+           </li>
+               
+           @else
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome back, {{ auth()->user()->username }}
+            </a>
+            <ul class="dropdown-menu">
+              <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="dropdown-item"><a>Logout</a></button>
+              </form>
+            </ul>
+           </li>
+               
+           @endif
+          @else
+          <li class="naav-item">
+            <a href="/login" class="nav-link {{ ( $title === "Login") ? 'active' : '' }}"><i class="bi bi-box-arrow-in-right"></i>
+              Login</a>
+          </li>
+          @endauth
+      </ul>
+        <div class="line w-10"></div>
     </div>
   </div>
 </nav>

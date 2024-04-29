@@ -88,3 +88,10 @@ Route::post('/validate-forgot-password-act', [LoginController::class, 'validate_
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/dashboard', function(){
+    return view('dashboard.index',[
+        'title' => 'Dashboard',
+        'active' => 'Dashboard'
+    ]);
+})->middleware('auth');
