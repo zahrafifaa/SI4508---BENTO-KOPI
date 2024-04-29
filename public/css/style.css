@@ -97,12 +97,18 @@ a {
     font-style: normal;
 }
 
-svg{
-    margin-top:7px;
+.bi-cart{
+    margin-top:3px;
     margin-left: 5%;
     width: 25px;
     height: 50px;
-    
+}
+
+.bi-person-circle{
+    margin-top:3px;
+    margin-left: 5%;
+    width: 25px;
+    height: 50px;
 }
 
 .line{
@@ -248,17 +254,35 @@ svg{
     flex-direction: column;
 }
 
+.grid2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.love{
+    display: inline-flex;
+    justify-content: end;
+    align-items: start;
+}
 
 
 .card1{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 2rem;
+    gap: 10px;
+    margin-top: 2rem;
+    background-color: #3C5049;
+    border-radius:10px;
+
+    /* display: flex;
     padding:2rem;
     gap: 10px;
     margin-top: 2rem;
     background-color: #3C5049;
-    justify-content: center;
+    justify-content: left;
     align-content: center;
-    border-radius:10px;
+    border-radius:10px; */
 }
 
 .bold{
@@ -321,6 +345,7 @@ h6{
 .inlineFlex{
     display: inline-flex;
 }
+
 
 .image2{
     width:25rem;

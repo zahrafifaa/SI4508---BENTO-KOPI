@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
@@ -19,7 +20,8 @@ class MenuController extends Controller
         $menus = Menu::all();
         $sort = 'null';
         $title = 'menu';
-        return view('menu', compact('menus', 'categories', 'sort','title'));
+        $user = Auth::user();
+        return view('menu', compact('menus', 'categories', 'sort','title', 'user'));
     }
     public function searchMenu( Request $request){
         $query = $request->input('query');

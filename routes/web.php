@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\BerandaController;
+
 
 
 /*
@@ -30,14 +33,13 @@ Route::get('/menu/sort/{option}', [MenuController::class, 'sortmenu'])->name('so
 Route::get('/menu/{kategori}/', [MenuController::class, 'showMenuByCategory'])->name('showmenubycategory');
 Route::get('/menu/{kategori}/{option}', [MenuController::class, 'sortShowMenuByCategory'])->name('sortshowmenubycategory');
 
-Route::get('/', function () {
-    return view('beranda', [
-        "title" => "Beranda",
-    ]);
-});
+Route::post('/menu/{menu}/favorite', [FavoriteController::class, 'store'])->name('storeMenu')->middleware('auth');
+Route::delete('/favorite/delete/{favorite}', [FavoriteController::class, 'destroy'])->name('destroyMenu')->middleware('auth');
 
+// Route::post('/favorites/{menuId}', [FavoriteController::class, 'toggleFavorite'])->name('favorites');
+// Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
 
-
+Route::get('/', [BerandaController::class, 'beranda']);
 
 Route::get('/reservasi', function () {
     return view('reservasi', [
