@@ -53,6 +53,6 @@ Route::get('/about', function () {
 
 Route::get('/buatkolaborasi', function () {
     return view('buatkolaborasi', [
-        "title" => "Buat"
+        "title" => "Kolaborasi"
     ]);
 });
