@@ -40,6 +40,28 @@
 
         <ul class="nav navbar-nav ms-auto">
           @auth
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Logout</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Apakah anda yakin ingin logout?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                  <form class="btn btn-primary" action="/logout" method="post">
+                    @csrf
+                    <button type="submit" class="dropdown-item "><a>Logout</a></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
            @if (auth()->user()->username === 'App')
            <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,10 +70,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
               <li><hr class="dropdown-divider"></li>
-                <form action="/logout" method="post">
-                @csrf
-                <button type="submit" class="dropdown-item"><a>Logout</a></button>
-                </form>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Logout</a></li>
             </ul>
            </li>
                
@@ -61,10 +80,7 @@
             Welcome back, {{ auth()->user()->username }}
             </a>
             <ul class="dropdown-menu">
-              <form action="/logout" method="post">
-                @csrf
-                <button type="submit" class="dropdown-item"><a>Logout</a></button>
-              </form>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Logout</a></li>
             </ul>
            </li>
                
