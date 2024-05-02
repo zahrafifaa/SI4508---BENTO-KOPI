@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function kolaborasi()
+    {
+        return $this->hasOne(Kolaborasi::class);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KolaborasiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,11 +22,6 @@ Route::get('/reservasi', function () {
     ]);
 });
 
-Route::get('/kolaborasi', function () {
-    return view('kolaborasi', [
-        "title" => "Kolaborasi"
-    ]);
-});
 
 Route::get('/artikel', function () {
     return view('artikel', [
@@ -51,8 +47,7 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/buatkolaborasi', function () {
-    return view('buatkolaborasi', [
-        "title" => "Kolaborasi"
-    ]);
-});
+Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
+Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
+Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
+Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
