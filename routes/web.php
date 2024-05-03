@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-
+use App\Models\Cart;
+use App\Models\Menu;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,3 +97,17 @@ Route::get('/dashboard', function(){
         'active' => 'Dashboard'
     ]);
 })->middleware('auth');
+
+// Route::get('/cartMenu', [MenuController::class, 'indexs']);  
+// Route::get('/shopping-cart', [MenuController::class, 'menuCart'])->name('shopping.cart');
+// Route::get('/menus/{id}', [MenuController::class, 'addmenutoCart'])->name('addmenu.to.cart');
+// Route::patch('/update-shopping-cart', [MenuController::class, 'updateCart'])->name('update.sopping.cart');
+// Route::delete('/delete-cart-product', [MenuController::class, 'deleteProduct'])->name('delete.cart.product');
+
+Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
+Route::GET('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
+Route::delete('/menu/delete/{menu}',  [CartController::class, 'destroy'])->name('cart.destroy')->middleware('auth');
+Route::post('/cart/increase-quantity',  [CartController::class, 'increaseQuantity'])->name('cart.increaseQuantity');
+Route::post('/cart/reduce-quantity',  [CartController::class, 'reduceQuantity'])->name('cart.reduceQuantity');
+Route::post('/cart/store-message', [CartController::class, 'storeMessage'])->name('cart.storeMessage');
+

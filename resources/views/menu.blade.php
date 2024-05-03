@@ -2,7 +2,7 @@
 
 
 @section('isiPage')
-<header>
+    <header>
         <nav class="navbar">
             <div class="container-lg">
                 <a class=""></a>
@@ -61,9 +61,14 @@
                                                 <p class="card-text">{{ $menu->deskripsi }}</p>
                                                 <p class="card-text">Rp. {{ number_format($menu->harga, 0, ',', '.') }}
                                                 </p>
-                                                <div class="d-grid">
-                                                    <button class="btn btn-success" type="button">Tambah</button>
-                                                </div>
+                                                <form action="{{ route('cart.store', $menu->id) }}" method="POST"  >
+                                                    @CSRF
+                                                    <div class="d-grid">
+                                                        <input type="hidden" value="{{ $menu->id }}" name="menu_id">
+                                                        <button class="btn btn-success" type="submmit">Tambah</button>
+                                                    </div>
+                                                </form>
+                                           
                                             </div>
                                         </div>
                                     </div>

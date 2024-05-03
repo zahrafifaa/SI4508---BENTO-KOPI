@@ -18,7 +18,7 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::all();
         $sort = 'null';
-        $title = 'menu';
+        $title = 'Menu';
         return view('menu', compact('menus', 'categories', 'sort','title'));
     }
     public function searchMenu( Request $request){
@@ -80,6 +80,58 @@ class MenuController extends Controller
 
         return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort', 'title'));
     }
+
+    // public function indexs()
+    // {
+    //     $menus = Menu::all();
+    //     return view('cart.products', compact('menus'));
+    // }
+  
+    // public function menuCart()
+    // {
+    //     return view('cart.carts');
+    // }
+    // public function addMenutoCart($id)
+    // {
+    //     $menu = Menu::findOrFail($id);
+    //     $cart = session()->get('cart', []);
+    //     if(isset($cart[$id])) {
+    //         $cart[$id]['quantity']++;
+    //     } else {
+    //         $cart[$id] = [
+    //             "nama" => $menu->nama,
+    //             "quantity" => 1,
+    //             "harga" => $menu->harga,
+    //             "gambar" => $menu->gambar
+    //         ];
+    //     }
+    //     session()->put('cart', $cart);
+    //     return redirect()->back()->with('success', 'menu has been added to cart!');
+    // }
+    
+    // public function updateCart(Request $request)
+    // {
+    //     if($request->id && $request->quantity){
+    //         $cart = session()->get('cart');
+    //         $cart[$request->id]["quantity"] = $request->quantity;
+    //         session()->put('cart', $cart);
+    //         session()->flash('success', 'menu added to cart.');
+    //     }
+    // }
+  
+    // public function deleteProduct(Request $request)
+    // {
+    //     if($request->id) {
+    //         $cart = session()->get('cart');
+    //         if(isset($cart[$request->id])) {
+    //             unset($cart[$request->id]);
+    //             session()->put('cart', $cart);
+    //         }
+    //         session()->flash('success', 'menu successfully deleted.');
+    //     }
+    // }
+
+
     /**
      * Show the form for creating a new resource.
      */
