@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             MenuSeeder::class,
+            DashboardKollabSeeder::class,
         ]);
 
         User::create([
@@ -42,6 +43,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'adminApp ',
             'username' => 'App',
             'email' => 'adminApp@gmail.com',
+            'password' => bcrypt('123456')
+        ]);
+
+        User::create([
+            'name' => 'faqih ',
+            'username' => 'faqih',
+            'email' => 'faqih@mail.com',
             'password' => bcrypt('123456')
         ]);
     }
