@@ -1,5 +1,5 @@
 
-{{-- Offcanvas --}}
+{{-- Offcanvas
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasRightLabel">Pesanan</h5>
@@ -8,7 +8,7 @@
   <div class="offcanvas-body">
     ...
   </div>
-</div>
+</div> --}}
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -18,27 +18,27 @@
       <span class="navbar-toggler-icon"></span>
     </button>
         <div class="collapse navbar-collapse  " id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Beranda") ? 'active' : '' }}" href="/">Beranda</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Menu") ? 'active' : '' }}" href="{{route('allmenu')}}">Menu</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Location") ? 'active' : '' }}" href="location">Location</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Apply") ? 'active' : '' }}" href="apply">Apply</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "About") ? 'active' : '' }}" href="about">About us</a></li>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0  ">
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Beranda") ? 'actives' : '' }}" href="/">Beranda</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Menu") ? 'actives' : '' }}" href="{{route('allmenu')}}">Menu</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Reservasi") ? 'actives' : '' }}" href="reservasi">Reservasi</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Kolaborasi") ? 'actives' : '' }}" href="kolaborasi">Kolaborasi</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Artikel") ? 'actives' : '' }}" href="artikel">Artikel</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Location") ? 'actives' : '' }}" href="location">Location</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Apply") ? 'actives' : '' }}" href="apply">Apply</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "About") ? 'actives' : '' }}" href="about">About us</a></li>
           </ul>
 
           <ul class="navbar-nav my-4  ">
             
             <li>
               {{-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button> --}}
-              <a class="nav-link" >
-                <i class="m-0 " data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-feather = "shopping-cart"></i>
+              <a class="nav-link" href="/cart" >
+                <i class="m-0 "  data-feather = "shopping-cart">d</i>
               </a>
             </li>
             @if($totalItems > 0)
-            <span class="quantity-badge">{{ $totalItems }}</span>
+            <span class="quantity-badge ">{{ $totalItems }}</span>
             @else
             <span class="quantity-badge">0</span>
             @endif

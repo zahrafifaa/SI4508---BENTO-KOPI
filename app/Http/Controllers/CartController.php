@@ -107,22 +107,20 @@ public function reduceQuantity(Request $request)
 public function storeMessage(Request $request)
 {
     $validated = $request->validate([
-        'menu_id' => 'required',
-        'pesan' => 'nullable|string',
+        'special_message' => 'nullable|string',
     ]);
 
     $user_id = auth()->id();
-    $cart = Cart::where('user_id', $user_id)
-                ->where('menu_id', $validated['menu_id'])
-                ->first();
+    $carts = Cart::where('user_id', $user_id)->get();
 
-    if ($cart) {
-        $cart->pesan = $validated['pesan'];
+    foreach ($carts as $cart) {
+        $cart->special_message = $validated['special_message'];
         $cart->save();
     }
 
     return redirect()->back()->with('success', 'Pesan Anda telah dikirim!');
 }
+
 }
 // public function viewCart()
 // {

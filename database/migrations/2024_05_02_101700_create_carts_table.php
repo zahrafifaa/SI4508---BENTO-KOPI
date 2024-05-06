@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('menu_id')->constrained()->cascadeOnDelete();
             $table->integer('jumlah');  
+            $table->text('special_message')->nullable();
             $table->timestamps();
         });
         
