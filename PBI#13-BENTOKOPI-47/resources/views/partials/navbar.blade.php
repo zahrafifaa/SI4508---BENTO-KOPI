@@ -12,7 +12,7 @@
         <li class="hoverG"> <a class="<?php echo $title == 'Kolaborasi' ? 'active' : ''; ?>" href="{{ route('kolaborasi.index') }}">Kolaborasi</a></li>
         <li class="hoverG"> <a class="<?php echo $title == 'Artikel' ? 'active' : ''; ?>" href="artikel">Artikel</a></li>
         <li class="hoverG"> <a class="<?php echo $title == 'Location' ? 'active' : ''; ?>" href="location">Location</a></li>
-        <li class="hoverG"> <a class="<?php echo $title == 'Apply' ? 'active' : ''; ?>" href="apply">Apply</a></li>
+        <li class="hoverG"> <a class="<?php echo $title == 'Apply' ? 'active' : ''; ?>" href="{{ route('lowongan.index') }}">Apply</a></li>
         <li class="hoverG"> <a class="<?php echo $title == 'About' ? 'active' : ''; ?>" href="about">About us</a></li>
     </ul>
 

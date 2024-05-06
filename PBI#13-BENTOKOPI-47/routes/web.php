@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KolaborasiController;
+use App\Http\Controllers\LowonganController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -51,3 +52,8 @@ Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolabora
 Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
 Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
 Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
+
+Route::get('lowongan', [LowonganController::class, 'index'])->name('lowongan.index');
+Route::get('lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
+Route::get('lowongan/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
+Route::post('lowongan/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
