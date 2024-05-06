@@ -76,7 +76,10 @@
                                                 <form action="{{ route('admin.menu.destroy', ['id' => $menu->id]) }}"
                                                     method="POST">
                                                     @csrf
-                                                    @method('DELETE')
+                                                    <!-- buat hapus -->
+                                                    @method('DELETE') 
+
+
                                                     <div class="d-grid">
                                                         <button class="btn btn-success" type="submit">Iya</button>
                                                     </div>
