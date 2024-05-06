@@ -9,7 +9,7 @@
                 <form class="d-flex" action="{{ route('searchMenu') }}" method="GET" role="search">
                     <input class="form-control me-2" type="search" name="query" placeholder="Search"
                         aria-label="Search">
-                    <button class="btn btn-outline-success d-none" type="submit">Searchs</button>
+                    <button class="btn btn-outline-success d-none" type="submit">Search</button>
                 </form>
             </div>
         </nav>
