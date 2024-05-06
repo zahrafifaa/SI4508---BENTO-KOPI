@@ -28,14 +28,14 @@
 .tablinks:hover {
     background-color: #cbd5e1;
 }
-/* .tablinks.active {
+.tablinks.active {
     background-color: #007200;
     color: white;
 }
 .tablinks.active:hover {
     background-color: #065f46;
     color: white;
-} */
+}
 
 h2 {
     font-size: 18px;
@@ -65,20 +65,6 @@ h2 {
 @media screen and (max-width: 768px) {
     .card-img-top {
         height: 100px;
-    }
-}
-
-#jumlahMenu{
-    border-right : 1px solid #007200;
-    border-left : 1px solid #007200;
-}
-
-@media screen and (max-width: 575px) {
-    #jumlahMenu {
-        border-top: 1px solid #007200;
-        border-bottom: 1px solid #007200;
-        border-right : 0;
-        border-left : 0;
     }
 }
 /* .ikon {
@@ -153,7 +139,7 @@ a {
 
 }
 
-.actives{
+.active{
     background-color: #007200;
     color: white;
     border-radius: 10px;
@@ -360,4 +346,3 @@ h6{
     width: 90%;
     height: 0.5rem;
 }
-
