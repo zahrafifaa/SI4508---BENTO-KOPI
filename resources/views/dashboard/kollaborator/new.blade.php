@@ -34,24 +34,26 @@
             </div>
             <div class="mb-3">
                 <label for='Gambar' class="form-label">Upload Gambar</label>
-                <input name='Gambar' id='Gambar' class="form-control  @error('Gambar') is-invalid @enderror" type="file">
+                <img class='img-preview img-fluid mb-3 col-sm-5'>
+                <input name='Gambar' id='Gambar' class="form-control img-preview  @error('Gambar') is-invalid @enderror" type="file" onchange="return previewGambar()">
                 @error('Gambar')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            {{-- <div class="mb-3">
-              <label class="form-label" for="Status">Status</label>
-              <input class="form-control" name='Status' id="Status" type="text">
-            </div> --}}
             <div class="mb-3">
               <label class="form-label" for="Status">Opsi positngan</label>
-              <select class="form-select" name='Status' id="Status" aria-label="Default select example">
+              <select class="form-select @error('Status') is-invalid @enderror" name='Status' id="Status" aria-label="Default select example" value='{{ old('Status') }}'>
                 <option selected="selected" value='notPost'>Pilih Opsi Draft</option>
-                <option value="Posted">Posting</option>
-                <option value="notPost">Simpan Draft</option>
+                <option @if(old('Status') == 'Posted') selected @endif value='Posted'>Posting</option>
+                <option @if(old('Status') == 'notPost') selected @endif value="notPost">Simpan Draft</option>
               </select>
+              @error('Status')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Detail">Description</label>
@@ -65,7 +67,26 @@
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
-    
-
+      <script>
+          
+        function previewGambar(){
+          const image = document.querySelector('#Gambar');
+          const imgPreview = document.querySelector('.img-preview');
+      
+          imgPreview.style.display = 'block';
+      
+          const oFReader = new FileReader();
+          oFReader.readAsDataURL(image.files[0]);
+      
+          console.log('oke');
+      
+          oFReader.onload = function(oFREvent){
+            imgPreview.src = ofREvent.target.result;
+          }
+        }
+      
+      </script>
     
 @endsection
+
+    

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DashboardKollab;
 use App\Http\Requests\StoreDashboardKollabRequest;
 use App\Http\Requests\UpdateDashboardKollabRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardKollabController extends Controller
@@ -100,6 +101,10 @@ class DashboardKollabController extends Controller
         ]);
 
         if($request->file('Gambar')){
+            if($request->oldGambar){
+                Storage::delete($request->oldGambar);
+            }
+
             $validatedData['Gambar'] = $request->file('Gambar')->store('kollab-images'); 
         }
         // Simpan data baru
