@@ -26,7 +26,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label" for="Tanggal">Tanggal</label>
-              <input  class="form-control @error('Tanggal') is-invalid @enderror" name='Tanggal' id="Tanggal" type="date" value="{{ old('Tanggal', $kolaborasi->Tanggal) }}" required >
+              <input  class="form-control @error('Tanggal') is-invalid @enderror" name='Tanggal' id="Tanggal" type="date" value="{{ old('Tanggal') ?? (\Carbon\Carbon::parse($kolaborasi->Tanggal))->format('Y-m-d') }}" required >
               @error('Tanggal')
               <div class="invalid-feedback">
                 {{ $message }}

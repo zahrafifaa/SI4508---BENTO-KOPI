@@ -16,7 +16,7 @@
         <div class='card p-3 mb-2'>
             <div class="mb-3">
               <label class="form-label" for="Judul">Judul</label>
-              <input class="form-control @error('Judul') is-invalid @enderror" name='Judul' id="Judul" type="text" required autofocus placeholder="Judul Kolaborasi">
+              <input class="form-control @error('Judul') is-invalid @enderror" name='Judul' id="Judul" value='{{ old('Judul') }}' type="text" required autofocus placeholder="Judul Kolaborasi">
               @error('Judul')
               <div class="invalid-feedback">
                 {{ $message }}
@@ -25,7 +25,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label" for="Tanggal">Tanggal</label>
-              <input class="form-control @error('Tanggal') is-invalid @enderror" name='Tanggal' id="Tanggal" type="date" required>
+              <input class="form-control @error('Tanggal') is-invalid @enderror" name='Tanggal' id="Tanggal" type="date" required value={{ old('Tanggal') }}>
               @error('Tanggal')
               <div class="invalid-feedback">
                 {{ $message }}
@@ -55,7 +55,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Detail">Description</label>
-                <textarea class="form-control @error('Detail') is-invalid @enderror" name="Detail" id="Detail" rows="3" placeholder="Description" required></textarea>
+                <textarea class="form-control @error('Detail') is-invalid @enderror" name="Detail" id="Detail" rows="3" placeholder="Description" required>{{ old('Detail') }}</textarea>
                 @error('Detail')
                     <div class="invalid-feedback">
                         {{ $message }}
