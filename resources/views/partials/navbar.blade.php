@@ -12,8 +12,8 @@
         </button>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li class="nav-item hoverG"> <a class ="{{ ($title === "Beranda") ? 'active' : '' }}" href="/">Beranda</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Menu") ? 'active' : '' }}" href="{{route('allmenu')}}">Menu</a></li>
+            <li class="nav-item hoverG"> <a class ="{{ Request::is('/') ? 'active' : '' }}" href="/">Beranda</a></li>
+            <li class="nav-item hoverG"> <a class="{{ Request::is('menu') ? 'active' : '' }}" href="{{route('allmenu')}}">Menu</a></li>
             <li class="nav-item hoverG"> <a class="{{ ($title === "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
             <li class="nav-item hoverG"> <a class="{{ ($title === "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
             <li class="nav-item hoverG"> <a class="{{ ($title === "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>

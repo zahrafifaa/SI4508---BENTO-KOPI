@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\DashboardKollabController;
 
 
 
@@ -20,9 +21,9 @@ use App\Http\Controllers\BerandaController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/menuapi', function () {
     return view('menuapi');
 });
@@ -90,3 +91,15 @@ Route::post('/validate-forgot-password-act', [LoginController::class, 'validate_
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/dashboard', function () {
+    return view("dashboard.index");
+})->middleware('auth');
+
+Route::get('/dashboard/kolaborator/new', function () {
+    return view("dashboard.kollaborator.new");
+})->middleware('auth');
+
+Route::get('/dashboard/kolaborator/{id}', [DashboardKollabController::class, 'show'])->name('kollab')->middleware('auth');
+Route::resource('/dashboard/kolaborator', DashboardKollabController::class)->middleware('auth');
+
