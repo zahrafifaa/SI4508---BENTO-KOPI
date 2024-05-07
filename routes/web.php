@@ -40,7 +40,7 @@ Route::delete('/favorite/delete/{favorite}', [FavoriteController::class, 'destro
 // Route::post('/favorites/{menuId}', [FavoriteController::class, 'toggleFavorite'])->name('favorites');
 // Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
 
-Route::get('/', [BerandaController::class, 'beranda']);
+Route::get('/', [BerandaController::class, 'beranda'])->middleware('auth');
 
 Route::get('/reservasi', function () {
     return view('reservasi', [
