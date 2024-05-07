@@ -2,9 +2,6 @@
 
 
 @section('isiPage')
-<<<<<<< HEAD
-    <h1>Halaman Kolaborasi</h1>
-=======
 <header>
         <nav class="navbar">
             <div class="container-lg">
@@ -110,5 +107,4 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="{{ asset('script/menu.js') }}"></script>
->>>>>>> origin/main
 @endsection
