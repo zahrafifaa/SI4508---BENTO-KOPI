@@ -2,6 +2,9 @@
 
 
 @section('isiPage')
+<<<<<<< HEAD
+    <h1>Halaman about</h1>
+=======
     <div class="mt-5">
         <div class="flexContainer">
             <h6>Our Story</h5>
@@ -60,4 +63,5 @@
 
     
 
+>>>>>>> origin/main
 @endsection
