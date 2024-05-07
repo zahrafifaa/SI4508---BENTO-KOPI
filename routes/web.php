@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KolaborasiController;
-use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -81,15 +79,6 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
-Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
-Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
-Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
-
-Route::get('lowongan', [LowonganController::class, 'index'])->name('lowongan.index');
-Route::get('lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
-Route::get('lowongan/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
-Route::post('lowongan/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
