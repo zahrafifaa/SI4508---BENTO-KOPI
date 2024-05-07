@@ -47,9 +47,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class);
     }
-
-    public function kolaborasi()
-    {
-        return $this->hasOne(Kolaborasi::class);
-    }
 }
