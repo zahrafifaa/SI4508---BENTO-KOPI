@@ -40,8 +40,8 @@ class DatabaseSeeder extends Seeder
         ]);
         
         User::create([
-            'name' => 'adminApp ',
-            'username' => 'App',
+            'name' => 'Super Admin ',
+            'username' => 'SuperAdmin',
             'email' => 'adminApp@gmail.com',
             'password' => bcrypt('123456')
         ]);
