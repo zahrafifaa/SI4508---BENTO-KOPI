@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithDictionary;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Grammars\MySqlGrammar;
 use Illuminate\Database\UniqueConstraintViolationException;
 
 class HasManyThrough extends Relation
@@ -601,24 +602,6 @@ class HasManyThrough extends Relation
     }
 
     /**
-     * Chunk the results of a query by comparing IDs in descending order.
-     *
-     * @param  int  $count
-     * @param  callable  $callback
-     * @param  string|null  $column
-     * @param  string|null  $alias
-     * @return bool
-     */
-    public function chunkByIdDesc($count, callable $callback, $column = null, $alias = null)
-    {
-        $column ??= $this->getRelated()->getQualifiedKeyName();
-
-        $alias ??= $this->getRelated()->getKeyName();
-
-        return $this->prepareQueryBuilder()->chunkByIdDesc($count, $callback, $column, $alias);
-    }
-
-    /**
      * Execute a callback over each item while chunking by ID.
      *
      * @param  callable  $callback
@@ -690,23 +673,6 @@ class HasManyThrough extends Relation
         $alias ??= $this->getRelated()->getKeyName();
 
         return $this->prepareQueryBuilder()->lazyById($chunkSize, $column, $alias);
-    }
-
-    /**
-     * Query lazily, by chunking the results of a query by comparing IDs in descending order.
-     *
-     * @param  int  $chunkSize
-     * @param  string|null  $column
-     * @param  string|null  $alias
-     * @return \Illuminate\Support\LazyCollection
-     */
-    public function lazyByIdDesc($chunkSize = 1000, $column = null, $alias = null)
-    {
-        $column ??= $this->getRelated()->getQualifiedKeyName();
-
-        $alias ??= $this->getRelated()->getKeyName();
-
-        return $this->prepareQueryBuilder()->lazyByIdDesc($chunkSize, $column, $alias);
     }
 
     /**
@@ -795,6 +761,42 @@ class HasManyThrough extends Relation
         return $query->select($columns)->whereColumn(
             $parentQuery->getQuery()->from.'.'.$this->localKey, '=', $hash.'.'.$this->firstKey
         );
+    }
+
+    /**
+     * Alias to set the "limit" value of the query.
+     *
+     * @param  int  $value
+     * @return $this
+     */
+    public function take($value)
+    {
+        return $this->limit($value);
+    }
+
+    /**
+     * Set the "limit" value of the query.
+     *
+     * @param  int  $value
+     * @return $this
+     */
+    public function limit($value)
+    {
+        if ($this->farParent->exists) {
+            $this->query->limit($value);
+        } else {
+            $column = $this->getQualifiedFirstKeyName();
+
+            $grammar = $this->query->getQuery()->getGrammar();
+
+            if ($grammar instanceof MySqlGrammar && $grammar->useLegacyGroupLimit($this->query->getQuery())) {
+                $column = 'laravel_through_key';
+            }
+
+            $this->query->groupLimit($value, $column);
+        }
+
+        return $this;
     }
 
     /**
