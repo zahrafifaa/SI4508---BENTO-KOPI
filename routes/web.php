@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\KolaborasiController;
+use App\Http\Controllers\LowonganController;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -10,53 +13,28 @@ use App\Http\Controllers\DashboardKollabController;
 use App\Http\Controllers\KolaborasiController;
 use App\Http\Controllers\ListKolaboratorController;
 use App\Http\Controllers\LowonganController;
+=======
+>>>>>>> 630fbcd5d5a9fd211ed9803f393c87f3367593e2
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/menuapi', function () {
-    return view('menuapi');
+Route::get('/', function () {
+    return view('beranda', [
+        "title" => "Beranda"
+    ]);
 });
-Route::get('/menu/search', [MenuController::class, 'searchMenu'])->name('searchMenu');
-Route::get('/menu/{kategori}/search', [MenuController::class, 'searchMenuByCategory'])->name('searchMenuByCategory');
-Route::get('/menu', [MenuController::class, 'menu'])->name('allmenu');
-Route::get('/menu/sort/{option}', [MenuController::class, 'sortmenu'])->name('sortmenu');
-Route::get('/menu/{kategori}/', [MenuController::class, 'showMenuByCategory'])->name('showmenubycategory');
-Route::get('/menu/{kategori}/{option}', [MenuController::class, 'sortShowMenuByCategory'])->name('sortshowmenubycategory');
 
-Route::post('/menu/{menu}/favorite', [FavoriteController::class, 'store'])->name('storeMenu')->middleware('auth');
-Route::delete('/favorite/delete/{favorite}', [FavoriteController::class, 'destroy'])->name('destroyMenu')->middleware('auth');
 
-// Route::post('/favorites/{menuId}', [FavoriteController::class, 'toggleFavorite'])->name('favorites');
-// Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
-
-Route::get('/', [BerandaController::class, 'beranda'])->middleware('auth');
+Route::get('/menu', function () {
+    return view('menu', [
+        "title" => "Menu"
+    ]);
+});
 
 Route::get('/reservasi', function () {
     return view('reservasi', [
-        "title" => "Reservasi",
-        "active" => "Reservasi",
+        "title" => "Reservasi"
     ]);
 });
 
-Route::get('/kolaborasi', function () {
-    return view('kolaborasi', [
-        "title" => "Kolaborasi"
-    ]);
-});
 
 Route::get('/artikel', function () {
     return view('artikel', [
@@ -82,30 +60,12 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
+Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
+Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
+Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
 
-Route::get('/forgot-password', [LoginController::class, 'forgot_password'])->name('forgot-password');
-Route::post('/forgot-password-act', [LoginController::class, 'forgot_password_act'])->name('forgot-password-act');
-
-Route::get('/validate-forgot-password/{token}', [LoginController::class, 'validate_forgot_password'])->name('validate-forgot-password');
-Route::post('/validate-forgot-password-act', [LoginController::class, 'validate_forgot_password_act'])->name('validate-forgot-password-act');
-
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
-
-Route::get('/dashboard', function () {
-    return view("dashboard.index");
-})->middleware('auth');
-
-Route::get('/dashboard/kolaborator/new', function () {
-    return view("dashboard.kollaborator.new");
-})->middleware('auth');
-
-Route::get('/dashboard/kolaborator/{id}', [DashboardKollabController::class, 'show'])->name('kollab')->middleware('auth');
-Route::resource('/dashboard/kolaborator', DashboardKollabController::class)->middleware('auth');
-
+<<<<<<< HEAD
 Route::get('/dashboard/kolaborasi', [ListKolaboratorController::class, 'index'])->name('kolaborasi')->middleware('auth');
 Route::get('/dashboard/kolaborasi/{id}', [ListKolaboratorController::class, 'show'])->name('showKolaborasi')->middleware('auth');
 Route::get('/dashboard/kolaborasi/{id}/download', [ListKolaboratorController::class, 'download'])->name('download.file')->middleware('auth');
@@ -119,3 +79,9 @@ Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index'
 Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
 Route::get('apply/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
 Route::post('apply/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
+=======
+Route::get('lowongan', [LowonganController::class, 'index'])->name('lowongan.index');
+Route::get('lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
+Route::get('lowongan/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
+Route::post('lowongan/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
+>>>>>>> 630fbcd5d5a9fd211ed9803f393c87f3367593e2

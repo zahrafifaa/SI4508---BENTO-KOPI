@@ -120,7 +120,11 @@
                     @enderror
                 </div>
                 <div class="form-group">
+<<<<<<< HEAD
                     <button type="submit" class="btn btnApply btn-primary">Apply</button>
+=======
+                    <button type="button" class="btn btnApply btn-primary">Apply</button>
+>>>>>>> 630fbcd5d5a9fd211ed9803f393c87f3367593e2
                 </div>
             </form>
         </div>

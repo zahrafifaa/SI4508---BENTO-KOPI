@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kolaborasi', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+<<<<<<< HEAD
             $table->string('organisasi');
             $table->string('jabatan');
             $table->string('deskripsi_singkat');
@@ -21,6 +22,11 @@ return new class extends Migration
             $table->string('surat')->nullable();
             $table->string('email')->nullable();
             $table->integer('nomor')->nullable();
+=======
+            $table->string('deskripsi_singkat');
+            $table->text('deskripsi');
+            $table->string('gambar')->nullable();
+>>>>>>> 630fbcd5d5a9fd211ed9803f393c87f3367593e2
             $table->foreignId('user_id')->constrained('users');
             $table->integer('status');
             $table->timestamps();

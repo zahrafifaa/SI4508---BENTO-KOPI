@@ -2,12 +2,15 @@
 
 
 @section('isiPage')
+<<<<<<< HEAD
     @if(session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif  
+=======
+>>>>>>> 630fbcd5d5a9fd211ed9803f393c87f3367593e2
     <h1 class="mt-4">Lowongan Pekerjaan</h1>
     <div class="row mb-3 text-center">
         <div class="col-md-8 themed-grid-col"></div>
