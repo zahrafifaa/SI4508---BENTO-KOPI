@@ -25,9 +25,8 @@
   color: black;
 }
 
-.sidebar .nav-link.active {
-  color: #2470dc;
-
+.active {
+  font-weight: bold;
 }
 
 .sidebar-heading {
@@ -65,4 +64,9 @@
 .bg-grey{
   background-color:#459d45;
 }
+
+.fs-14{
+  font-size: 14px;
+}
+
 

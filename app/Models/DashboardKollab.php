@@ -23,7 +23,16 @@ class DashboardKollab extends Model
 
     public function getTanggalAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->format('d/m/Y');
+        return \Carbon\Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function gambar()
+    {
+        if ($this->Gambar) {
+            return asset('storage/' . $this->Gambar);
+        } else {
+            return asset('images/bentoKopi1.png');
+        }
     }
 
 }

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MenuSeeder::class,
             DashboardKollabSeeder::class,
+            LowonganSeeder::class
         ]);
 
         User::create([

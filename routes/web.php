@@ -7,6 +7,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\DashboardKollabController;
+use App\Http\Controllers\KolaborasiController;
+use App\Http\Controllers\ListKolaboratorController;
+use App\Http\Controllers\LowonganController;
 
 
 
@@ -103,3 +106,16 @@ Route::get('/dashboard/kolaborator/new', function () {
 Route::get('/dashboard/kolaborator/{id}', [DashboardKollabController::class, 'show'])->name('kollab')->middleware('auth');
 Route::resource('/dashboard/kolaborator', DashboardKollabController::class)->middleware('auth');
 
+Route::get('/dashboard/kolaborasi', [ListKolaboratorController::class, 'index'])->name('kolaborasi')->middleware('auth');
+Route::get('/dashboard/kolaborasi/{id}', [ListKolaboratorController::class, 'show'])->name('showKolaborasi')->middleware('auth');
+Route::get('/dashboard/kolaborasi/{id}/download', [ListKolaboratorController::class, 'download'])->name('download.file')->middleware('auth');
+
+Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
+Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
+Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
+Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
+
+Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index');
+Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
+Route::get('apply/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
+Route::post('apply/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');

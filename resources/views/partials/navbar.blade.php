@@ -15,10 +15,10 @@
             <li class="nav-item hoverG"> <a class ="{{ Request::is('/') ? 'active' : '' }}" href="/">Beranda</a></li>
             <li class="nav-item hoverG"> <a class="{{ Request::is('menu') ? 'active' : '' }}" href="{{route('allmenu')}}">Menu</a></li>
             <li class="nav-item hoverG"> <a class="{{ ($title === "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
+            <li class="nav-item hoverG"> <a class="{{ ($title === "Kolaborasi") ? 'active' : '' }}" href="{{ route('kolaborasi.index') }}">Kolaborasi</a></li>
             <li class="nav-item hoverG"> <a class="{{ ($title === "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>
             <li class="nav-item hoverG"> <a class="{{ ($title === "Location") ? 'active' : '' }}" href="location">Location</a></li>
-            <li class="nav-item hoverG"> <a class="{{ ($title === "Apply") ? 'active' : '' }}" href="apply">Apply</a></li>
+            <li class="nav-item hoverG"> <a class="{{ ($title === "Apply") ? 'active' : '' }}" href="{{ route('lowongan.index') }}">Apply</a></li>
             <li class="nav-item hoverG"> <a class="{{ ($title === "About") ? 'active' : '' }}" href="about">About us</a></li>
         </ul>
 
