@@ -12,11 +12,7 @@ class LowonganController extends Controller
     {
         $items = Lowongan::where('status', 1)->latest()->get();
         return view('pages.lowongan.index', [
-<<<<<<< HEAD
-            'title' => 'Lowongan Pekerjaan',
-=======
             'title' => 'Apply',
->>>>>>> 2fd7998b261c423801df0cf4ef1a18af34189db7
             'items' => $items
         ]);
     }
@@ -25,11 +21,7 @@ class LowonganController extends Controller
     {
         $item = Lowongan::findOrFail($id);
         return view('pages.lowongan.show', [
-<<<<<<< HEAD
-            'title' => 'Detail Lowongan',
-=======
             'title' => 'Apply',
->>>>>>> 2fd7998b261c423801df0cf4ef1a18af34189db7
             'item' => $item
         ]);
     }
@@ -37,11 +29,7 @@ class LowonganController extends Controller
     {
         $item = Lowongan::findOrFail($id);
         return view('pages.lowongan.apply', [
-<<<<<<< HEAD
-            'title' => 'Apply Lowongan',
-=======
             'title' => 'Apply',
->>>>>>> 2fd7998b261c423801df0cf4ef1a18af34189db7
             'item' => $item
         ]);
     }
@@ -67,10 +55,6 @@ class LowonganController extends Controller
         $data['cv'] = request()->file('cv')->store('melamar', 'public');
         $data['lowongan_id'] = $lowongan_id;
         Melamar::create($data);
-<<<<<<< HEAD
-        return redirect()->back()->with('success', 'Anda berhasil melamar pekerjaan ini.');
-=======
         return redirect('/apply')->with('success', 'Anda berhasil melamar pekerjaan ini.');
->>>>>>> 2fd7998b261c423801df0cf4ef1a18af34189db7
     }
 }
