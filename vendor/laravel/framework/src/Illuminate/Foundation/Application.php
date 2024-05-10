@@ -45,7 +45,11 @@ class Application extends Container implements ApplicationContract, CachesConfig
      *
      * @var string
      */
+<<<<<<< HEAD
     const VERSION = '11.1.1';
+=======
+    const VERSION = '10.48.10';
+>>>>>>> 2fd7998b261c423801df0cf4ef1a18af34189db7
 
     /**
      * The base path for the Laravel installation.
@@ -589,6 +593,10 @@ class Application extends Container implements ApplicationContract, CachesConfig
     {
         if (isset($_ENV['LARAVEL_STORAGE_PATH'])) {
             return $this->joinPaths($this->storagePath ?: $_ENV['LARAVEL_STORAGE_PATH'], $path);
+        }
+
+        if (isset($_SERVER['LARAVEL_STORAGE_PATH'])) {
+            return $this->joinPaths($this->storagePath ?: $_SERVER['LARAVEL_STORAGE_PATH'], $path);
         }
 
         return $this->joinPaths($this->storagePath ?: $this->basePath('storage'), $path);

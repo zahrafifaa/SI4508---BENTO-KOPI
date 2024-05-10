@@ -22,8 +22,17 @@
                             <img class="bd-placeholder-img rounded-circle img-fluid" style="max-height:150px"
                                 src="{{ $item->gambar() }}" alt="Placeholder">
                         </div>
+<<<<<<< HEAD
                         <h2 class="fw-normal">{{ $item->nama }}</h2>
                         <p>{{ $item->deskripsi_singkat }}</p>
+=======
+                        <h2 class="fw-normal"> 
+                            <strong>
+                                {{ $item->Judul }}
+                            </strong> 
+                        </h2>
+                        <p>{{ Str::limit($item->Detail, 100, '...') }}</p>
+>>>>>>> 2fd7998b261c423801df0cf4ef1a18af34189db7
                         <p><a class="btn btn-secondary" href="{{ route('kolaborasi.show', $item->id) }}">View details
                                 &raquo;</a></p>
                     </div>
