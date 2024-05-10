@@ -16,11 +16,7 @@ class Lowongan extends Model
         if ($this->gambar) {
             return asset('storage/' . $this->gambar);
         } else {
-<<<<<<< HEAD
             return asset('images/bentoKopi1.png');
-=======
-            return asset('images/AyamGeprek.png');
->>>>>>> 630fbcd5d5a9fd211ed9803f393c87f3367593e2
         }
     }
 

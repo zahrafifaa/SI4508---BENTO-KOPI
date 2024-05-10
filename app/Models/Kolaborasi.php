@@ -21,7 +21,6 @@ class Kolaborasi extends Model
         $val->where('status', 1);
     }
 
-<<<<<<< HEAD
     public function getSurat()
     {
         return storage_path('app/public/' . $this->surat);
@@ -39,10 +38,5 @@ class Kolaborasi extends Model
     public function getTanggalAttribute($value)
     {
         return \Carbon\Carbon::parse($value)->format('d-m-Y');
-=======
-    public function gambar()
-    {
-        return asset('storage/' . $this->gambar);
->>>>>>> 630fbcd5d5a9fd211ed9803f393c87f3367593e2
     }
 }
