@@ -3,8 +3,8 @@
 @section('isiDashboard')
     <div class="d-flex pt-3 poppins">
         <p>
-            <a href="{{ url('/dashboard/kolaborasi') }}" class="text-black" style="text-decoration:none;">Daftar Kolaborasi > </a>
-            <a href="{{ route('kollab', $item->id) }}" class="text-black" style="text-decoration:none;">{{ $item->nama }} ></a>
+            <a href="{{ url('/dashboard/kolaborasi') }}" class="text-black" style="text-decoration:none;">Kolaborator > </a>
+            <a href="{{ route('kollab', $item->id) }}" class="text-black" style="text-decoration:none;">{{ $item->organisasi }} ></a>
         </p>
     </div>
     <div   div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
