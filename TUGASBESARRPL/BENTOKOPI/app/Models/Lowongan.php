@@ -28,4 +28,13 @@ class Lowongan extends Model
 
         ];
     }
+
+    public function status()
+    {
+        if ($this->status == 0) {
+            return '<span class="badge badge-danger">Tidak Aktif</span>';
+        } else {
+            return '<span class="badge badge-success">Aktif</span>';
+        }
+    }
 }
