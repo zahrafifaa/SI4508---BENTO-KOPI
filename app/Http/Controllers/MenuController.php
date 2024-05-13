@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
-
-use Illuminate\Http\Request;
+use App\Models\CartItem;
 
 class MenuController extends Controller
 {
@@ -19,7 +21,15 @@ class MenuController extends Controller
         $menus = Menu::all();
         $sort = 'null';
         $title = 'Menu';
-        return view('menu', compact('menus', 'categories', 'sort','title'));
+        // Hitung total item dalam keranjang belanja
+    $totalItems = 0;
+    if (Auth::check()) {
+        $cart_id = Auth::id();
+        $totalItems = CartItem::where('cart_id', $cart_id)->sum('jumlah');
+    }
+
+    // Render view dan sertakan $totalItems
+    return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems'));
     }
     public function searchMenu( Request $request){
         $query = $request->input('query');

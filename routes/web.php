@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardCashierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Cart;
+use App\Models\DashboardCashier;
 use App\Models\Menu;
 
 /*
@@ -106,8 +108,12 @@ Route::get('/dashboard', function(){
 
 Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
 Route::GET('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
-Route::delete('/menu/delete/{menu}',  [CartController::class, 'destroy'])->name('cart.destroy')->middleware('auth');
+Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy')->middleware('auth');
 Route::post('/cart/increase-quantity',  [CartController::class, 'increaseQuantity'])->name('cart.increaseQuantity');
 Route::post('/cart/reduce-quantity',  [CartController::class, 'reduceQuantity'])->name('cart.reduceQuantity');
 Route::post('/cart/store-message', [CartController::class, 'storeMessage'])->name('cart.storeMessage');
+
+
+Route::get('/dashboardCashier', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
+
 

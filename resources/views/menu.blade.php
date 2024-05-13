@@ -2,20 +2,30 @@
 
 
 @section('isiPage')
-    <header>
-        <nav class="navbar">
-            <div class="container-lg">
-                <a class=""></a>
-                <form class="d-flex" action="{{ route('searchMenu') }}" method="GET" role="search">
-                    <input class="form-control me-2" type="search" name="query" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success d-none" type="submit">Searchs</button>
-                </form>
-            </div>
-        </nav>
-    </header>
+    
+    
     <main>
+        
         <section class="container-lg">
+            <div class="row">
+                <div class="col-sm-6 pt-3">
+                    Total item yang dipesan : {{ $totalItems }}
+                </div>
+                <div class="col-sm-6 ms-auto">
+                    <header>
+                        <nav class="navbar">
+                            <div class="container-lg">
+                                <a class=""></a>
+                                <form class="" action="{{ route('searchMenu') }}" method="GET" role="search">
+                                    <input class="form-control me-2" type="search" name="query" placeholder="Search"
+                                        aria-label="Search">
+                                    <button class="btn btn-outline-success d-none" type="submit">Searchs</button>
+                                </form>
+                            </div>
+                        </nav>
+                </div>
+            </div>
+            </header>
             <div class=" row row-cols-2 row-cols-md-6 g-4">
                 <div class="col d-grid">
                     <a href="{{ route('allmenu') }}" class="btn tablinks btnsemua px-4 py-1 active"

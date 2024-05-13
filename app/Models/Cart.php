@@ -14,10 +14,18 @@ class Cart extends Model
         'timestamps'
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function menu(){
-        return $this->belongsTo(Menu::class, 'menu_id');
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class, 'cart_id');
+    }
+
+    public function orderTables()
+    {
+        return $this->hasOne(OrderTable::class);
     }
 }

@@ -11,8 +11,14 @@ class Menu extends Model
     protected $fillable = [
         'nama',
         'kategori',
+        'gambar',
         'deskripsi',
         'harga',
         'gambar'
     ];
+
+    public function cartitem()
+    {
+        return $this->belongsTo(CartItem::class);
+    }
 }

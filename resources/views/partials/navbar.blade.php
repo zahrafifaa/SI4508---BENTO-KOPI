@@ -1,15 +1,4 @@
 
-{{-- Offcanvas --}}
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Pesanan</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    ...
-  </div>
-</div>
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand fs-2 fw-bold" href="/" style="color: #007200;">BentoKopi</a>
@@ -32,16 +21,13 @@
           <ul class="navbar-nav my-4  ">
             
             <li>
-              {{-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button> --}}
-              <a class="nav-link" >
-                <i class="m-0 " data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-feather = "shopping-cart"></i>
-              </a>
+              <a class="nav-link" href="/cart"><i class="m-0 "  aria-controls="offcanvasRight" data-feather = "shopping-cart"></i></a>
             </li>
-            @if($totalItems > 0)
+            {{-- @if($totalItems > 0)
             <span class="quantity-badge">{{ $totalItems }}</span>
             @else
-            <span class="quantity-badge">0</span>
-            @endif
+            <span class="quantity-badge">4</span>
+            @endif --}}
             <li>
               <a class="nav-link" href="/"><i class="m-0 " data-feather = "user"></i></a>
             </li>
@@ -75,6 +61,18 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Logout</a></li>
+              </ul>
+             </li>
+
+             @elseif (auth()->user()->username === 'Cashier')
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome back, {{ auth()->user()->username }}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('dashboard.cashier') }}">My dashboard</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Logout</a></li>
               </ul>
