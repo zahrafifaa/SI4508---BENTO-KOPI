@@ -3,7 +3,7 @@
 @section('isiDashboard')
     <div class="d-flex pt-3 poppins">
         <p>
-            <a href="{{ url('/dashboard/kolaborator') }}" class="text-black" style="text-decoration:none;">Kolaborator > </a>
+            <a href="{{ url('/dashboard/kolaborator') }}" class="text-black" style="text-decoration:none;">Kolaborasi > </a>
             <a href="{{ route('kollab', $kolaborasi->id) }}" class="text-black" style="text-decoration:none;">{{ $kolaborasi->Judul }} ></a>
         </p>
     </div>

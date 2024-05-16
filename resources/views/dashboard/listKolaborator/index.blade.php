@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 poppins fw-bold">
-        <h1 class="h2">Our Collaborator</h1>
+        <h1 class="h2">Daftar Kolaborator</h1>
     </div>
 
     @if(session()->has('success'))
