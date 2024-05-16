@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardKollabController;
 use App\Http\Controllers\KolaborasiController;
 use App\Http\Controllers\ListKolaboratorController;
 use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\PelamarController;
 
 
 
@@ -119,3 +120,5 @@ Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index'
 Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
 Route::get('apply/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
 Route::post('apply/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
+
+Route::get('/dashboard/pelamar', [PelamarController::class, 'index'])->name('pelamar.index');

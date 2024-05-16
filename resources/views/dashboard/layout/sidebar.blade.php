@@ -29,6 +29,27 @@
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+              <svg class="bi"><use xlink:href="#people"/></svg>
+                Lowongan Kerja
+            </button>
+            <div class="collapse" id="dashboard-collapse" style="">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
+                <li>
+                  <a href="/dashboard/kolaborator" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('dashboard/kolaborator') ? 'active' : ''}}">
+                    Daftar Lowongan
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('pelamar.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/pelamar') ? 'active' : ''}}">
+                    Pelamar
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
           
         </ul>
       </div>
