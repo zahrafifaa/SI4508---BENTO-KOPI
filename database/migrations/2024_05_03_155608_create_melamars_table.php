@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('pengalaman_kerja')->nullable();
             $table->string('cv');
             $table->string('foto');
+            $table->string('status')->default('Belum ditinjau');
             $table->timestamps();
         });
     }
