@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderTable;
+use App\Models\CartItemOrder;
 use App\Models\DashboardCashier;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreDashboardCashierRequest;
 use App\Http\Requests\UpdateDashboardCashierRequest;
 
@@ -13,8 +16,14 @@ class DashboardCashierController extends Controller
      */
     public function index()
     {
-        
-        return view('dashboardcashier.index');
+        $orderedMenus = CartItemOrder::with(['menu', 'cart.user', 'cart.orderTables'])
+        ->orderBy('created_at', 'asc') // Order by created_at to ensure correct sequence
+        ->get()
+        ->groupBy(function($item) {
+            return $item->cart->user->id . '_' . $item->created_at->toDateTimeString(); // Group by user and exact time
+        });
+
+    return view('dashboardcashier.index', compact('orderedMenus'));
     }
 
     /**

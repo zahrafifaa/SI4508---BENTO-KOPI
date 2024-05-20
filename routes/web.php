@@ -112,8 +112,8 @@ Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.dest
 Route::post('/cart/increase-quantity',  [CartController::class, 'increaseQuantity'])->name('cart.increaseQuantity');
 Route::post('/cart/reduce-quantity',  [CartController::class, 'reduceQuantity'])->name('cart.reduceQuantity');
 Route::post('/cart/store-message', [CartController::class, 'storeMessage'])->name('cart.storeMessage');
+Route::post('/cart/order', [CartController::class, 'storeOrder'])->middleware('auth')->name('cart.storeOrder');
 
 
 Route::get('/dashboardCashier', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
-
 

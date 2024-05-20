@@ -21,4 +21,9 @@ class Menu extends Model
     {
         return $this->belongsTo(CartItem::class);
     }
+
+    public function cartItemsOrder()
+    {
+        return $this->belongsTo(CartItemOrder::class);
+    }
 }

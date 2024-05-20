@@ -1,0 +1,4 @@
+.carousel-item img {
+    height: 300px; /* Atur tinggi sesuai kebutuhan Anda */
+    object-fit: cover; /* Untuk mengisi ruang dengan gambar tanpa merubah proporsi aspek */
+}

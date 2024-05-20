@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
-use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Models\DashboardCashier;
+use App\Http\Requests\StoreDashboardCashierRequest;
+use App\Http\Requests\UpdateDashboardCashierRequest;
 
-class DashboardPostController extends Controller
+class DashboardCashierController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.posts.index',[
-            // 'posts' => Post::where('user_id', auth()->user()->id)->get()
-        ]);
+        
+        return view('dashboardcashier.index');
     }
 
     /**
@@ -29,7 +28,7 @@ class DashboardPostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDashboardCashierRequest $request)
     {
         //
     }
@@ -37,34 +36,32 @@ class DashboardPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Menu $post)
+    public function show(DashboardCashier $dashboardCashier)
     {
-        return view('dashboard.posts.show',[
-            'post' => $post
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(Post $post)
-    // {
-    //     //
-    // }
+    public function edit(DashboardCashier $dashboardCashier)
+    {
+        //
+    }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, Post $post)
-    // {
-    //     //
-    // }
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateDashboardCashierRequest $request, DashboardCashier $dashboardCashier)
+    {
+        //
+    }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(Post $post)
-    // {
-    //     //
-    // }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(DashboardCashier $dashboardCashier)
+    {
+        //
+    }
 }

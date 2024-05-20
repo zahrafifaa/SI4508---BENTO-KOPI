@@ -11,8 +11,13 @@ class DashboardCashier extends Model
 
     protected $guarded = ['id', 'timestamps'];
 
-    public function ordertable()
+    public function orderTable()
     {
         return $this->hasMany(OrderTable::class, 'ordertable_id');
+    }
+
+    public function cartItemsOrder()
+    {
+        return $this->hasMany(CartItemOrder::class);
     }
 }

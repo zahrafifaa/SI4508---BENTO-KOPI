@@ -20,4 +20,6 @@ class OrderTable extends Model
     {
         return $this->belongsTo(DashboardCashier::class);
     }
+
+    
 }

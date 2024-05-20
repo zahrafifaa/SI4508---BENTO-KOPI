@@ -24,6 +24,11 @@ class Cart extends Model
         return $this->hasMany(CartItem::class, 'cart_id');
     }
 
+    public function cartItemsOrder()
+    {
+        return $this->hasMany(CartItem::class, 'cart_id');
+    }
+
     public function orderTables()
     {
         return $this->hasOne(OrderTable::class);

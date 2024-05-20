@@ -23,14 +23,11 @@
             <li>
               <a class="nav-link" href="/cart"><i class="m-0 "  aria-controls="offcanvasRight" data-feather = "shopping-cart"></i></a>
             </li>
-            {{-- @if($totalItems > 0)
-            <span class="quantity-badge">{{ $totalItems }}</span>
-            @else
-            <span class="quantity-badge">4</span>
-            @endif --}}
+
             <li>
               <a class="nav-link" href="/"><i class="m-0 " data-feather = "user"></i></a>
             </li>
+            
             @auth
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -85,8 +85,8 @@
         </div>
 
         <!-- Text area untuk pesan khusus -->
-    <div class="pesan tambahan mt-4">
-            <form action="{{ route('cart.storeMessage') }}" method="POST">
+        <div class="pesan tambahan mt-4">
+            <form action="{{ route('cart.storeOrder') }}" method="POST">
                 @csrf
                 <textarea class="form-control" name="special_message" placeholder="Masukkan pesan khusus untuk pesanan Anda di sini"></textarea>
                 <div class="d-grid gap-2 mt-2">
