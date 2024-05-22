@@ -22,6 +22,13 @@
 
     {{-- Alpinejs --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    {{-- Midtrans --}}
+    <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key -->
+    <script type="text/javascript"
+    src="https://app.stg.midtrans.com/snap/snap.js"
+    data-client-key={{ config('midtrans.client_key') }}></script>
+    <!-- Note: replace with src="https://app.midtrans.com/snap/snap.js" for Production environment -->
 
     <link rel="stylesheet" href="js/app.js">
 </head>
@@ -44,5 +51,7 @@
     <script>
         feather.replace();
     </script>
+
+    
 </body>
 </html>

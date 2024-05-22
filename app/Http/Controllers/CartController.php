@@ -24,7 +24,13 @@ class CartController extends Controller
             $totalPrice += $subtotal;
         }
 
-        return view('cart.index', compact('carts', 'totalItems', 'totalPrice', 'title','cart_id'));
+        if(session('snapToken')){
+            $snapToken = session()->get('snapToken');
+        }else{
+            $snapToken ='';
+        }
+
+        return view('cart.index', compact('carts', 'totalItems', 'totalPrice', 'title','cart_id', 'snapToken'));
     }
 
     public function store(Request $request)
@@ -116,6 +122,14 @@ public function storeOrder(Request $request)
     $user_id = Auth::id();
     $carts = CartItem::where('cart_id', $user_id)->get();
 
+    $totalPrice = 0;
+    $totalItems = $carts->sum('jumlah');
+
+    foreach ($carts as $cart) {
+        $subtotal = $cart->jumlah * $cart->menu->harga;
+        $totalPrice += $subtotal;
+    }
+
     // Save special message
     $order = OrderTable::create([
         'cart_id' => $user_id,
@@ -139,40 +153,76 @@ public function storeOrder(Request $request)
     // Save order to DashboardCashier
     $dashboardCashier = DashboardCashier::create([
         'ordertable_id' => $order->id,
-        'cartitem_id' => $order->cart_id,
+        // 'cartitem_id' => $order->cart_id,
+        'qty' => $totalItems,
+        'total_price' => $totalPrice,
+        'status' => 'Unpaid'
     ]);
 
     // Delete cart items after saving to CartItemOrder
-    CartItem::where('cart_id', $user_id)->delete();     
+    CartItem::where('cart_id', $user_id)->delete();   
+    
+    $cartItemOrder = CartItemOrder::with('cart.user');
+    $user = $cartItemOrder->first()->cart->user;
 
-    return redirect()->back()->with('success', 'Pesanan Anda telah disimpan!');
-    DashboardCashier::create([
-        'ordertable_id' => $order->id,
-    ]);
+    // Set your Merchant Server Key
+    \Midtrans\Config::$serverKey = config('midtrans.server_key');
+    // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+    \Midtrans\Config::$isProduction = false;
+    // Set sanitization on (default)
+    \Midtrans\Config::$isSanitized = true;
+    // Set 3DS transaction for credit card to true
+    \Midtrans\Config::$is3ds = true;
+
+    $params = array(
+        'transaction_details' => array(
+            'order_id' => $dashboardCashier->id,
+            'gross_amount' => $dashboardCashier->total_price,
+        ),
+        'customer_details' => array(
+            'name' => $user->username,
+            'phone' => $user->phone,
+        ),
+    );
+
+    $snapToken = \Midtrans\Snap::getSnapToken($params);  
+    return redirect()->route('checkout');
+
 }
+
+public function checkout()
+{
+    $cart_id = Auth::id();
+    $items = CartItemOrder::where('cart_id',$cart_id)->get();
+    // Save order to DashboardCashier
+    $dashboardCashier = DashboardCashier::first();
+    
+    $cartItemOrder = CartItemOrder::with('cart.user');
+    $user = $cartItemOrder->first()->cart->user;
+
+    // Set your Merchant Server Key
+    \Midtrans\Config::$serverKey = config('midtrans.server_key');
+    // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+    \Midtrans\Config::$isProduction = false;
+    // Set sanitization on (default)
+    \Midtrans\Config::$isSanitized = true;
+    // Set 3DS transaction for credit card to true
+    \Midtrans\Config::$is3ds = true;
+
+    $params = array(
+        'transaction_details' => array(
+            'order_id' => $dashboardCashier->id,
+            'gross_amount' => $dashboardCashier->total_price,
+        ),
+        'customer_details' => array(
+            'name' => $user->username,
+            'phone' => $user->phone,
+        ),
+    );
+
+    $snapToken = \Midtrans\Snap::getSnapToken($params); 
+    return view('dummy', compact('items','snapToken'));
+
 }
 
-    // public function storeMessage(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'special_message' => 'nullable|string',
-    //     ]);
-    
-    //     $cart_id = auth()->id();
-    
-    //     // Buat OrderTable baru atau ambil yang sudah ada jika ada
-    //     $order = OrderTable::where('cart_id', $cart_id)->first();
-    //     if (!$order) {
-    //         $order = new OrderTable(['cart_id' => $cart_id]);
-    //     }
-    
-    //     // Set special_message pada OrderTable
-    //     $order->special_message = $validated['special_message'];
-    //     $order->save();
-    
-    //     return redirect()->back()->with('success', 'Pesan Anda telah dikirim!');
-    // }
-
-    
-
-    
+}

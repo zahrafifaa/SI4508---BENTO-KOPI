@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dashboard_cashiers', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ordertable_id');
+            $table->string('name');
+            $table->text('address');
             $table->integer('qty');
             $table->bigInteger('total_price');
             $table->enum('status', ['Unpaid','Paid']);
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dashboard_cashiers');
+        Schema::dropIfExists('orders');
     }
 };

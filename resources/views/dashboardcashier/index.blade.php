@@ -14,7 +14,7 @@
                 <th scope="col">Nama</th>
                 <th scope="col">Harga</th>
                 <th scope="col">Jumlah</th>
-                <th scope="col">Dipesan oleh</th>
+                <th scope="col">Dipesan oleh</th>nam
                 <th scope="col">Pesan Khusus</th>
                 {{-- <th scope="col">Waktu Pemesanan</th> --}}
                 <th scope="col">Status Pembayaran</th>
