@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\DashboardCashierController;
+use App\Models\Cart;
+use App\Models\Menu;
+use App\Models\DashboardCashier;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\RegisterController;
-use App\Models\Cart;
-use App\Models\DashboardCashier;
-use App\Models\Menu;
+use App\Http\Controllers\DashboardCashierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,4 +119,7 @@ Route::get('/invoice/{id}', [CartController::class, 'invoice'])->middleware('aut
 
 
 Route::get('/dashboardCashier', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
+
+Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
+Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
 

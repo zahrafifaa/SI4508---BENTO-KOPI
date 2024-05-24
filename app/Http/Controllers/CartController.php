@@ -187,7 +187,7 @@ public function checkout()
 
             // Set your Merchant Server Key
             \Midtrans\Config::$serverKey = config('midtrans.server_key');
-            \Midtrans\Config::$isProduction = false;
+            \Midtrans\Config::$isProduction = config('midtrans.is_production');
             \Midtrans\Config::$isSanitized = true;
             \Midtrans\Config::$is3ds = true;
 
@@ -199,7 +199,8 @@ public function checkout()
                     'gross_amount' => $dashboardCashier->total_price,
                 ),
                 'customer_details' => array(
-                    'name' => $user->name,
+                    'first_name' => $user->username,
+                    'last_name' => '',
                     'phone' => $user->phone,
                 ),
             );

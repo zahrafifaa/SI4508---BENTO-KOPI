@@ -14,7 +14,7 @@
                 <th scope="col">Nama</th>
                 <th scope="col">Harga</th>
                 <th scope="col">Jumlah</th>
-                <th scope="col">Dipesan oleh</th>nam
+                <th scope="col">Dipesan oleh</th>
                 <th scope="col">Pesan Khusus</th>
                 {{-- <th scope="col">Waktu Pemesanan</th> --}}
                 <th scope="col">Status Pembayaran</th>
@@ -35,20 +35,20 @@
               <tr>
                 <td>{{ $no++ }}</td>
                 <td>
-                    @foreach($orders as $order)
-                      {{ $order->menu->nama }} <br> <!-- Menambahkan tag <br> untuk membuat setiap item ditampilkan dalam baris terpisah -->
-                    @endforeach
-                  </td>
-                  <td>
-                    @foreach($orders as $order)
-                      Rp {{ $order->menu->harga }} <br> <!-- Menambahkan tag <br> untuk membuat setiap item ditampilkan dalam baris terpisah -->
-                    @endforeach
-                  </td>
-                  <td>
-                    @foreach($orders as $order)
-                      {{ $order->jumlah }} <br> <!-- Menambahkan tag <br> untuk membuat setiap item ditampilkan dalam baris terpisah -->
-                    @endforeach
-                  </td>
+                  @foreach($orders as $order)
+                    {{ $order->menu->nama }} <br>
+                  @endforeach
+                </td>
+                <td>
+                  @foreach($orders as $order)
+                    Rp {{ $order->menu->harga }} <br>
+                  @endforeach
+                </td>
+                <td>
+                  @foreach($orders as $order)
+                    {{ $order->jumlah }} <br>
+                  @endforeach
+                </td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $specialMessage }}</td>
                 {{-- <td>{{ $time }}</td> --}}
@@ -63,62 +63,37 @@
     </div>
     
     <div class="col-4">
-        <div class="container">
-            <h1>Gambar Acak</h1>
-            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  @php
-                    // Mengumpulkan semua gambar menu
-                    $allImages = [];
-                    foreach($orderedMenus as $orders) {
-                        foreach($orders as $order) {
-                            $allImages[] = $order->menu->gambar;
-                        }
-                    }
-                    // Memilih 3 gambar secara acak
-                    $randomImages = array_rand(array_flip($allImages), 3);
-                  @endphp
-                  @foreach($randomImages as $key => $image)
-                  <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                    <img src="{{ $image }}" class="d-block w-100" alt="Menu Image">
-                  </div>
-                  @endforeach
-                </div>
+      <div class="container">
+        <h1>Gambar Acak</h1>
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            @php
+              // Mengumpulkan semua gambar menu
+              $allImages = [];
+              foreach($orderedMenus as $orders) {
+                  foreach($orders as $order) {
+                      $allImages[] = $order->menu->gambar;
+                  }
+              }
+              // Memilih hingga 3 gambar secara acak
+              $randomImages = count($allImages) >= 3 ? array_rand(array_flip($allImages), 3) : $allImages;
+            @endphp
+            @foreach($randomImages as $key => $image)
+            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+              <img src="{{ $image }}" class="d-block w-100 carousel-image" alt="Menu Image">
             </div>
+            @endforeach
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
+
+<style>
+  .carousel-image {
+    height: 300px; /* Atur tinggi yang sama untuk semua gambar */
+    object-fit: cover; /* Memastikan gambar sesuai dengan container tanpa mengubah rasio aspek */
+  }
+</style>
 @endsection
-{{-- 
-<h1>Pesanan Sedang Dipesan</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Pengguna</th>
-                    <th>Menu</th>
-                    <th>Jumlah</th>
-                    <th>Pesan Khusus</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($orderedMenus as $order)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $order->cart->user->name }}</td>
-                    <td>{{ $order->menu->nama }}</td>
-                    <td>{{ $order->jumlah }}</td>
-                    <td>{{ $orderTable->special_message ?? 'Tidak ada pesan khusus' }}</td>
-                </tr>
-                
-            @endforeach
-        </div>
-                        {{-- <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $order->orderTable->cart->user->name }}</td>
-                            <td>{{ $itemOrder->menu->nama }}</td>
-                            <td>{{ $itemOrder->jumlah }}</td>
-                            <td>{{ $order->orderTable->special_message }}</td>
-                        </tr> --}}

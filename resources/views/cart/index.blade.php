@@ -122,7 +122,8 @@
                     <div class="pesan tambahan mt-4">
                         <form action="{{ route('cart.storeOrder') }}" method="POST">
                             @csrf
-                            <textarea class="form-control" name="special_message" placeholder="Masukkan pesan khusus untuk pesanan Anda di sini"></textarea>
+                            <label for="special_message" class="form-label">Catatan</label>
+                            <textarea class="form-control" id="special_message" name="special_message" placeholder="Masukkan pesan khusus untuk pesanan Anda di sini"></textarea>
                             <div class="d-grid gap-2 mt-2">
                                 <button type="submit" class="btn btn-primary" id="pay-button">Bayar</button>
                             </div>
@@ -143,7 +144,5 @@
         feather.replace();
     </script>
 
-
-    
 </body>
 </html>
