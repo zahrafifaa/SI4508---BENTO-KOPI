@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CartItemOrder;
 use App\Models\DashboardCashier;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class CartController extends Controller
 {
@@ -151,7 +152,7 @@ public function storeOrder(Request $request)
     }
 
     // Save order to DashboardCashier
-    $dashboardCashier = DashboardCashier::create([
+    DashboardCashier::create([
         'ordertable_id' => $order->id,
         // 'cartitem_id' => $order->cart_id,
         'qty' => $totalItems,
@@ -161,31 +162,7 @@ public function storeOrder(Request $request)
 
     // Delete cart items after saving to CartItemOrder
     CartItem::where('cart_id', $user_id)->delete();   
-    
-    $cartItemOrder = CartItemOrder::with('cart.user');
-    $user = $cartItemOrder->first()->cart->user;
-
-    // Set your Merchant Server Key
-    \Midtrans\Config::$serverKey = config('midtrans.server_key');
-    // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-    \Midtrans\Config::$isProduction = false;
-    // Set sanitization on (default)
-    \Midtrans\Config::$isSanitized = true;
-    // Set 3DS transaction for credit card to true
-    \Midtrans\Config::$is3ds = true;
-
-    $params = array(
-        'transaction_details' => array(
-            'order_id' => $dashboardCashier->id,
-            'gross_amount' => $dashboardCashier->total_price,
-        ),
-        'customer_details' => array(
-            'name' => $user->username,
-            'phone' => $user->phone,
-        ),
-    );
-
-    $snapToken = \Midtrans\Snap::getSnapToken($params);  
+  
     return redirect()->route('checkout');
 
 }
@@ -193,36 +170,76 @@ public function storeOrder(Request $request)
 public function checkout()
 {
     $cart_id = Auth::id();
-    $items = CartItemOrder::where('cart_id',$cart_id)->get();
-    // Save order to DashboardCashier
-    $dashboardCashier = DashboardCashier::first();
+
+    // Ambil DashboardCashier yang belum dibayar
+    $dashboardCashier = DashboardCashier::where('status', 'Unpaid')->first();
+
+    // Pastikan ada dashboard cashier yang belum dibayar
+    if ($dashboardCashier) {
+        // Ambil item yang sesuai dengan nomor dashboard_cashier
+        $items = CartItemOrder::where('cart_id', $cart_id)
+                    ->where('nomor', $dashboardCashier->id)
+                    ->get();
+
+        // Pastikan ada item yang ditampilkan
+        if ($items->isNotEmpty()) {
+            $user = Auth::user();
+
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            \Midtrans\Config::$isProduction = false;
+            \Midtrans\Config::$isSanitized = true;
+            \Midtrans\Config::$is3ds = true;
+
+            $order_id = $dashboardCashier->id . '-' . time();
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $order_id,
+                    'gross_amount' => $dashboardCashier->total_price,
+                ),
+                'customer_details' => array(
+                    'name' => $user->name,
+                    'phone' => $user->phone,
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            return view('dummy', compact('items', 'snapToken'));
+        }
+    }
+
+    // Jika tidak ada item atau dashboard cashier belum dibayar, kembali ke halaman lain
+    return redirect()->route('index')->with('error', 'Tidak ada item untuk checkout.');
+}
+
+public function callback(Request $request)
+{
+    $serverKey = config('midtrans.server_key');
+    $hashed = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+
+    if ($hashed == $request->signature_key) {
+        if ($request->transaction_status == 'capture' || $request->transaction_status == 'settlement') {
+            $order_id = explode('-', $request->order_id)[0];
+            $order = DashboardCashier::find($order_id);
+            if ($order) {
+                $order->update(['status' => 'Paid']);
+            }
+        }
+    }
+}
+
+public function invoice($id){
+    $title = 'invoice';
+    $cart_id = Auth::id();
+    $cashier =  DashboardCashier::where('status', 'Paid')->first();
+
+    $orders = CartItemOrder::where('cart_id', $cart_id)
+                ->where('nomor', $cashier->id)
+                ->get();
+
     
-    $cartItemOrder = CartItemOrder::with('cart.user');
-    $user = $cartItemOrder->first()->cart->user;
-
-    // Set your Merchant Server Key
-    \Midtrans\Config::$serverKey = config('midtrans.server_key');
-    // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-    \Midtrans\Config::$isProduction = false;
-    // Set sanitization on (default)
-    \Midtrans\Config::$isSanitized = true;
-    // Set 3DS transaction for credit card to true
-    \Midtrans\Config::$is3ds = true;
-
-    $params = array(
-        'transaction_details' => array(
-            'order_id' => $dashboardCashier->id,
-            'gross_amount' => $dashboardCashier->total_price,
-        ),
-        'customer_details' => array(
-            'name' => $user->username,
-            'phone' => $user->phone,
-        ),
-    );
-
-    $snapToken = \Midtrans\Snap::getSnapToken($params); 
-    return view('dummy', compact('items','snapToken'));
-
+    return view('invoice', compact('title','orders'));
 }
 
 }

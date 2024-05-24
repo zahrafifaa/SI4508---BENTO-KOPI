@@ -113,7 +113,9 @@ Route::post('/cart/increase-quantity',  [CartController::class, 'increaseQuantit
 Route::post('/cart/reduce-quantity',  [CartController::class, 'reduceQuantity'])->name('cart.reduceQuantity');
 Route::post('/cart/order', [CartController::class, 'storeOrder'])->middleware('auth')->name('cart.storeOrder');
 
-Route::get('cart/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('checkout');
+Route::get('/cart/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('checkout');
+Route::get('/invoice/{id}', [CartController::class, 'invoice'])->middleware('auth');
+
 
 Route::get('/dashboardCashier', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
 
