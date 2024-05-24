@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Discount;
 use App\Models\OrderTable;
 use Illuminate\Http\Request;
 use App\Models\CartItemOrder;
@@ -114,6 +115,27 @@ public function reduceQuantity(Request $request)
     return redirect()->back();
 }
 
+public function applyDiscount(Request $request)
+{
+    $validated = $request->validate([
+        'discount' => 'nullable|string',
+    ]);
+
+    $discountAmount = 0;
+    if (!empty($validated['discount'])) {
+        $discount = Discount::where('code', $validated['discount'])->first();
+        if ($discount) {
+            $discountAmount = $discount->amount;
+            session(['discountAmount' => $discountAmount]);
+            session(['discountCode' => $validated['discount']]);
+        } else {
+            return redirect()->back()->with('error', 'Kode diskon tidak valid.');
+        }
+    }
+
+    return redirect()->back()->with('success', 'Kode diskon berhasil diterapkan.');
+}
+
 public function storeOrder(Request $request)
 {
     $validated = $request->validate([
@@ -131,7 +153,12 @@ public function storeOrder(Request $request)
         $totalPrice += $subtotal;
     }
 
-    // Save special message
+    // Apply discount if available
+    $discountAmount = session('discountAmount', 0);
+    $discountCode = session('discountCode', '');
+    $totalPrice -= $discountAmount;
+
+    // Save special message and discount info
     $order = OrderTable::create([
         'cart_id' => $user_id,
         'special_message' => $validated['special_message']
@@ -154,7 +181,6 @@ public function storeOrder(Request $request)
     // Save order to DashboardCashier
     DashboardCashier::create([
         'ordertable_id' => $order->id,
-        // 'cartitem_id' => $order->cart_id,
         'qty' => $totalItems,
         'total_price' => $totalPrice,
         'status' => 'Unpaid'
@@ -162,6 +188,9 @@ public function storeOrder(Request $request)
 
     // Delete cart items after saving to CartItemOrder
     CartItem::where('cart_id', $user_id)->delete();   
+
+    // Clear discount session
+    session()->forget(['discountAmount', 'discountCode']);
   
     return redirect()->route('checkout');
 

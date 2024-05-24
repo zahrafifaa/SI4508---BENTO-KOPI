@@ -123,3 +123,5 @@ Route::get('/dashboardCashier', [DashboardCashierController::class, 'index'])->n
 Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
 Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
 
+// Route untuk mengaplikasikan kode diskon
+Route::post('/cart/apply-discount', [CartController::class, 'applyDiscount'])->name('cart.applyDiscount');
