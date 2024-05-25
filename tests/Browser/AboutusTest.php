@@ -7,20 +7,20 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\User;
 
-class HomepageTest extends DuskTestCase
+class AboutusTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
-     * @group homepage
+     * @group aboutUs
      */
     public function testExample(): void
     {
-
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
                     ->visit('/')
-                    ->pause(2000)
-                    ->assertSee('Inspirasi');
+                    ->clickLink('About us')
+                    ->assertPathIs('/about')
+                    ->assertSee('Our Story');
         });
     }
 }

@@ -122,3 +122,7 @@ Route::get('apply/{id}/apply', [LowonganController::class, 'apply'])->name('lowo
 Route::post('apply/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
 
 Route::get('/dashboard/pelamar', [PelamarController::class, 'index'])->name('pelamar.index');
+Route::post('/dashboard/pelamar/{id}', [PelamarController::class, 'updatestatus']);
+Route::get('/dashboard/pelamar/{id}', [PelamarController::class, 'show'])->name('pelamar.show');
+Route::get('/dashboard/pelamar/{id}/downloadFoto', [PelamarController::class, 'downloadFoto'])->name('download.foto')->middleware('auth');
+Route::get('/dashboard/pelamar/{id}/downloadCV', [PelamarController::class, 'downloadCV'])->name('download.cv')->middleware('auth');

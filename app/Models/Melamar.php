@@ -26,4 +26,14 @@ class Melamar extends Model
         return Carbon::parse($this->attributes['tanggal_lahir'])->age;
     }
 
+    public function getPasFoto()
+    {
+        return storage_path('app/public/' . $this->foto);
+    }
+    
+    public function getPasCV()
+    {
+        return storage_path('app/public/' . $this->cv);
+    }
+
 }

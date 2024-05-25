@@ -25,12 +25,13 @@ class ListKolaboratorController extends Controller
 
         // return dd($filePath);
 
-        return response()->download($filePath, 'surat.pdf');
+        // return response()->download($filePath, 'surat.pdf');
 
-        // if (file_exists($filePath)) {
-        //     return response()->download($filePath, $file);
-        // }else{
-        //     return redirect()->back()->with('error', 'file not found');
-        // }
+        if (file_exists($filePath)) {
+            session()->flash('success', 'File berhasil diunduh.');
+            return response()->download($filePath, 'surat.pdf');
+        }else{
+            return redirect()->back()->with('error', 'file not found');
+        }
     }
 }
