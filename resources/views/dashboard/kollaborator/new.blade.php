@@ -11,7 +11,7 @@
     </div>
 
     
-    <form method="post" action="/dashboard/kolaborator" enctype="multipart/form-data">
+    <form method="post" action="/dashboard/kolaborator" enctype="multipart/form-data" novalidate>
         @csrf
         <div class='card p-3 mb-2'>
             <div class="mb-3">
