@@ -21,7 +21,7 @@
           <ul class="navbar-nav my-4  ">
             
             <li>
-              <a class="nav-link" dusk='cart' href="/cart"><i class="m-0 "  aria-controls="offcanvasRight" data-feather = "shopping-cart"></i></a>
+              <a class="nav-link" href="/cart"><i class="m-0 "  aria-controls="offcanvasRight" data-feather = "shopping-cart"></i></a>
             </li>
 
             <li>
@@ -30,42 +30,62 @@
             
             @auth
             <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" dusk="modalLogout">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="staticBackdropLabel">Logout</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                          Apakah anda yakin ingin logout?
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                          <form action="{{ route('logout') }}" method="post" dusk="logoutForm">
-                              @csrf
-                              <button type="submit" class="btn btn-primary">Logout</button>
-                          </form>
-                      </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog ">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Logout</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
+                  <div class="modal-body">
+                    Apakah anda yakin ingin logout?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <form class="btn btn-primary" action="/logout" method="post">
+                      @csrf
+                      <button type="submit" class="dropdown-item "><a>Logout</a></button>
+                    </form>
+                  </div>
+                </div>
               </div>
-          </div>
+            </div>
   
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" dusk="userDropdown">
-                  Welcome back, {{ auth()->user()->username }}
+             @if (auth()->user()->username === 'App')
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome back, {{ auth()->user()->username }}
               </a>
               <ul class="dropdown-menu">
-                  @if(auth()->user()->username === 'App')
-                      <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                  @elseif(auth()->user()->username === 'Cashier')
-                      <li><a class="dropdown-item" href="{{ route('dashboard.cashier') }}">My dashboard</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                  @endif
-                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#" dusk="logoutLink">Logout</a></li>
+                <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Logout</a></li>
               </ul>
-          </li>
+             </li>
+
+             @elseif (auth()->user()->username === 'Cashier')
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome back, {{ auth()->user()->username }}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('dashboard.cashier') }}">My dashboard</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Logout</a></li>
+              </ul>
+             </li>
+                 
+             @else
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome back, {{ auth()->user()->username }}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Logout</a></li>
+              </ul>
+             </li>
+                 
+             @endif
             @else
             <li class="nav-item ">
               <a href="/login" class="nav-link {{ ( $title === "Login") ? 'active' : '' }}"><i class="bi bi-box-arrow-in-right"></i>

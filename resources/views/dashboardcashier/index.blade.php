@@ -19,17 +19,11 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $iteration = 1;
-                @endphp
                 @foreach ($orders as $orderTableId => $order)
                     @foreach ($order['items'] as $index => $item)
                         <tr>
                             @if ($index === 0)
-                                <td rowspan="{{ count($order['items']) }}">{{ $iteration }}</td>
-                                @php
-                                    $iteration++;
-                                @endphp
+                                <td rowspan="{{ count($order['items']) }}">{{ $loop->iteration }}</td>
                             @endif
                             <td>{{ $item->menu->nama }}</td>
                             <td>{{ $item->jumlah }}</td>

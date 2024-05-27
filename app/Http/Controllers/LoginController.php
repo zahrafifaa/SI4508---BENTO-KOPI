@@ -47,6 +47,7 @@ class LoginController extends Controller
 
         PasswordResetToken::updateOrCreate([
             'email' => $request->email
+
         ],
         [
             'email' => $request->email,
@@ -115,7 +116,7 @@ class LoginController extends Controller
         if(Auth::attempt($credentials))
         {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success','Anda berhasil Login');
+            return redirect()->intended('/');
         }
 
         return back()->with('loginError', 'Login failed!');
@@ -129,7 +130,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('success', 'Anda berhasil logout');
+        return redirect('/');
     }
 
 }
