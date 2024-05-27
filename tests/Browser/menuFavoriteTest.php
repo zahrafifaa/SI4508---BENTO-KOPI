@@ -16,29 +16,29 @@ class menuFavoriteTest extends DuskTestCase
     public function testFavorite(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser->loginAs(User::find(2))
                     ->visit('/menu')
                     ->press('#Love')
                     ->visit('/')
                     ->maximize()
-                    ->assertSee('Coffee 2')
+                    ->assertSee('Coffee 1')
                     ->screenshot('menuFavorite');
         });
     }
 
     /**
      * A Dusk test example.
-     * @group menuUnFavorite
+     * @group menuFavorite
      */
     public function testUnFavorite(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser->loginAs(User::find(2))
                     ->visit('/')
                     ->maximize()
                     ->press('#unLove')
                     ->refresh()
-                    ->assertDontSee('Coffee 2')
+                    ->assertDontSee('Coffee 1')
                     ->screenshot('menuUnFavorite');
         });
     }

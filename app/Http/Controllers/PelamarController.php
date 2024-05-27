@@ -35,7 +35,7 @@ class PelamarController extends Controller
             session()->flash('success', 'Foto berhasil diunduh.');
             return response()->download($filePath, $namaFile);
         }else{
-            return redirect()->back()->with('error', 'file not found');
+            return redirect()->back()->with('error', 'file not found'); 
         }
     }
 
