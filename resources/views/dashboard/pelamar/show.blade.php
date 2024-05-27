@@ -95,9 +95,9 @@
     @csrf
     <select class="form-select @error('status') is-invalid @enderror" name='status' id="status" aria-label="Default select example">
         <option value='Belum ditinjau' {{ (old('status') ?? $pelamar->status) == 'Belum ditinjau' ? 'selected' : ''}}>Belum ditinjau</option>
-        <option value='Terima' {{ (old('status') ?? $pelamar->status) == 'Terima' ? 'selected' : ''}}>Terima</option>
-        <option value='Diproses' {{ (old('status') ?? $pelamar->status) == 'Diproses' ? 'selected' : ''}}>Diproses</option>
-        <option value='Tolak' {{ (old('status') ?? $pelamar->status) == 'Tolak' ? 'selected' : ''}}>Tolak</option>
+        <option value='Terima' {{ (old('status') ?? $pelamar->status) == 'Terima' ? 'selected' : ''}}>Terima </option>
+        <option value='Diproses' {{ (old('status') ?? $pelamar->status) == 'Diproses' ? 'selected' : ''}}>Diproses </option>
+        <option value='Tolak' {{ (old('status') ?? $pelamar->status) == 'Tolak' ? 'selected' : ''}}>Tolak </option>
     </select>
     <button class="btn btn-primary mt-3" type="submit">Simpan</button>
     </form>
