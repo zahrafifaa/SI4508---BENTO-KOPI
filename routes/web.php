@@ -120,14 +120,13 @@ Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.sh
 Route::get('apply/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
 Route::post('apply/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
 
-Route::get('reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
-Route::get('reservasi/cek', [ReservasiController::class, 'cek'])->name('reservasi.cek');
-Route::post('reservasi', [ReservasiController::class, 'submit'])->name('reservasi.submit')->middleware('auth');
-Route::get('reservasi/{kode}', [ReservasiController::class, 'success'])->name('reservasi.success');
+//Route::get('reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
+//Route::get('reservasi/cek', [ReservasiController::class, 'cek'])->name('reservasi.cek');
+//Route::post('reservasi', [ReservasiController::class, 'submit'])->name('reservasi.submit')->middleware('auth');
+//Route::get('reservasi/{kode}', [ReservasiController::class, 'success'])->name('reservasi.success');
 
-Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('location', App\Http\Controllers\Admin\LocationController::class);
-    Route::resource('meja', App\Http\Controllers\Admin\MejaController::class);
-
-    Route::get('reservasi/acc', [App\Http\Controllers\Admin\ReservasiController::class, 'acc'])->name('reservasi.acc');
-    Route::resource('reservasi', App\Http\Controllers\Admin\ReservasiController::class)->only(['index', 'destroy']);
+//Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    //Route::resource('location', App\Http\Controllers\Admin\LocationController::class);
+    //Route::resource('meja', App\Http\Controllers\Admin\MejaController::class);
+    //Route::get('reservasi/acc', [App\Http\Controllers\Admin\ReservasiController::class, 'acc'])->name('reservasi.acc');
+    //Route::resource('reservasi', App\Http\Controllers\Admin\ReservasiController::class)->only(['index', 'destroy']);
