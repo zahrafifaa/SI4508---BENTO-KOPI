@@ -55,7 +55,7 @@ class CartController extends Controller
             $cart = CartItem::create($validated);
         }
 
-        return redirect()->back()->with('success', 'Menu berhasil ditambahkan');
+        return redirect()->back();
     }
 
     public function destroy($id)
@@ -203,10 +203,8 @@ public function checkout()
 {
     $user_id = Auth::id();
 
-    // Ambil DashboardCashier yang belum dibayar untuk user yang sedang login melalui relasi dengan OrderTable
-    $dashboardCashier = DashboardCashier::whereHas('orderTable', function($query) use ($user_id) {
-        $query->where('user_id', $user_id);
-    })->where('status', 'Unpaid')->first();
+    // Ambil DashboardCashier yang belum dibayar
+    $dashboardCashier = DashboardCashier::where('status', 'Unpaid')->first();
 
     // Pastikan ada dashboard cashier yang belum dibayar
     if ($dashboardCashier) {
@@ -265,21 +263,16 @@ public function callback(Request $request)
 }
 
 public function invoice($id){
-    $title = 'Invoice';
+    $title = 'invoice';
+    $user_id = Auth::id();
+    $cashier =  DashboardCashier::where('status', 'Paid')->first();
+
+    $orders = CartItemOrder::where('user_id', $user_id)
+                ->where('nomor', $cashier->id)
+                ->get();
+
     
-    // Mengambil data DashboardCashier berdasarkan ID yang diberikan
-    $cashier = DashboardCashier::with(['orderTable.cartItemOrders.menu'])->findOrFail($id);
-
-    // Memastikan user yang sedang login memiliki akses ke pesanan ini
-    if ($cashier->orderTable->user_id !== Auth::id()) {
-        abort(403, 'Unauthorized action.');
-    }
-
-    // Mengambil semua CartItemOrder yang terkait dengan pesanan ini
-    $orders = $cashier->orderTable->cartItemOrders;
-
-    return view('invoice', compact('title', 'orders', 'cashier'));
+    return view('invoice', compact('title','orders'));
 }
-
 
 }
