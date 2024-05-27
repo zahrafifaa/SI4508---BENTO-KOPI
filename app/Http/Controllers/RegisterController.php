@@ -23,7 +23,8 @@ class RegisterController extends Controller
             'name' => 'required | max:255',
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:5|max:255'
+            'password' => 'required|min:5|max:255',
+            'phone' => 'required|min:5|max:255'
         ]);
 
         // $validatedData['password'] = bcrypt($validatedData['password']);
@@ -34,9 +35,6 @@ class RegisterController extends Controller
         $cartData = [
             'user_id' => $user->id
         ];
-
-        // Create cart entry for the user
-        Cart::create($cartData);
 
         return redirect('/login')->with('success', 'Registrasi Berhasil☕');
     }
