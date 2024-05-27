@@ -58,3 +58,5 @@ class LowonganController extends Controller
         return redirect()->back()->with('success', 'Anda berhasil melamar pekerjaan ini.');
     }
 }
+
+//selesaikan
