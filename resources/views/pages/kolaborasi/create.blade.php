@@ -95,17 +95,4 @@
             });
         </script>
     @endif
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
-    <script>
-        $(function() {
-            ClassicEditor
-                .create(document.querySelector('#deskripsi'))
-                .then(editor => {
-                    console.log(editor);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        })
-    </script>
 @endpush
