@@ -39,7 +39,7 @@ Route::get('/', function () {
     return view('beranda', [
         "title" => "Beranda",
     ]);
-});
+})->name('index');
 
 
 
@@ -82,8 +82,8 @@ Route::get('/about', function () {
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/login', [LoginController::class, 'authenticate'])->name('log.in');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', [LoginController::class, 'forgot_password'])->name('forgot-password');
 Route::post('/forgot-password-act', [LoginController::class, 'forgot_password_act'])->name('forgot-password-act');
@@ -107,8 +107,8 @@ Route::get('/dashboard', function(){
 // Route::patch('/update-shopping-cart', [MenuController::class, 'updateCart'])->name('update.sopping.cart');
 // Route::delete('/delete-cart-product', [MenuController::class, 'deleteProduct'])->name('delete.cart.product');
 
-Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
 Route::GET('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
+Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy')->middleware('auth');
 Route::post('/cart/increase-quantity',  [CartController::class, 'increaseQuantity'])->name('cart.increaseQuantity');
 Route::post('/cart/reduce-quantity',  [CartController::class, 'reduceQuantity'])->name('cart.reduceQuantity');
