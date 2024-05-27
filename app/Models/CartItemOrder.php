@@ -10,15 +10,16 @@ class CartItemOrder extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cart_id',
+        'user_id',
         'nomor',
         'menu_id',
+        'order_table_id',
         'jumlah'
     ];
 
-    public function cart()
+    public function user()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function menu()
@@ -26,9 +27,14 @@ class CartItemOrder extends Model
         return $this->belongsTo(Menu::class);
     }
 
+    public function orderTable()
+    {
+        return $this->belongsTo(OrderTable::class, 'order_table_id');
+    }
+
     public function dashboardCashier()
     {
-        return $this->belongsTo(DashboardCashier::class);
+        return $this->belongsTo(DashboardCashier::class,'cartitemorder_id');
     }
 
 

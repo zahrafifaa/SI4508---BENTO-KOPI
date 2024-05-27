@@ -24,8 +24,8 @@ class MenuController extends Controller
         // Hitung total item dalam keranjang belanja
     $totalItems = 0;
     if (Auth::check()) {
-        $cart_id = Auth::id();
-        $totalItems = CartItem::where('cart_id', $cart_id)->sum('jumlah');
+        $user_id = Auth::id();
+        $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
     }
 
     // Render view dan sertakan $totalItems

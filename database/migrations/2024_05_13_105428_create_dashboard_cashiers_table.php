@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('dashboard_cashiers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('ordertable_id');
+            $table->foreignId('cartitemorder_id');
             $table->integer('qty');
             $table->bigInteger('total_price');
             $table->enum('status', ['Unpaid','Paid']);

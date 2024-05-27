@@ -9,16 +9,21 @@ class OrderTable extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cart_id','special_message'];
+    protected $fillable = ['user_id', 'nomor', 'special_message'];
 
-    public function cart()
+    public function user()
     {
-        return $this->belongsTo(Cart::class, 'cart_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function dashboardcashier()
+    public function cartItemOrders()
     {
-        return $this->belongsTo(DashboardCashier::class);
+        return $this->hasMany(CartItemOrder::class);
+    }
+
+    public function dashboardCashier()
+    {
+        return $this->hasOne(DashboardCashier::class);
     }
 
     

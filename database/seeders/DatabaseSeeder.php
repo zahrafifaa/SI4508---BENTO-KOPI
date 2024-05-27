@@ -36,8 +36,6 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user->id
         ];
 
-        // Create cart entry for the user
-        Cart::create($cartData);
         
         $user = User::create([
             'name' => 'adminCashier ',
@@ -50,8 +48,6 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user->id
         ];
 
-        // Create cart entry for the user
-        Cart::create($cartData);
         
         $user = User::create([
             'name' => 'adminApp ',
@@ -64,8 +60,6 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user->id
         ];
 
-        // Create cart entry for the user
-        Cart::create($cartData);
     }
 
     

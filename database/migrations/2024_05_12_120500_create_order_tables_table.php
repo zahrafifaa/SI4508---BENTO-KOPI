@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('order_tables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id');
+            $table->foreignId('user_id');
+            $table->integer('nomor');
             $table->text('special_message')->nullable();
             $table->timestamps();
         });

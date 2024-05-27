@@ -15,8 +15,8 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cart_id = Auth::id();
-        $carts = CartItem::where('cart_id', $cart_id)->get();
+        $user_id = Auth::id();
+        $carts = CartItem::where('user_id', $user_id)->get();
         $title = "Cart";
         $totalPrice = 0;
         $totalItems = $carts->sum('jumlah');
@@ -32,7 +32,7 @@ class CartController extends Controller
             $snapToken ='';
         }
 
-        return view('cart.index', compact('carts', 'totalItems', 'totalPrice', 'title','cart_id', 'snapToken'));
+        return view('cart.index', compact('carts', 'totalItems', 'totalPrice', 'title','user_id', 'snapToken'));
     }
 
     public function store(Request $request)
@@ -41,11 +41,11 @@ class CartController extends Controller
             'menu_id' => 'required',
         ]);
 
-        $validated['cart_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
         $validated['jumlah'] = 1;
 
         $existingCartItem = CartItem::where('menu_id', $validated['menu_id'])
-            ->where('cart_id', $validated['cart_id'])
+            ->where('user_id', $validated['user_id'])
             ->first();
 
         if ($existingCartItem) {
@@ -55,7 +55,7 @@ class CartController extends Controller
             $cart = CartItem::create($validated);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Menu berhasil ditambahkan');
     }
 
     public function destroy($id)
@@ -71,11 +71,11 @@ public function increaseQuantity(Request $request)
         'menu_id' => 'required',
     ]);
 
-    $cart_id = Auth::id();
+    $user_id = Auth::id();
     $menu_id = $validated['menu_id'];
 
     // Cek apakah produk sudah ada di keranjang
-    $cart = CartItem::where('cart_id', $cart_id)
+    $cart = CartItem::where('user_id', $user_id)
                 ->where('menu_id', $menu_id)
                 ->first();
 
@@ -94,11 +94,11 @@ public function reduceQuantity(Request $request)
         'menu_id' => 'required',
     ]);
 
-    $cart_id = Auth::id();
+    $user_id = Auth::id();
     $menu_id = $validated['menu_id'];
 
     // Cek apakah produk sudah ada di keranjang
-    $cart = CartItem::where('cart_id', $cart_id)
+    $cart = CartItem::where('user_id', $user_id)
                 ->where('menu_id', $menu_id)
                 ->first();
 
@@ -142,8 +142,8 @@ public function storeOrder(Request $request)
         'special_message' => 'nullable|string',
     ]);
 
-    $user_id = Auth::id();
-    $carts = CartItem::where('cart_id', $user_id)->get();
+    $user_id = auth()->id();
+    $carts = CartItem::where('user_id', $user_id)->get();
 
     $totalPrice = 0;
     $totalItems = $carts->sum('jumlah');
@@ -158,22 +158,24 @@ public function storeOrder(Request $request)
     $discountCode = session('discountCode', '');
     $totalPrice -= $discountAmount;
 
-    // Save special message and discount info
-    $order = OrderTable::create([
-        'cart_id' => $user_id,
-        'special_message' => $validated['special_message']
-    ]);
-
     // Determine the next order number for the user
-    $lastOrder = CartItemOrder::where('cart_id', $user_id)->orderBy('nomor', 'desc')->first();
+    $lastOrder = CartItemOrder::where('user_id', $user_id)->orderBy('nomor', 'desc')->first();
     $nextOrderNumber = $lastOrder ? $lastOrder->nomor + 1 : 1;
 
+    // Save special message and discount info
+    $order = OrderTable::create([
+        'user_id' => $user_id,
+        'special_message' => $validated['special_message'],
+        'nomor' => $nextOrderNumber,
+    ]);
+  
     // Save cart items to CartItemOrder
     foreach ($carts as $cart) {
-        CartItemOrder::create([
-            'cart_id' => $cart->cart_id,
+        $itemorder = CartItemOrder::create([
+            'user_id' => $cart->user_id,
             'nomor' => $nextOrderNumber, // Set the order number
             'menu_id' => $cart->menu_id,
+            'order_table_id' => $order->id,
             'jumlah' => $cart->jumlah,
         ]);
     }
@@ -181,13 +183,14 @@ public function storeOrder(Request $request)
     // Save order to DashboardCashier
     DashboardCashier::create([
         'ordertable_id' => $order->id,
+        'cartitemorder_id' => $itemorder->id,
         'qty' => $totalItems,
         'total_price' => $totalPrice,
         'status' => 'Unpaid'
     ]);
 
     // Delete cart items after saving to CartItemOrder
-    CartItem::where('cart_id', $user_id)->delete();   
+    CartItem::where('user_id', $user_id)->delete();   
 
     // Clear discount session
     session()->forget(['discountAmount', 'discountCode']);
@@ -198,15 +201,17 @@ public function storeOrder(Request $request)
 
 public function checkout()
 {
-    $cart_id = Auth::id();
+    $user_id = Auth::id();
 
-    // Ambil DashboardCashier yang belum dibayar
-    $dashboardCashier = DashboardCashier::where('status', 'Unpaid')->first();
+    // Ambil DashboardCashier yang belum dibayar untuk user yang sedang login melalui relasi dengan OrderTable
+    $dashboardCashier = DashboardCashier::whereHas('orderTable', function($query) use ($user_id) {
+        $query->where('user_id', $user_id);
+    })->where('status', 'Unpaid')->first();
 
     // Pastikan ada dashboard cashier yang belum dibayar
     if ($dashboardCashier) {
         // Ambil item yang sesuai dengan nomor dashboard_cashier
-        $items = CartItemOrder::where('cart_id', $cart_id)
+        $items = CartItemOrder::where('user_id', $user_id)
                     ->where('nomor', $dashboardCashier->id)
                     ->get();
 
@@ -260,16 +265,21 @@ public function callback(Request $request)
 }
 
 public function invoice($id){
-    $title = 'invoice';
-    $cart_id = Auth::id();
-    $cashier =  DashboardCashier::where('status', 'Paid')->first();
-
-    $orders = CartItemOrder::where('cart_id', $cart_id)
-                ->where('nomor', $cashier->id)
-                ->get();
-
+    $title = 'Invoice';
     
-    return view('invoice', compact('title','orders'));
+    // Mengambil data DashboardCashier berdasarkan ID yang diberikan
+    $cashier = DashboardCashier::with(['orderTable.cartItemOrders.menu'])->findOrFail($id);
+
+    // Memastikan user yang sedang login memiliki akses ke pesanan ini
+    if ($cashier->orderTable->user_id !== Auth::id()) {
+        abort(403, 'Unauthorized action.');
+    }
+
+    // Mengambil semua CartItemOrder yang terkait dengan pesanan ini
+    $orders = $cashier->orderTable->cartItemOrders;
+
+    return view('invoice', compact('title', 'orders', 'cashier'));
 }
+
 
 }

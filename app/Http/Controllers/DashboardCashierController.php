@@ -16,14 +16,30 @@ class DashboardCashierController extends Controller
      */
     public function index()
     {
-        $orderedMenus = CartItemOrder::with(['menu', 'cart.user', 'cart.orderTables'])
-        ->orderBy('created_at', 'asc') // Order by created_at to ensure correct sequence
-        ->get()
-        ->groupBy(function($item) {
-            return $item->cart->user->id . '_' . $item->created_at->toDateTimeString(); // Group by user and exact time
-        });
+        $dashboardCashiers = DashboardCashier::with(['orderTable.user', 'orderTable.cartItemOrders.menu'])->get();
+        
+        // Group data by orderTable
+        $orders = [];
+        foreach ($dashboardCashiers as $dashboardCashier) {
+            $orderTableId = $dashboardCashier->orderTable->id;
+            if (!isset($orders[$orderTableId])) {
+                $orders[$orderTableId] = [
+                    'dashboardCashier' => $dashboardCashier,
+                    'items' => [],
+                    'totalQty' => 0,
+                    'totalPrice' => 0
+                ];
+            }
 
-    return view('dashboardcashier.index', compact('orderedMenus'));
+            foreach ($dashboardCashier->orderTable->cartItemOrders as $item) {
+                $orders[$orderTableId]['items'][] = $item;
+                $orders[$orderTableId]['totalQty'] += $item->jumlah;
+                $orders[$orderTableId]['totalPrice'] += $item->menu->harga * $item->jumlah;
+            }
+        }
+
+        return view('dashboardcashier.index', compact('orders'));
+     
     }
 
     /**

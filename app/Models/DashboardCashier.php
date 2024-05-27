@@ -13,11 +13,13 @@ class DashboardCashier extends Model
 
     public function orderTable()
     {
-        return $this->hasMany(OrderTable::class, 'ordertable_id');
+        return $this->belongsTo(OrderTable::class, 'ordertable_id');
     }
 
     public function cartItemsOrder()
     {
-        return $this->hasMany(CartItemOrder::class);
+        return $this->hasMany(CartItemOrder::class, 'cartitemorder_id');
     }
+
+    
 }

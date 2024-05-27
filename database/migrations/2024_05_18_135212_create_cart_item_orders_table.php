@@ -10,9 +10,10 @@ class CreateCartItemOrdersTable extends Migration
     {
         Schema::create('cart_item_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id');
             $table->integer('nomor');
             $table->foreignId('menu_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_table_id')->constrained('order_tables')->cascadeOnDelete();
             $table->integer('jumlah');
             $table->timestamps();
         });
