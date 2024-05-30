@@ -5,11 +5,11 @@
     font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-nav {
+/* nav {
     background-color: white;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-}
+} */
 
 #filter .btn {
     font-size: 14px;
@@ -67,13 +67,13 @@ h2 {
         height: 100px;
     }
 }
-.ikon {
+/* .ikon {
     color: #007200;
     margin-top: 0.1rem;
     font-family: "Poppins", sans-serif;
     font-size: 2rem;
     float: left;
-}
+} */
 
 .subIkon {
     color: #007200;
@@ -81,23 +81,32 @@ h2 {
     font-size: 2rem;
 }
 
-li {
+/* li {
     float: left;
     list-style-type: none;
-}
+} */
 
 a {
-    display: inline;
+    /* display: inline;
     text-align: center;
-    padding: 10px 15px;
+    padding: 10px 15px; */
     text-decoration: none;
     color: #007200;
-    font-family: "Poppins", sans-serif;
+    /* font-family: "Poppins", sans-serif;
     font-size: 16px;
-    font-style: normal;
+    font-style: normal; */
 }
 
-.bi-cart{
+
+/* svg{
+    margin-top:7px;
+    margin-left: 5%;
+    width: 25px;
+    height: 50px;
+    
+} */
+
+/* .bi-cart{
     margin-top:3px;
     margin-left: 5%;
     width: 25px;
@@ -109,7 +118,8 @@ a {
     margin-left: 5%;
     width: 25px;
     height: 50px;
-}
+} */
+
 
 .line{
     float:right;
@@ -128,10 +138,10 @@ a {
 }
 
 
-.cart{
+/* .cart{
     padding: 0px 1rem 0px 3rem;
     margin-right: 1rem;
-}
+} */
 
 .hoverG > a:hover{
     background-color: #67BC67;
@@ -247,12 +257,12 @@ a {
     padding: 1rem;
 }
 
-.flexContainer{
+/* .flexContainer{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
+} */
 
 .grid2{
     display: grid;
@@ -371,3 +381,4 @@ h6{
     width: 90%;
     height: 0.5rem;
 }
+
