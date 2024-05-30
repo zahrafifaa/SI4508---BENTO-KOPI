@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
-use App\Http\Requests\StoreMenuRequest;
-use App\Http\Requests\UpdateMenuRequest;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\UpdateMenuRequest;
+use App\Models\CartItem;
+
 
 class MenuController extends Controller
 {
@@ -19,9 +20,18 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::all();
         $sort = 'null';
-        $title = 'menu';
-        $user = Auth::user();
-        return view('menu', compact('menus', 'categories', 'sort','title', 'user'));
+
+        $title = 'Menu';
+        // Hitung total item dalam keranjang belanja
+    $totalItems = 0;
+    if (Auth::check()) {
+        $user_id = Auth::id();
+        $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
+    }
+
+    // Render view dan sertakan $totalItems
+    return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems'));
+
     }
     public function searchMenu( Request $request){
         $query = $request->input('query');
@@ -82,6 +92,58 @@ class MenuController extends Controller
 
         return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort', 'title'));
     }
+
+    // public function indexs()
+    // {
+    //     $menus = Menu::all();
+    //     return view('cart.products', compact('menus'));
+    // }
+  
+    // public function menuCart()
+    // {
+    //     return view('cart.carts');
+    // }
+    // public function addMenutoCart($id)
+    // {
+    //     $menu = Menu::findOrFail($id);
+    //     $cart = session()->get('cart', []);
+    //     if(isset($cart[$id])) {
+    //         $cart[$id]['quantity']++;
+    //     } else {
+    //         $cart[$id] = [
+    //             "nama" => $menu->nama,
+    //             "quantity" => 1,
+    //             "harga" => $menu->harga,
+    //             "gambar" => $menu->gambar
+    //         ];
+    //     }
+    //     session()->put('cart', $cart);
+    //     return redirect()->back()->with('success', 'menu has been added to cart!');
+    // }
+    
+    // public function updateCart(Request $request)
+    // {
+    //     if($request->id && $request->quantity){
+    //         $cart = session()->get('cart');
+    //         $cart[$request->id]["quantity"] = $request->quantity;
+    //         session()->put('cart', $cart);
+    //         session()->flash('success', 'menu added to cart.');
+    //     }
+    // }
+  
+    // public function deleteProduct(Request $request)
+    // {
+    //     if($request->id) {
+    //         $cart = session()->get('cart');
+    //         if(isset($cart[$request->id])) {
+    //             unset($cart[$request->id]);
+    //             session()->put('cart', $cart);
+    //         }
+    //         session()->flash('success', 'menu successfully deleted.');
+    //     }
+    // }
+
+
     /**
      * Show the form for creating a new resource.
      */

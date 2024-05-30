@@ -55,7 +55,7 @@
                     <label class="small mb-1" for="inputFirstName">Nama Pengguna</label>
                       <div class="form-floating">
                         <input type="text" name="username" class="form-control @error('username')is-invalid @enderror" id="username" placeholder="Username" value="{{ old('username') }}"> 
-                        <label for="name">Masukkan Nama Pengguna</label>
+                        <label for="username">Masukkan Nama Pengguna</label>
                         @error('username')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -93,6 +93,20 @@
                     </div>
                 </div>
               </div>
+              <div class="row  gx-3 mb-3">
+                <!-- Form Email -->
+                <div class="col-md-6">
+                  <label class="small mb-1" for="inputFirstName">Nomor Handphone</label>
+                    <div class="form-floating">
+                      <input type="tel" name="phone" class="form-control @error('phone')is-invalid @enderror" id="phone" placeholder="Phone" value="{{ old('phone') }}">
+                      <label for="phone">Masukkan Nomor Handphone </label>
+                      @error('phone')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+                </div>
               {{-- Tombol Daftar --}}
               <button class="btn btn-primary mt-3" type="submit">Daftar</button>
             </form>

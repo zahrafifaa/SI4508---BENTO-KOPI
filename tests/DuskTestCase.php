@@ -15,10 +15,10 @@ abstract class DuskTestCase extends BaseTestCase
 
     /**
      * Prepare for Dusk test execution.
-     *
-     * @beforeClass
+
      */
-    // #[BeforeClass]
+    #[BeforeClass]
+
     public static function prepare(): void
     {
         if (! static::runningInSail()) {
@@ -47,7 +47,6 @@ abstract class DuskTestCase extends BaseTestCase
             )
         );
     }
-
     /**
      * Determine whether the Dusk command has disabled headless mode.
      */
@@ -65,4 +64,5 @@ abstract class DuskTestCase extends BaseTestCase
         return isset($_SERVER['DUSK_START_MAXIMIZED']) ||
                isset($_ENV['DUSK_START_MAXIMIZED']);
     }
+
 }

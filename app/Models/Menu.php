@@ -11,16 +11,26 @@ class Menu extends Model
     protected $fillable = [
         'nama',
         'kategori',
+        'gambar',
         'deskripsi',
         'harga',
         'gambar'
     ];
 
-    public function user(){
+    public function cartitem()
+    {
+        return $this->belongsTo(CartItem::class);
+    }
+
+    public function cartItemsOrder()
+    {
+        return $this->belongsTo(CartItemOrder::class);
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function favorites(){
 
-    }
 }

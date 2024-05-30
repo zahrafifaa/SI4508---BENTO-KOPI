@@ -1,9 +1,15 @@
 <?php
 
+use App\Models\Cart;
+use App\Models\Menu;
+use App\Models\DashboardCashier;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardCashierController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\DashboardKollabController;
@@ -11,7 +17,6 @@ use App\Http\Controllers\KolaborasiController;
 use App\Http\Controllers\ListKolaboratorController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\PelamarController;
-
 
 
 /*
@@ -38,8 +43,16 @@ Route::get('/menu/sort/{option}', [MenuController::class, 'sortmenu'])->name('so
 Route::get('/menu/{kategori}/', [MenuController::class, 'showMenuByCategory'])->name('showmenubycategory');
 Route::get('/menu/{kategori}/{option}', [MenuController::class, 'sortShowMenuByCategory'])->name('sortshowmenubycategory');
 
+
+Route::get('/', function () {
+    return view('beranda', [
+        "title" => "Beranda",
+    ]);
+})->name('index');
+
 Route::post('/menu/{menu}/favorite', [FavoriteController::class, 'store'])->name('storeMenu')->middleware('auth');
 Route::delete('/favorite/delete/{favorite}', [FavoriteController::class, 'destroy'])->name('destroyMenu')->middleware('auth');
+
 
 // Route::post('/favorites/{menuId}', [FavoriteController::class, 'toggleFavorite'])->name('favorites');
 // Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
@@ -84,8 +97,8 @@ Route::get('/about', function () {
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/login', [LoginController::class, 'authenticate'])->name('log.in');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', [LoginController::class, 'forgot_password'])->name('forgot-password');
 Route::post('/forgot-password-act', [LoginController::class, 'forgot_password_act'])->name('forgot-password-act');
@@ -96,9 +109,40 @@ Route::post('/validate-forgot-password-act', [LoginController::class, 'validate_
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/dashboard', function () {
-    return view("dashboard.index");
+
+Route::get('/dashboard', function(){
+    return view('dashboard.index',[
+        'title' => 'Dashboard',
+        'active' => 'Dashboard'
+    ]);
 })->middleware('auth');
+
+// Route::get('/cartMenu', [MenuController::class, 'indexs']);  
+// Route::get('/shopping-cart', [MenuController::class, 'menuCart'])->name('shopping.cart');
+// Route::get('/menus/{id}', [MenuController::class, 'addmenutoCart'])->name('addmenu.to.cart');
+// Route::patch('/update-shopping-cart', [MenuController::class, 'updateCart'])->name('update.sopping.cart');
+// Route::delete('/delete-cart-product', [MenuController::class, 'deleteProduct'])->name('delete.cart.product');
+
+Route::GET('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
+Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
+Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy')->middleware('auth');
+Route::post('/cart/increase-quantity',  [CartController::class, 'increaseQuantity'])->name('cart.increaseQuantity');
+Route::post('/cart/reduce-quantity',  [CartController::class, 'reduceQuantity'])->name('cart.reduceQuantity');
+Route::post('/cart/order', [CartController::class, 'storeOrder'])->middleware('auth')->name('cart.storeOrder');
+
+Route::get('/cart/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('checkout');
+Route::get('/invoice/{id}', [CartController::class, 'invoice'])->middleware('auth');
+
+
+Route::get('/dashboardCashier', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
+
+Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
+Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
+
+// Route untuk mengaplikasikan kode diskon
+Route::post('/cart/apply-discount', [CartController::class, 'applyDiscount'])->name('cart.applyDiscount');
+
+
 
 Route::get('/dashboard/kolaborator/new', function () {
     return view("dashboard.kollaborator.new");
@@ -126,3 +170,4 @@ Route::post('/dashboard/pelamar/{id}', [PelamarController::class, 'updatestatus'
 Route::get('/dashboard/pelamar/{id}', [PelamarController::class, 'show'])->name('pelamar.show');
 Route::get('/dashboard/pelamar/{id}/downloadFoto', [PelamarController::class, 'downloadFoto'])->name('download.foto')->middleware('auth');
 Route::get('/dashboard/pelamar/{id}/downloadCV', [PelamarController::class, 'downloadCV'])->name('download.cv')->middleware('auth');
+
