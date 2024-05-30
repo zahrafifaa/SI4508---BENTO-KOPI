@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+
     use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
     protected $guarded = ['id', 'timestamps'];
@@ -23,5 +24,10 @@ class User extends Authenticatable
     public function orderTables()
     {
         return $this->hasMany(OrderTable::class, 'user_id');
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }

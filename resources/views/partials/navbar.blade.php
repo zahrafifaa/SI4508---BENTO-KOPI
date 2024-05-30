@@ -18,6 +18,7 @@
               <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "About") ? 'active' : '' }}" href="about">About us</a></li>
           </ul>
 
+
           <ul class="navbar-nav my-4  ">
             
             <li>

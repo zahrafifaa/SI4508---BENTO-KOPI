@@ -26,4 +26,11 @@ class Menu extends Model
     {
         return $this->belongsTo(CartItemOrder::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 }

@@ -10,6 +10,14 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardCashierController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\DashboardKollabController;
+use App\Http\Controllers\KolaborasiController;
+use App\Http\Controllers\ListKolaboratorController;
+use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\PelamarController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +30,9 @@ use App\Http\Controllers\DashboardCashierController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/menuapi', function () {
     return view('menuapi');
 });
@@ -35,14 +43,21 @@ Route::get('/menu/sort/{option}', [MenuController::class, 'sortmenu'])->name('so
 Route::get('/menu/{kategori}/', [MenuController::class, 'showMenuByCategory'])->name('showmenubycategory');
 Route::get('/menu/{kategori}/{option}', [MenuController::class, 'sortShowMenuByCategory'])->name('sortshowmenubycategory');
 
+
 Route::get('/', function () {
     return view('beranda', [
         "title" => "Beranda",
     ]);
 })->name('index');
 
+Route::post('/menu/{menu}/favorite', [FavoriteController::class, 'store'])->name('storeMenu')->middleware('auth');
+Route::delete('/favorite/delete/{favorite}', [FavoriteController::class, 'destroy'])->name('destroyMenu')->middleware('auth');
 
 
+// Route::post('/favorites/{menuId}', [FavoriteController::class, 'toggleFavorite'])->name('favorites');
+// Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
+
+Route::get('/', [BerandaController::class, 'beranda'])->middleware('auth');
 
 Route::get('/reservasi', function () {
     return view('reservasi', [
@@ -94,6 +109,7 @@ Route::post('/validate-forgot-password-act', [LoginController::class, 'validate_
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+
 Route::get('/dashboard', function(){
     return view('dashboard.index',[
         'title' => 'Dashboard',
@@ -125,3 +141,33 @@ Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts
 
 // Route untuk mengaplikasikan kode diskon
 Route::post('/cart/apply-discount', [CartController::class, 'applyDiscount'])->name('cart.applyDiscount');
+
+
+
+Route::get('/dashboard/kolaborator/new', function () {
+    return view("dashboard.kollaborator.new");
+})->middleware('auth');
+
+Route::get('/dashboard/kolaborator/{id}', [DashboardKollabController::class, 'show'])->name('kollab')->middleware('auth');
+Route::resource('/dashboard/kolaborator', DashboardKollabController::class)->middleware('auth');
+
+Route::get('/dashboard/kolaborasi', [ListKolaboratorController::class, 'index'])->name('kolaborasi')->middleware('auth');
+Route::get('/dashboard/kolaborasi/{id}', [ListKolaboratorController::class, 'show'])->name('showKolaborasi')->middleware('auth');
+Route::get('/dashboard/kolaborasi/{id}/download', [ListKolaboratorController::class, 'download'])->name('download.file')->middleware('auth');
+
+Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
+Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
+Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
+Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
+
+Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index');
+Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
+Route::get('apply/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
+Route::post('apply/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
+
+Route::get('/dashboard/pelamar', [PelamarController::class, 'index'])->name('pelamar.index');
+Route::post('/dashboard/pelamar/{id}', [PelamarController::class, 'updatestatus']);
+Route::get('/dashboard/pelamar/{id}', [PelamarController::class, 'show'])->name('pelamar.show');
+Route::get('/dashboard/pelamar/{id}/downloadFoto', [PelamarController::class, 'downloadFoto'])->name('download.foto')->middleware('auth');
+Route::get('/dashboard/pelamar/{id}/downloadCV', [PelamarController::class, 'downloadCV'])->name('download.cv')->middleware('auth');
+

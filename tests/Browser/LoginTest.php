@@ -10,11 +10,14 @@ class LoginTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
+
      * @group login
+
      */
     public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
+
             $browser->visit('/login')
                     ->clickLink('Login')
                     ->assertPathIs('/login')
@@ -23,7 +26,7 @@ class LoginTest extends DuskTestCase
                     ->press('Login')
                     ->assertSee('The email field must be a valid email address.')
                     ->screenshot('BK.Login.003');
-                    
+                  
         });
     }
 }

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use App\Models\CartItem;
+
 
 class MenuController extends Controller
 {
@@ -20,6 +20,7 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::all();
         $sort = 'null';
+
         $title = 'Menu';
         // Hitung total item dalam keranjang belanja
     $totalItems = 0;
@@ -30,6 +31,7 @@ class MenuController extends Controller
 
     // Render view dan sertakan $totalItems
     return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems'));
+
     }
     public function searchMenu( Request $request){
         $query = $request->input('query');

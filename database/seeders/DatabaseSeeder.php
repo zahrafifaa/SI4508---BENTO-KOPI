@@ -23,20 +23,11 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             MenuSeeder::class,
+            DashboardKollabSeeder::class,
+            LowonganSeeder::class
         ]);
 
-        $user = User::create([
-            'name' => 'user ',
-            'username' => 'User1 ',
-            'email' => 'user1@gmail.com',
-            'phone' => '08211117828',
-            'password' => bcrypt('123456')
-        ]);
-        $cartData = [
-            'user_id' => $user->id
-        ];
-
-        
+      
         $user = User::create([
             'name' => 'adminCashier ',
             'username' => 'Cashier',
@@ -49,6 +40,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         
+
         $user = User::create([
             'name' => 'adminApp ',
             'username' => 'App',
@@ -56,7 +48,31 @@ class DatabaseSeeder extends Seeder
             'phone' => '08211117826',
             'password' => bcrypt('123456')
         ]);
+
         $cartData = [
+            'user_id' => $user->id
+        ];
+      
+      $user = User::create([
+            'name' => 'user ',
+            'username' => 'User1 ',
+            'email' => 'user1@gmail.com',
+            'phone' => '08211117828',
+            'password' => bcrypt('123456')
+        ]);
+        $cartData = [
+            'user_id' => $user->id
+        ];
+
+      
+        User::create([
+            'name' => 'faqih ',
+            'username' => 'faqih',
+            'email' => 'faqih@mail.com',
+            'phone' => '0814211419',
+            'password' => bcrypt('123456')
+        ]);
+      $cartData = [
             'user_id' => $user->id
         ];
 
