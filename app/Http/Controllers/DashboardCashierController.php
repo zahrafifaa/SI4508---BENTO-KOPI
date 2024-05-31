@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\OrderTable;
 use App\Models\CartItemOrder;
 use App\Models\DashboardCashier;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreDashboardCashierRequest;
-use App\Http\Requests\UpdateDashboardCashierRequest;
 
 class DashboardCashierController extends Controller
 {
@@ -39,54 +38,29 @@ class DashboardCashierController extends Controller
         }
 
         return view('dashboardcashier.index', compact('orders'));
-     
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Update the status of the order.
      */
-    public function create()
+    public function updateStatus(Request $request, $id)
     {
-        //
+        $dashboardCashier = DashboardCashier::findOrFail($id);
+        $dashboardCashier->status_pemesanan = $request->input('status_pemesanan');
+        $dashboardCashier->save();
+
+        return redirect()->back()->with('success', 'Status pemesanan berhasil diubah.');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Complete the order and remove it from the dashboard.
      */
-    public function store(StoreDashboardCashierRequest $request)
+    public function completeOrder($id)
     {
-        //
-    }
+        $dashboardCashier = DashboardCashier::findOrFail($id);
+        $dashboardCashier->delete();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(DashboardCashier $dashboardCashier)
-    {
-        //
+        return redirect()->back()->with('success', 'Pesanan berhasil diselesaikan dan dihapus dari daftar.');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DashboardCashier $dashboardCashier)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDashboardCashierRequest $request, DashboardCashier $dashboardCashier)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DashboardCashier $dashboardCashier)
-    {
-        //
-    }
+    
 }

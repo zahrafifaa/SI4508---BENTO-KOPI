@@ -135,6 +135,10 @@ Route::get('/invoice/{id}', [CartController::class, 'invoice'])->middleware('aut
 
 
 Route::get('/dashboardCashier', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
+Route::post('/dashboardcashier/{id}/update-status', [DashboardCashierController::class, 'updateStatus'])->name('dashboardcashier.updateStatus')->middleware('auth');
+Route::delete('/dashboardcashier/{id}/complete', [DashboardCashierController::class, 'completeOrder'])->name('dashboardcashier.completeOrder')->middleware('auth');
+
+
 
 Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
 Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');

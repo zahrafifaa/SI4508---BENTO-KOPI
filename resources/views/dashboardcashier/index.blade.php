@@ -16,6 +16,8 @@
                     <th>Special Message</th>
                     <th>Status Pembayaran</th>
                     <th>Nama Pemesan</th>
+                    <th>Ubah Status Pemesanan</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +40,26 @@
                                 <td rowspan="{{ count($order['items']) }}">{{ $order['dashboardCashier']->orderTable->special_message ?? 'Tidak ada pesan khusus' }}</td>
                                 <td rowspan="{{ count($order['items']) }}">{{ $order['dashboardCashier']->status }}</td>
                                 <td rowspan="{{ count($order['items']) }}">{{ $order['dashboardCashier']->orderTable->user->name ?? 'Tidak ditemukan' }}</td>
+                                <td rowspan="{{ count($order['items']) }}">
+                                    <form method="POST" action="{{ route('dashboardcashier.updateStatus', $order['dashboardCashier']->id) }}">
+                                        @csrf
+                                        <select class="form-select @error('status_pemesanan') is-invalid @enderror" name="status_pemesanan">
+                                            <option value="Belum ditinjau" {{ $order['dashboardCashier']->status_pemesanan == 'Belum ditinjau' ? 'selected' : '' }}>Belum Diproses</option>
+                                            <option value="Diproses" {{ $order['dashboardCashier']->status_pemesanan == 'Diproses' ? 'selected' : '' }}>Diproses</option>
+                                            <option value="Diterima" {{ $order['dashboardCashier']->status_pemesanan == 'Diterima' ? 'selected' : '' }}>Pesanan Selesai</option>
+                                        </select>  
+                                        <button class="btn btn-primary mt-2" type="submit">Simpan</button>
+                                    </form>
+                                </td>
+                                <td rowspan="{{ count($order['items']) }}">
+                                    @if ($order['dashboardCashier']->status_pemesanan == 'Diterima')
+                                        <form method="POST" action="{{ route('dashboardcashier.completeOrder', $order['dashboardCashier']->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-success mt-2" type="submit">Selesaikan Pesanan</button>
+                                        </form>
+                                    @endif
+                                </td>
                             @endif
                         </tr>
                     @endforeach
