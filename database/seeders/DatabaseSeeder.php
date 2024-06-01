@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\MenuSeeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -21,30 +19,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
+            AdminSeeder::class,
             MenuSeeder::class,
         ]);
-
-        User::create([
-            'name' => 'user ',
-            'username' => 'User1 ',
-            'email' => 'user1@gmail.com',
-            'password' => bcrypt('123456')
-        ]);
-        
-        User::create([
-            'name' => 'adminCashier ',
-            'username' => 'Cashier ',
-            'email' => 'adminCashier@gmail.com',
-            'password' => bcrypt('123456')
-        ]);
-        
-        User::create([
-            'name' => 'adminApp ',
-            'username' => 'App',
-            'email' => 'adminApp@gmail.com',
-            'password' => bcrypt('123456')
-        ]);
     }
-
-    
 }

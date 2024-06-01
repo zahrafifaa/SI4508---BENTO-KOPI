@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Menu extends Model
 {
@@ -11,16 +13,14 @@ class Menu extends Model
     protected $fillable = [
         'nama',
         'kategori',
+        'jenis',
         'deskripsi',
         'harga',
-        'gambar'
+        'gambar',
+        'admin_id'
     ];
-
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-
-    public function favorites(){
-
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(Admin::class);
     }
 }

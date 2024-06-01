@@ -23,6 +23,7 @@
     </style>
 </head>
 
+
 <body>
     <main>
         <header class="px-5 py-3">
@@ -53,9 +54,9 @@
                         <div class="card h-100 p-3 border-0">
                             <h3 class="card-title mb-0">{{ $menu->nama }}</h3>
                             <div class="card-body p-0">
-                                <img src="{{ $menu->gambar }}"
+                                <img src="{{ $menu->gambar  }}"
                                     style="object-fit:cover;  width: 100%; object-position: 50%; " class="card-img-top"
-                                    alt="kopi">
+                                    alt="{{$menu->nama}}">
                                 <div class="collapse position-relative" id="collapseExample{{ $menu->id }}">
                                     <div class="card card-body position-absolute top-0 bg-white border borer-2 border-dark"
                                         style="width: 100%">
