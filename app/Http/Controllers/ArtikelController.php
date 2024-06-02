@@ -5,42 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use App\Models\KategoriArtikel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ArtikelController extends Controller
 {
-    public function index()
+    public function update($id)
     {
-        $kategori = request('kategori');
-        $urutan = request('urutan');
-        $items = Artikel::whereNotNull('id');
-        if ($kategori) {
-            $items->whereHas('kategori_artikel', function ($q) use ($kategori) {
-                $q->where('slug', $kategori);
-            });
-        }
-        if ($urutan) {
-            if ($urutan === 'terbaru')
-                $items->orderBy('id', 'DESC');
-            else
-                $items->orderBy('id', 'ASC');
-        }
-
-        $artikels = $items->paginate(6);
-
-        $categories = KategoriArtikel::orderBy('nama', 'ASC')->get();
-        return view('pages.artikel.index', [
-            'title' => 'List Artikel',
-            'items' => $artikels,
-            'categories'  => $categories
+        request()->validate([
+            'gambar' => ['image', 'mimes:png,jpg,jpeg', 'max:2048'],
+            'kategori_artikel_id' => ['required'],
+            'judul' => ['required'],
+            'deskripsi_singkat' => ['required'],
+            'deskripsi' => ['required']
         ]);
-    }
 
-    public function show($slug)
-    {
-        $item = Artikel::where('slug', $slug)->firstOrFail();
-        return view('pages.artikel.show', [
-            'title' => $item->judul,
-            'item' => $item
-        ]);
+        $data = request()->all();
+        $data['slug'] = Str::slug(request('judul')) . '-' . rand(999, 9999);
+        $item = Artikel::findOrFail($id);
+
+        if (request()->file('gambar')) {
+            if ($item->gambar) {
+                Storage::disk('public')->delete($item->gambar);
+            }
+            $data['gambar'] = request()->file('gambar')->store('artikel', 'public');
+        }
+
+        $item->update($data);
+
+        return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil diupdate.');
     }
 }
