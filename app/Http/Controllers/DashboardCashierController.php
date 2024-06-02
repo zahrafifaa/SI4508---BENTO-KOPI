@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use App\Models\OrderTable;
+use App\Models\DashboardCashierTotal;
+use Illuminate\Http\Request;
 use App\Models\CartItemOrder;
 use App\Models\DashboardCashier;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardCashierController extends Controller
@@ -15,7 +17,11 @@ class DashboardCashierController extends Controller
      */
     public function index()
     {
-        $dashboardCashiers = DashboardCashier::with(['orderTable.user', 'orderTable.cartItemOrders.menu'])->get();
+
+        $user = Auth::user();
+
+        if($user->id == 1){
+            $dashboardCashiers = DashboardCashier::with(['orderTable.user', 'orderTable.cartItemOrders.menu'])->get();
         
         // Group data by orderTable
         $orders = [];
@@ -38,6 +44,13 @@ class DashboardCashierController extends Controller
         }
 
         return view('dashboardcashier.index', compact('orders'));
+        }
+        else{
+            $favorites = Favorite::all()->where('user_id', $user->id);
+            $title = 'Beranda';
+            return view('beranda', compact('title', 'user', 'favorites'));
+        }
+        
     }
 
     /**
@@ -58,6 +71,11 @@ class DashboardCashierController extends Controller
     public function completeOrder($id)
     {
         $dashboardCashier = DashboardCashier::findOrFail($id);
+        // Simpan data ke dashboardcashier_total
+        DashboardCashierTotal::create([
+            'ordertable_id' => $dashboardCashier->orderTable->id,
+            'total_price' => $dashboardCashier->total_price
+        ]);
         $dashboardCashier->delete();
 
         return redirect()->back()->with('success', 'Pesanan berhasil diselesaikan dan dihapus dari daftar.');

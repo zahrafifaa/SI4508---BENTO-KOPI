@@ -195,27 +195,33 @@ public function storeOrder(Request $request)
     // Clear discount session
     session()->forget(['discountAmount', 'discountCode']);
   
-    return redirect()->route('checkout');
+    return redirect()->route('cart.orderSummary');
 
 }
 
-public function checkout()
+public function orderSummary()
+{
+    $user_id = Auth::id();
+    $unpaidOrders = DashboardCashier::whereHas('orderTable', function($query) use ($user_id) {
+        $query->where('user_id', $user_id);
+    })->where('status', 'Unpaid')->get();
+
+    return view('order_summary', compact('unpaidOrders'));
+}
+
+public function checkout($id)
 {
     $user_id = Auth::id();
 
-    // Ambil DashboardCashier yang belum dibayar untuk user yang sedang login melalui relasi dengan OrderTable
-    $dashboardCashier = DashboardCashier::whereHas('orderTable', function($query) use ($user_id) {
-        $query->where('user_id', $user_id);
-    })->where('status', 'Unpaid')->first();
+    // Ambil DashboardCashier yang belum dibayar untuk user yang sedang login melalui ID
+    $dashboardCashier = DashboardCashier::where('id', $id)->where('status', 'Unpaid')->first();
 
-    // Pastikan ada dashboard cashier yang belum dibayar
     if ($dashboardCashier) {
         // Ambil item yang sesuai dengan nomor dashboard_cashier
         $items = CartItemOrder::where('user_id', $user_id)
-                    ->where('nomor', $dashboardCashier->id)
+                    ->where('nomor', $dashboardCashier->orderTable->nomor)
                     ->get();
 
-        // Pastikan ada item yang ditampilkan
         if ($items->isNotEmpty()) {
             $user = Auth::user();
 
@@ -244,7 +250,6 @@ public function checkout()
         }
     }
 
-    // Jika tidak ada item atau dashboard cashier belum dibayar, kembali ke halaman lain
     return redirect()->route('index')->with('error', 'Tidak ada item untuk checkout.');
 }
 

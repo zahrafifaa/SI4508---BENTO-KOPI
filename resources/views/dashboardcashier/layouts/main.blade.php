@@ -22,19 +22,26 @@
   </head>
   <body>
     <div>
-      @include('dashboardcashier.layouts.header')
+      
 <main>
-  @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-    @yield('container')
+  
+        @include('dashboardcashier.layouts.header')
+        
+        <div class="row">
+
+          @include('dashboardcashier.layouts.sidebar')
+      
+          <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            
+            @yield('container')
+          </main>
+        </div>
+
+
+    
 </main>
     </div>
 </body>
   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-<script src="dashboard.js"></script></body>
-</html>
