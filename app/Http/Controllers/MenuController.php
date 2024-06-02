@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMenuRequest;
-use App\Http\Requests\UpdateMenuRequest;
 use App\Models\Menu;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\UpdateMenuRequest;
+use App\Models\CartItem;
 
 class MenuController extends Controller
 {
@@ -21,16 +21,33 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::all();
         $sort = 'null';
-        return view('menu', compact('menus', 'categories', 'sort'));
+        $title = 'Menu';
+        // Count total items in the shopping cart
+        $totalItems = 0;
+        $user = Auth::user();
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
+        }
+        // Render view and include $totalItems
+        return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems', 'user', 'user'));
     }
+
     public function searchMenu(Request $request)
     {
         $query = $request->input('query');
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::where('nama', 'like', "%$query%")->get();
         $sort = 'null';
-        return view('menu', compact('menus', 'categories', 'sort'));
+        $title = 'menu';
+        $user = Auth::user();
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
+        }
+        return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems', 'user_id', 'user'));
     }
+
     public function searchMenuByCategory($kategori, Request $request)
     {
         $query = $request->input('query');
@@ -38,12 +55,20 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::where('kategori', $kategori)->where('nama', 'like', "%$query%")->paginate(4);
         $sort = 'null';
-        return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort'));
+        $title = 'menu';
+        $user = Auth::user();
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
+        }
+        return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort', 'title', 'user', 'user_id', 'totalItems'));
     }
+
     public function sortmenu($option)
     {
         $categories = Menu::pluck('kategori')->unique();
         $sort = $option;
+        $title = 'menu';
         switch ($option) {
             case 'termurah':
                 $menus = Menu::orderBy('harga')->get();
@@ -52,7 +77,12 @@ class MenuController extends Controller
                 $menus = Menu::orderByDesc('harga')->get();
                 break;
         }
-        return view('menu', compact('menus', 'categories', 'sort'));
+        $user = Auth::user();
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
+        }
+        return view('menu', compact('menus', 'categories', 'sort', 'title', 'user', 'user_id', 'totalItems'));
     }
 
     public function showMenuByCategory($kategori)
@@ -61,13 +91,21 @@ class MenuController extends Controller
         $menus = Menu::where('kategori', $kategori)->paginate(4);
         $categorynow = $kategori;
         $sort = "null";
-        return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort'));
+        $title = 'menu';
+        $user = Auth::user();
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
+        }
+        return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort', 'title', 'user', 'user_id', 'totalItems'));
     }
+
     public function sortShowMenuByCategory($kategori, $option)
     {
         $categories = Menu::pluck('kategori')->unique();
-        $categorynow = strtolower($kategori); // Ubah ke huruf kecil
+        $categorynow = strtolower($kategori); // Convert to lowercase
         $sort = $option;
+        $title = 'menu';
         switch ($option) {
             case 'termurah':
                 $menus = Menu::where('kategori', $kategori)->orderBy('harga')->paginate(4);
@@ -76,34 +114,33 @@ class MenuController extends Controller
                 $menus = Menu::where('kategori', $kategori)->orderByDesc('harga')->paginate(4);
                 break;
         }
-
-        return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort'));
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
+        }
+        return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort', 'title', 'user', 'user_id', 'totalItems'));
     }
+
     public function adminMenuMakanan()
     {
         $menus = Menu::where('jenis', 'makanan')->get();
         return view('admin.menu-makanan', compact('menus'));
     }
+
     public function adminMenuMinuman()
     {
         $menus = Menu::where('jenis', 'minuman')->get();
         return view('admin.menu-minuman', compact('menus'));
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function adminStore(Request $request)
     {
         try {
-            // Validasi data yang diterima dari formulir
             $validatedData = $request->validate([
                 'nama' => 'required|string',
                 'jenis' => 'required|string',
@@ -121,30 +158,20 @@ class MenuController extends Controller
             $menu = Menu::create($validatedData);
             return redirect()->back()->with('success', 'Menu berhasil ditambahkan.');
         } catch (\Exception $e) {
-            // Tangani kesalahan
             return redirect()->back()->with('error', 'Terjadi kesalahan. Mohon coba lagi.');
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Menu $menu)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Menu $menu)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function adminUpdate(Request $request)
     {
         $request->validate([
@@ -183,30 +210,5 @@ class MenuController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Request $request, $id)
-    {
-        try {
-            // Hapus data menu makanan dari database
-            DB::beginTransaction();
-            $menu = Menu::findOrFail($id);
-            $menu->delete();
-            $gambar = $menu->gambar;
-            DB::commit();
-
-            // Hapus gambar menu dari penyimpanan jika ada
-            if (!empty($menu->gambar)) {
-                $namaGambar = basename($gambar);
-                Storage::delete('public/images/menu/' . $namaGambar);
-            }
-
-            return redirect()->back()->with('success', 'Data menu makanan dan gambarnya berhasil dihapus.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->withErrors(['error' => 'Gagal menghapus data menu dan gambarnya: ' . $e->getMessage()]);
-        }
-    }
-
+   
 }

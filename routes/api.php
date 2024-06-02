@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\MenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\MenuController;
 
 
 /*
@@ -23,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get("/menu", [MenuController::class, 'index']);
 Route::get('/menu/{kategori}', [MenuController::class, 'showByCategory'])->name('showmenubycategory');
 Route::get("/categories", [MenuController::class, 'categories']);
+
+Route::post('/midtrans-callback', [CartController::class, 'callback']);

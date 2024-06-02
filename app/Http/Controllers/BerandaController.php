@@ -18,8 +18,14 @@ class BerandaController extends Controller
     public function beranda()
     {
         $user = Auth::user();
-        $favorites = Favorite::all()->where('user_id', $user->id);
-        $title = 'Beranda';
-        return view('beranda', compact('title', 'user', 'favorites'));
+
+        if($user->id == 3){
+            return view('dashboard.index');
+        }
+        else{
+            $favorites = Favorite::all()->where('user_id', $user->id);
+            $title = 'Beranda';
+            return view('beranda', compact('title', 'user', 'favorites'));
+        }
     }
 }

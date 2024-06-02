@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\CartItemOrder;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer(['layout.main', 'other.layout'], function ($view) {
+            $user_id = auth()->id();
+            $carts = CartItemOrder::where('user_id', $user_id)->get();
+            $totalItems = $carts->sum('jumlah');
+            $view->with('totalItems', $totalItems);
+        });
     }
+
+    
 }
