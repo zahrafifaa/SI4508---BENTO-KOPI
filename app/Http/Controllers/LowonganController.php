@@ -25,6 +25,7 @@ class LowonganController extends Controller
             'item' => $item
         ]);
     }
+    
     public function apply($id)
     {
         $item = Lowongan::findOrFail($id);
@@ -51,6 +52,7 @@ class LowonganController extends Controller
 
 
         $data = request()->all();
+        $data['user_id'] = auth()->id();
         $data['foto'] = request()->file('foto')->store('melamar', 'public');
         $data['cv'] = request()->file('cv')->store('melamar', 'public');
         $data['lowongan_id'] = $lowongan_id;
