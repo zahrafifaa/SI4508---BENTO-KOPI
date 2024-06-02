@@ -39,8 +39,6 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user->id
         ];
 
-        
-
         $user = User::create([
             'name' => 'adminApp ',
             'username' => 'App',

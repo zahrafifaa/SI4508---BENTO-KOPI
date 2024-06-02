@@ -17,6 +17,7 @@ class MenuController extends Controller
      */
     public function menu()
     {
+        $user = Auth::user();
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::all();
         $sort = 'null';
@@ -30,7 +31,7 @@ class MenuController extends Controller
     }
 
     // Render view dan sertakan $totalItems
-    return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems'));
+    return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems', 'user'));
 
     }
     public function searchMenu( Request $request){
