@@ -124,7 +124,7 @@ Route::get('/dashboard', function(){
 // Route::get('/menus/{id}', [MenuController::class, 'addmenutoCart'])->name('addmenu.to.cart');
 // Route::patch('/update-shopping-cart', [MenuController::class, 'updateCart'])->name('update.sopping.cart');
 // Route::delete('/delete-cart-product', [MenuController::class, 'deleteProduct'])->name('delete.cart.product');
-
+Route::get('/', [BerandaController::class, 'index'])->middleware('auth');
 Route::GET('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
 Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy')->middleware('auth');
@@ -138,7 +138,7 @@ Route::get('/checkout/{id}', [CartController::class, 'checkout'])->name('cart.ch
 // Route::get('/cart/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('checkout');
 Route::get('/invoice/{id}', [CartController::class, 'invoice'])->middleware('auth');
 
-Route::get('/', [BerandaController::class, 'beranda'])->middleware('auth');
+
 Route::get('/', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
 Route::post('/dashboardcashier/{id}/update-status', [DashboardCashierController::class, 'updateStatus'])->name('dashboardcashier.updateStatus')->middleware('auth');
 Route::delete('/dashboardcashier/{id}/complete', [DashboardCashierController::class, 'completeOrder'])->name('dashboardcashier.completeOrder')->middleware('auth');
@@ -150,10 +150,6 @@ Route::get('/discounts/show', [DiscountController::class, 'show'])->name('discou
 Route::delete('/discounts/show/{id}', [DiscountController::class, 'destroy'])->name('discounts.destroy');
 Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
 Route::post('/cart/apply-discount', [CartController::class, 'applyDiscount'])->name('cart.applyDiscount');
-
-
-
-
 
 Route::get('/dashboard/kolaborator/new', function () {
     return view("dashboard.kollaborator.new");
