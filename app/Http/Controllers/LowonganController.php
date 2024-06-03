@@ -59,4 +59,5 @@ class LowonganController extends Controller
     }
 }
 
-//selesaikan
+//selesai
+
