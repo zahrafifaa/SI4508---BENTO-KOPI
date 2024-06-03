@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- Midtrans --}}
     <script type="text/javascript"
-        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        src="{{ config('midtrans.snap_url') }}"
         data-client-key="{{ config('midtrans.client_key') }}"></script>
     <title>Checkout</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 

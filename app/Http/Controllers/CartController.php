@@ -60,8 +60,8 @@ class CartController extends Controller
 
     public function destroy($id)
 {
-
-    CartItem::destroy($id);
+    $cartItem = CartItem::findOrFail($id);
+    $cartItem->delete();
     return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang!');
 }
 
@@ -121,19 +121,20 @@ public function applyDiscount(Request $request)
         'discount' => 'nullable|string',
     ]);
 
-    $discountAmount = 0;
-    if (!empty($validated['discount'])) {
-        $discount = Discount::where('code', $validated['discount'])->first();
-        if ($discount) {
-            $discountAmount = $discount->amount;
-            session(['discountAmount' => $discountAmount]);
-            session(['discountCode' => $validated['discount']]);
-        } else {
-            return redirect()->back()->with('error', 'Kode diskon tidak valid.');
-        }
+    if (empty($validated['discount'])) {
+        return redirect()->back()->with('error', 'Masukkan kode diskon.');
     }
 
-    return redirect()->back()->with('success', 'Kode diskon berhasil diterapkan.');
+    $discountAmount = 0;
+    $discount = Discount::where('code', $validated['discount'])->first();
+    if ($discount) {
+        $discountAmount = $discount->amount;
+        session(['discountAmount' => $discountAmount]);
+        session(['discountCode' => $validated['discount']]);
+        return redirect()->back()->with('success', 'Kode diskon berhasil diterapkan.');
+    } else {
+        return redirect()->back()->with('error', 'Kode diskon tidak valid.');
+    }
 }
 
 public function storeOrder(Request $request)

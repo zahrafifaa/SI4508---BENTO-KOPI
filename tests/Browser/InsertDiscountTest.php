@@ -20,7 +20,6 @@ class InsertDiscountTest extends DuskTestCase
             ->visit('/')
             ->click('@insert_discount')
             ->assertPathIs('/discounts/create')
-            ->screenshot('BK.InsertDiscount.001')
                     ->type('code', 'YUKSELASA') // Isi form kode diskon
                     ->type('amount', '10000') // Isi form potongan harga
                     ->press('Simpan Diskon') // Tekan tombol Simpan Diskon

@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Artikel;
 use App\Models\Cart;
+use App\Models\KategoriArtikel;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\MenuSeeder;
@@ -23,6 +26,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             MenuSeeder::class,
+            KategoriArtikelSeeder::class,
+            ArtikelSeeder::class,
             DashboardKollabSeeder::class,
             LowonganSeeder::class
         ]);
@@ -40,7 +45,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         $user = User::create([
-            'name' => 'adminApp ',
+            'name' => 'adminApp',
             'username' => 'App',
             'email' => 'adminApp@gmail.com',
             'phone' => '08211117826',
