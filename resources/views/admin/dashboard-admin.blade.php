@@ -28,6 +28,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
+                            <!-- Reservasi -->
                             <h5 class="card-title">Admin Reservasi Tempat Preview Per Hari</h5>
                             <canvas id="chart3"></canvas>
                         </div>
