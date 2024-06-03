@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand fs-2 fw-bold" href="/" style="color: #007200;">BentoKopi</a>
@@ -19,41 +18,7 @@
           </ul>
 
 
-        <div class="col-md-2 text-end">
-            <li class="cart">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                </svg>
-            </li>
-            <li> 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-            </li>
-            <ul class="nav navbar-nav ms-auto">
-                @auth
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Welcome back, {{ auth()->user()->username }}
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <form action="/logout" method="post">
-                      @csrf
-                      <button type="submit" class="dropdown-item" id='logout'><a>Logout</a></button>
-                    </form>
-                </ul>
-              </li>
-                @else
-                <li class="nav-item hoverG">
-                  <a href="/login" class="nav-link {{ ( $title === "Login") ? 'active' : '' }}"><i class="bi bi-box-arrow-in-right"></i>
-                    Login</a>
-                </li>
-                @endauth
-              </ul>
+          <ul class="navbar-nav my-4  ">
             
             <li>
               <a class="nav-link" dusk='cart' href="/cart"><i class="m-0 "  aria-controls="offcanvasRight" data-feather = "shopping-cart"></i></a>
@@ -95,6 +60,7 @@
                       <li><a class="dropdown-item" href="/dashboard">My dashboard</a></li>
                       <li><hr class="dropdown-divider"></li>
                   @elseif(auth()->user()->username === 'Cashier')
+                      <li><a class="dropdown-item" href="{{ route('discounts.create') }}">Kode Diskon</a></li>
                       <li><a class="dropdown-item" href="{{ route('dashboard.cashier') }}">My dashboard</a></li>
                       <li><hr class="dropdown-divider"></li>
                   @endif

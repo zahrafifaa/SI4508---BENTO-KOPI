@@ -23,9 +23,9 @@
                                 </form>
                             </div>
                         </nav>
+                    </header>
                 </div>
             </div>
-            </header>
             <div class=" row row-cols-2 row-cols-md-6 g-4">
                 <div class="col d-grid">
                     <a href="{{ route('allmenu') }}" class="btn tablinks btnsemua px-4 py-1 active"
