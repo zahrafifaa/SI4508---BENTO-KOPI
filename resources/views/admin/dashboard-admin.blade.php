@@ -17,6 +17,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
+                            <!-- Kolaborasi -->
                             <h5 class="card-title">Admin Kolaborasi Pengajuan Preview Per Bulan</h5>
                             <canvas id="chart2"></canvas>
                         </div>
