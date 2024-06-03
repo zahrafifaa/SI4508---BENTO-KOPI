@@ -33,7 +33,7 @@
                                         <td>{{ $item->judul }}</td>
                                         <td>{{ $item->tanggal_buka->translatedFormat('d F Y') }}</td>
                                         <td>{{ $item->tanggal_tutup->translatedFormat('d F Y') }}</td>
-                                        <td>{!! $item->status() !!}</td>
+                                        <td>{!! $item->status !!}</td>
                                         <td>
                                             <a href="{{ route('admin.lowongan.edit', $item->id) }}"
                                                 class="btn btn-sm py-2 btn-info">Edit</a>
