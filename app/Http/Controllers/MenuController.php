@@ -18,6 +18,7 @@ class MenuController extends Controller
      */
     public function menu()
     {
+        $user = Auth::user();
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::all();
         $sort = 'null';
