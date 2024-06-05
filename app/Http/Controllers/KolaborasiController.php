@@ -38,7 +38,7 @@ class KolaborasiController extends Controller
             'tanggal' => ['required'],
             'surat' => ['required', 'file', 'mimes:pdf'],
             'email' => ['required', 'unique:users,email'],
-            'nomor' => ['required', 'numeric'],
+            'nomor' => 'required|min:5|max:255'
         ]);
 
         $data = request()->all();
