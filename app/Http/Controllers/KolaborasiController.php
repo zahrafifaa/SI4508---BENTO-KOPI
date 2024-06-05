@@ -34,8 +34,17 @@ class KolaborasiController extends Controller
             'gambar' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'email' => ['required', 'unique:users,email'],
             'password' => ['required', 'min:5', 'confirmed'],
-            'password_confirmation' => ['required']
+            // 'password_confirmation' => ['required'],
+            // 'nomor' => 'required|min:5|max:255'
         ]);
+
+        $data = request()->all();
+        $data['user_id'] = auth()->id();
+        $data['status'] = 0;
+        $data['surat'] = request()->file('surat')->store('kolaborasi', 'public');
+        Kolaborasi::create($data);
+        return redirect('/kolaborasi')->with('success', 'Anda berhasil melamar pekerjaan ini.');
+ 
 
         DB::beginTransaction();
         try {

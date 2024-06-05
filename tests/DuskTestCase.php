@@ -2,19 +2,21 @@
 
 namespace Tests;
 
-use Facebook\WebDriver\Chrome\ChromeOptions;
-use Facebook\WebDriver\Remote\DesiredCapabilities;
-use Facebook\WebDriver\Remote\RemoteWebDriver;
-use Illuminate\Support\Collection;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use Facebook\WebDriver\Chrome\ChromeOptions;
+use Illuminate\Database\Eloquent\Collection;
 use PHPUnit\Framework\Attributes\BeforeClass;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
 
 abstract class DuskTestCase extends BaseTestCase
 {
     /**
      * Prepare for Dusk test execution.
+
      */
     #[BeforeClass]
+
     public static function prepare(): void
     {
         if (! static::runningInSail()) {
@@ -43,4 +45,22 @@ abstract class DuskTestCase extends BaseTestCase
             )
         );
     }
+    /**
+     * Determine whether the Dusk command has disabled headless mode.
+     */
+    protected function hasHeadlessDisabled(): bool
+    {
+        return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
+               isset($_ENV['DUSK_HEADLESS_DISABLED']);
+    }
+
+    /**
+     * Determine if the browser window should start maximized.
+     */
+    protected function shouldStartMaximized(): bool
+    {
+        return isset($_SERVER['DUSK_START_MAXIMIZED']) ||
+               isset($_ENV['DUSK_START_MAXIMIZED']);
+    }
+
 }
