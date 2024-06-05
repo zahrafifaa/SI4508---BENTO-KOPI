@@ -79,7 +79,7 @@
         </div>
         <div class='form-group mb-3'>
             <label for='nomor' class='mb-2'>Nomor HP</label>
-            <input type='integer' name='nomor' id='nomor' class='form-control @error('nomor') is-invalid @enderror'
+            <input type='tel' name='nomor' id='nomor' class='form-control @error('nomor') is-invalid @enderror'
                 value='{{ old('nomor') }}'>
             @error('nomor')
                 <div class='invalid-feedback'>

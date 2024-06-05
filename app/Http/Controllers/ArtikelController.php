@@ -34,6 +34,15 @@ class ArtikelController extends Controller
     return view('pages.artikel.index', compact('user', 'categories', 'items', 'title'));
 }
 
+// Tambahkan metode show di sini
+public function show($slug)
+{
+    $item = Artikel::where('slug', $slug)->firstOrFail();
+    $title = 'Detail Artikel';
+    
+    return view('pages.artikel.show', compact('item', 'title'));
+}
+
     public function update($id)
     {
         request()->validate([

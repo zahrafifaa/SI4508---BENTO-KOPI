@@ -6,7 +6,7 @@
           <a href="{{ route('dashboard.cashier') }}" dusk='pesanan' class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded px-4 my-2 fs-14">Pesanan</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('discounts.create') }}" dusk='insert_discount' class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded px-4 my-2 fs-14">Masukkan Diskon</a>
+          <a href="{{ route('discounts.create') }}" id='discount' dusk='insert_discount' class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded px-4 my-2 fs-14">Masukkan Diskon</a>
         </li>
         <li class="nav-item">
           <a href="{{ route('discounts.show') }}" dusk='show_discount' class="link-body-emphasis d-inline-flex align-items-center text-decoration-none rounded px-4 my-2 fs-14">Lihat Daftar Diskon</a>
