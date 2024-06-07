@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 
+use App\Http\Controllers\Admin\LocationController;
 use App\Models\Artikel;
 
 use App\Models\Cart;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             MenuSeeder::class,
+            LocationSeeder::class,
             KategoriArtikelSeeder::class,
             ArtikelSeeder::class,
             DashboardKollabSeeder::class,

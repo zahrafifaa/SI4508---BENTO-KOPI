@@ -16,7 +16,7 @@ class Lowongan extends Model
         if ($this->gambar) {
             return asset('storage/' . $this->gambar);
         } else {
-            return asset('images/bentoKopi1.png');
+            return asset('images/AyamGeprek.png');
         }
     }
 
@@ -28,4 +28,14 @@ class Lowongan extends Model
 
         ];
     }
+
+    public function status()
+    {
+        if ($this->status == 0) {
+            return '<span class="badge badge-danger">Tidak Aktif</span>';
+        } else {
+            return '<span class="badge badge-success">Aktif</span>';
+        }
+    }
 }
+//selesai

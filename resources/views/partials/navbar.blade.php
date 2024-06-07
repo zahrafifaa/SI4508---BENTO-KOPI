@@ -13,7 +13,7 @@
               <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Reservasi") ? 'active' : '' }}" href="reservasi">Reservasi</a></li>
               <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Kolaborasi") ? 'active' : '' }}" href="kolaborasi">Kolaborasi</a></li>
               <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Artikel") ? 'active' : '' }}" href="artikel">Artikel</a></li>
-              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Location") ? 'active' : '' }}" href="location">Location</a></li>
+              <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Location") ? 'active' : '' }}" href="{{ route('location.index') }}">Location</a></li>
               <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "Apply") ? 'active' : '' }}" href="apply">Apply</a></li>
               <li class="nav-item hoverG"> <a class="nav-link{{ ($title === "About") ? 'active' : '' }}" href="about">About us</a></li>
           </ul>
