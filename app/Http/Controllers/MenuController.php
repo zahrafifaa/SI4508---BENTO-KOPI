@@ -142,13 +142,13 @@ class MenuController extends Controller
     public function adminMenuMakanan()
     {
         $menus = Menu::where('jenis', 'makanan')->get();
-        return view('admin.menu-makanan', compact('menus'));
+        return view('dashboard.kelolamenu.menu-makanan', compact('menus'));
     }
 
     public function adminMenuMinuman()
     {
         $menus = Menu::where('jenis', 'minuman')->get();
-        return view('admin.menu-minuman', compact('menus'));
+        return view('dashboard.kelolamenu.menu-minuman', compact('menus'));
     }
 
     public function create()

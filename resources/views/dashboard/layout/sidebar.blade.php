@@ -11,6 +11,34 @@
 
           <li class="nav-item">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-up" viewBox="0 0 16 16">
+  <path d="M7.646 15.854a.5.5 0 0 0 .708 0L10.207 14H14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3.793zM1 9V6h14v3zm14 1v2a1 1 0 0 1-1 1h-3.793a1 1 0 0 0-.707.293l-1.5 1.5-1.5-1.5A1 1 0 0 0 5.793 13H2a1 1 0 0 1-1-1v-2zm0-5H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zM2 11.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 0-1h-8a.5.5 0 0 0-.5.5m0-4a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11a.5.5 0 0 0-.5.5m0-4a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 0-1h-6a.5.5 0 0 0-.5.5"/>
+</svg>
+                Kelola Menu
+            </button>
+            <div class="collapse" id="dashboard-collapse" style="">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
+                <li>
+                  <a href="{{ route('admin.menu.makanan') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('dashboard/menu-makanan') ? 'active' : ''}}">
+                    Menu Makanan
+                  </a>
+                </li>
+                <li>
+                  <a href="{{route('admin.menu.minuman')}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/menu-minuman') ? 'active' : ''}}">
+                    Menu Minuman
+                  </a>
+                </li>
+                <li>
+                  <a href="{{route('admin.store.menu')}}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/tambah-menu') ? 'active' : ''}}">
+                    Tambah Menu
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
               <svg class="bi"><use xlink:href="#people"/></svg>
                 Kolaborasi
             </button>
