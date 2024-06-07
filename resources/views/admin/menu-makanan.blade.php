@@ -57,38 +57,29 @@
                                 <img src="{{ $menu->gambar  }}"
                                     style="object-fit:cover;  width: 100%; object-position: 50%; " class="card-img-top"
                                     alt="{{$menu->nama}}">
-                                <div class="collapse position-relative" id="collapseExample{{ $menu->id }}">
-                                    <div class="card card-body position-absolute top-0 bg-white border borer-2 border-dark"
-                                        style="width: 100%">
-                                        <p>Hapus Menu?</p>
-                                        <div class="row row-cols-md-2 g-2 g-md-3">
-                                            <div class="col">
-                                                <div class="d-grid">
-                                                    <button class="btn btn-danger" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#collapseExample{{ $menu->id }}"
-                                                        aria-expanded="false"
-                                                        aria-controls="collapseExample{{ $menu->id }}">
-                                                        Batal
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <form action="{{ route('admin.menu.destroy', ['id' => $menu->id]) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    <!-- buat hapus -->
-                                                    @method('DELETE') 
-
-
-                                                    <div class="d-grid">
-                                                        <button class="btn btn-success" type="submit">Iya</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
+                                    <div class="collapse position-relative" id="collapseExample{{ $menu->id }}">
+                        <div class="card card-body position-absolute top-0 bg-white border borer-2 border-dark" style="width: 100%">
+                            <p>Hapus Menu?</p>
+                            <div class="row row-cols-md-2 g-2 g-md-3">
+                                <div class="col">
+                                    <div class="d-grid">
+                                        <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $menu->id }}" aria-expanded="false" aria-controls="collapseExample{{ $menu->id }}">
+                                            Batal
+                                        </button>
                                     </div>
                                 </div>
+                                <div class="col">
+                                    <form action="{{ route('admin.menu.destroy', ['id' => $menu->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="d-grid">
+                                            <button class="btn btn-success" type="submit">Iya</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                                 <p class="fw-bold m-0">Rp. {{ number_format($menu->harga, 0, ',', '.') }}
                                 <p>{{ $menu->deskripsi }}</p>
                                 </p>

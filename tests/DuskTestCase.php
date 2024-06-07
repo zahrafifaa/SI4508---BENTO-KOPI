@@ -15,8 +15,15 @@ abstract class DuskTestCase extends BaseTestCase
 
     /**
      * Prepare for Dusk test execution.
+<<<<<<< HEAD
      */
     #[BeforeClass]
+=======
+
+     */
+    #[BeforeClass]
+
+>>>>>>> 9176f433f172c1f9f8e6c325debbc0df99ace2df
     public static function prepare(): void
     {
         if (! static::runningInSail()) {
@@ -45,4 +52,25 @@ abstract class DuskTestCase extends BaseTestCase
             )
         );
     }
+<<<<<<< HEAD
+=======
+    /**
+     * Determine whether the Dusk command has disabled headless mode.
+     */
+    protected function hasHeadlessDisabled(): bool
+    {
+        return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
+               isset($_ENV['DUSK_HEADLESS_DISABLED']);
+    }
+
+    /**
+     * Determine if the browser window should start maximized.
+     */
+    protected function shouldStartMaximized(): bool
+    {
+        return isset($_SERVER['DUSK_START_MAXIMIZED']) ||
+               isset($_ENV['DUSK_START_MAXIMIZED']);
+    }
+
+>>>>>>> 9176f433f172c1f9f8e6c325debbc0df99ace2df
 }

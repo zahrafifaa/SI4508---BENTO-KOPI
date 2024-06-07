@@ -62,9 +62,7 @@ Route::get('/login-admin', function () {
     return view('login-admin');
 })->name('login-admin');
 Route::post('/login-admin', [AdminController::class, 'login']);
-Route::get('/dashboardadmin', function () {
-    return view('admin.dashboard-admin');
-});
+
 
 
 Route::get('/', function () {
@@ -95,11 +93,20 @@ Route::get('/kolaborasi', function () {
     ]);
 })->middleware('auth');
 
-Route::get('/artikel', function () {
-    return view('artikel', [
-        "title" => "Artikel"
-    ]);
+
+Route::get('/dashboard-admin', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth')->name('dashboardadmin');
+Route::get('/dashboard123', function () {
+    return view('/admin/dashboard');
 })->middleware('auth');
+Route::delete('/admin/menu/{id}', [MenuController::class, 'destroy'])->name('admin.menu.destroy');
+
+// Route::get('artikel', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth');
+
+// Route::get('/artikel', function () {
+//     return view('artikel', [
+//         "title" => "Artikel"
+//     ]);
+// })->middleware('auth');
 
 Route::get('/location', function () {
     return view('location', [

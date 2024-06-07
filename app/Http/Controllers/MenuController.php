@@ -34,6 +34,8 @@ class MenuController extends Controller
         return view('menu', compact('menus', 'categories', 'sort', 'title', 'totalItems', 'user', 'user'));
     }
 
+    
+
     public function searchMenu(Request $request)
     {
         $query = $request->input('query');
@@ -65,6 +67,21 @@ class MenuController extends Controller
         return view('showmenubycategory', compact('menus', 'categories', 'categorynow', 'sort', 'title', 'user', 'user_id', 'totalItems'));
     }
 
+    public function destroy($id)
+    {
+        try {
+            $menu = Menu::findOrFail($id);
+            if ($menu->gambar) {
+                $namaGambar = basename($menu->gambar);
+                Storage::delete('public/images/menu/' . $namaGambar);
+            }
+            $menu->delete();
+            return redirect()->back()->with('success', 'Menu berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menghapus menu. Silakan coba lagi.');
+        }
+    }
+    
     public function sortmenu($option)
     {
         $categories = Menu::pluck('kategori')->unique();
