@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Http\Controllers\Admin\LocationController;
 use App\Models\Artikel;
 use App\Models\Cart;
 use App\Models\KategoriArtikel;
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             MenuSeeder::class,
+            LocationSeeder::class,
             KategoriArtikelSeeder::class,
             ArtikelSeeder::class,
             DashboardKollabSeeder::class,

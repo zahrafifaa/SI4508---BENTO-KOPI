@@ -50,6 +50,37 @@
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+              <svg class="bi"><use xlink:href="#people"/></svg>
+                Lokasi
+            </button>
+            <div class="collapse" id="dashboard-collapse" style="">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
+                <li>
+                  <a href="{{ route('admin.dashboard') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('dashboard/kolaborator') ? 'active' : ''}}">
+                    Dashboard
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('admin.location.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
+                    Location
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('admin.meja.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
+                    Meja
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('admin.reservasi.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
+                    Reservasi
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
           
         </ul>
       </div>

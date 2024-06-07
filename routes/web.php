@@ -3,8 +3,10 @@
 use App\Models\Cart;
 use App\Models\Menu;
 use App\Models\DashboardCashier;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
@@ -15,7 +17,12 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReservasiController;
+use App\Http\Controllers\Admin\MejaController;
 use App\Http\Controllers\KolaborasiController;
+use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\ReservasiControllerAdmin;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\DashboardKollabController;
 use App\Http\Controllers\ListKolaboratorController;
 use App\Http\Controllers\DashboardCashierController;
@@ -80,11 +87,13 @@ Route::get('/artikel', function () {
     ]);
 })->middleware('auth');
 
-Route::get('/location', function () {
-    return view('location', [
-        "title" => "Location"
-    ]);
-})->middleware('auth');
+// Route::get('/location', function () {
+//     return view('location', [
+//         "title" => "Location"
+//     ]);
+// })->middleware('auth');
+Route::get('/location', [App\Http\Controllers\LocationController::class, 'index'])->name('location.index');
+Route::get('/location/{id}', [App\Http\Controllers\LocationController::class, 'show'])->name('location.show');
 
 Route::get('/apply', function () {
     return view('apply', [
@@ -166,6 +175,40 @@ Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolabora
 Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
 Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
 Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
+
+// Punya Fitri
+Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
+Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
+Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
+Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
+
+Route::get('lowongan', [LowonganController::class, 'index'])->name('lowongan.index');
+Route::get('lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
+Route::get('lowongan/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
+Route::post('lowongan/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
+
+
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
+Route::get('reservasi/cek', [ReservasiController::class, 'cek'])->name('reservasi.cek');
+Route::post('reservasi', [ReservasiController::class, 'submit'])->name('reservasi.submit')->middleware('auth');
+Route::get('reservasi/{kode}', [ReservasiController::class, 'success'])->name('reservasi.success');
+
+//Admin Fitri
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('location', LocationController::class);
+    Route::resource('meja', MejaController::class);
+
+    Route::get('reservasi/acc', [ReservasiControllerAdmin::class, 'acc'])->name('reservasi.acc');
+    Route::resource('reservasi', ReservasiControllerAdmin::class)->only(['index', 'destroy']);
+});
+// AKhir Punya Fitri
+
+
+
 
 Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index')->middleware('auth');
 Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
