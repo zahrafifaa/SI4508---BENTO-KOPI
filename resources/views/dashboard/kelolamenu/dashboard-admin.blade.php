@@ -1,6 +1,6 @@
-@extends('admin.layout.master')
+@extends('dashboard.layout.main')
 
-@section('content')
+@section('isiDashboard')
     <main>
         <h1>Dashboard Admin</h1>
         <div class="container mt-4">

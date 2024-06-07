@@ -95,7 +95,7 @@ Route::get('/kolaborasi', function () {
 })->middleware('auth');
 
 
-Route::get('/dashboard-admin', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth')->name('dashboardadmin');
+Route::get('/dashboard', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth')->name('dashboardadmin');
 Route::get('/dashboard123', function () {
     return view('/admin/dashboard');
 })->middleware('auth');
@@ -141,12 +141,12 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 
-Route::get('/dashboard', function(){
-    return view('dashboard.index',[
-        'title' => 'Dashboard',
-        'active' => 'Dashboard'
-    ]);
-})->middleware('auth')->name('dashboard');
+// Route::get('/dashboard', function(){
+//     return view('dashboard.index',[
+//         'title' => 'Dashboard',
+//         'active' => 'Dashboard'
+//     ]);
+// })->middleware('auth')->name('dashboard');
 
 // Route::get('/cartMenu', [MenuController::class, 'indexs']);  
 // Route::get('/shopping-cart', [MenuController::class, 'menuCart'])->name('shopping.cart');
