@@ -48,17 +48,17 @@ Route::get('/menu', [MenuController::class, 'menu'])->name('allmenu')->middlewar
 Route::get('/menu/sort/{option}', [MenuController::class, 'sortmenu'])->name('sortmenu');
 Route::get('/menu/{kategori}/', [MenuController::class, 'showMenuByCategory'])->name('showmenubycategory');
 Route::get('/menu/{kategori}/{option}', [MenuController::class, 'sortShowMenuByCategory'])->name('sortshowmenubycategory');
-Route::prefix('admin')->middleware([CekAdmin::class])->group(function () {
-    Route::get('/menu-makanan', [MenuController::class, 'adminMenuMakanan'])->name('admin.menu.makanan');
-    Route::delete('/destroy-menu/{id}', [MenuController::class, 'destroy'])->name('admin.menu.destroy');
-    Route::get('/menu-minuman', [MenuController::class, 'adminMenuMinuman'])->name('admin.menu.inuman');
-    Route::put('/update-menu', [MenuController::class, 'adminUpdate'])->name('admin.update.menu');
-    Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-    Route::get('/tambah-menu', function () {
-        return view('admin.tambah-menu');
-    })->name('admin.tambah.menu');
-    Route::post('/tambah-menu', [MenuController::class, 'adminStore'])->name('admin.store.menu');
-});
+Route::get('/dashboard/menu-makanan', [MenuController::class, 'adminMenuMakanan'])->name('admin.menu.makanan');
+Route::delete('/dashboard/destroy-menu/{id}', [MenuController::class, 'destroy'])->name('admin.menu.destroy');
+Route::get('/dashboard/menu-minuman', [MenuController::class, 'adminMenuMinuman'])->name('admin.menu.minuman');
+Route::put('/dashboard/update-menu', [MenuController::class, 'adminUpdate'])->name('admin.update.menu');
+Route::post('/dashboard/logout', [AdminController::class, 'logout'])->name('admin.logout');
+Route::get('/dashboard/tambah-menu', function () {
+    return view('dashboard.kelolamenu.tambah-menu');
+})->name('admin.tambah.menu');
+Route::post('/dashboard/tambah-menu', [MenuController::class, 'adminStore'])->name('admin.store.menu');
+// Route::prefix('admin')->middleware([CekAdmin::class])->group(function () {
+// });
 Route::get('/login-admin', function () {
     return view('login-admin');
 })->name('login-admin');
@@ -146,7 +146,7 @@ Route::get('/dashboard', function(){
         'title' => 'Dashboard',
         'active' => 'Dashboard'
     ]);
-})->middleware('auth');
+})->middleware('auth')->name('dashboard');
 
 // Route::get('/cartMenu', [MenuController::class, 'indexs']);  
 // Route::get('/shopping-cart', [MenuController::class, 'menuCart'])->name('shopping.cart');
