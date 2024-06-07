@@ -14,9 +14,12 @@ return new class extends Migration {
             $table->id();
             $table->string('nama');
             $table->string('kategori');
+            $table->string('jenis');
             $table->text('gambar');
             $table->text('deskripsi');
             $table->integer('harga');
+            $table->unsignedBigInteger('admin_id');
+            $table->foreign('admin_id')->references('id')->on('admins');
             $table->timestamps();
         });
     }

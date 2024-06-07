@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservasi extends Model
 {
     use HasFactory;
+
     protected $table = 'reservasi';
     protected $guarded = ['id'];
 
@@ -54,3 +55,6 @@ class Reservasi extends Model
     // 1 = Disetujui
     // 2 = Ditolak
 }
+
+}
+

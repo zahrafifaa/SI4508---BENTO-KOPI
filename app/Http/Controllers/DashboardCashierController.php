@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\CartItemOrder;
 use App\Models\DashboardCashier;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Kolaborasi;
+use App\Models\Reservasi;
+use App\Models\Melamar;
+use DB;
 
 class DashboardCashierController extends Controller
 {
@@ -20,37 +24,35 @@ class DashboardCashierController extends Controller
 
         $user = Auth::user();
 
-        if($user->id == 1){
+        if ($user->id == 1) {
             $dashboardCashiers = DashboardCashier::with(['orderTable.user', 'orderTable.cartItemOrders.menu'])->get();
-        
-        // Group data by orderTable
-        $orders = [];
-        foreach ($dashboardCashiers as $dashboardCashier) {
-            $orderTableId = $dashboardCashier->orderTable->id;
-            if (!isset($orders[$orderTableId])) {
-                $orders[$orderTableId] = [
-                    'dashboardCashier' => $dashboardCashier,
-                    'items' => [],
-                    'totalQty' => 0,
-                    'totalPrice' => 0
-                ];
+
+            // Group data by orderTable
+            $orders = [];
+            foreach ($dashboardCashiers as $dashboardCashier) {
+                $orderTableId = $dashboardCashier->orderTable->id;
+                if (!isset($orders[$orderTableId])) {
+                    $orders[$orderTableId] = [
+                        'dashboardCashier' => $dashboardCashier,
+                        'items' => [],
+                        'totalQty' => 0,
+                        'totalPrice' => 0
+                    ];
+                }
+
+                foreach ($dashboardCashier->orderTable->cartItemOrders as $item) {
+                    $orders[$orderTableId]['items'][] = $item;
+                    $orders[$orderTableId]['totalQty'] += $item->jumlah;
+                    $orders[$orderTableId]['totalPrice'] += $item->menu->harga * $item->jumlah;
+                }
             }
 
-            foreach ($dashboardCashier->orderTable->cartItemOrders as $item) {
-                $orders[$orderTableId]['items'][] = $item;
-                $orders[$orderTableId]['totalQty'] += $item->jumlah;
-                $orders[$orderTableId]['totalPrice'] += $item->menu->harga * $item->jumlah;
-            }
-        }
-
-        return view('dashboardcashier.index', compact('orders'));
-        }
-        else{
+            return view('dashboardcashier.index', compact('orders'));
+        } else {
             $favorites = Favorite::all()->where('user_id', $user->id);
             $title = 'Beranda';
             return view('beranda', compact('title', 'user', 'favorites'));
         }
-        
     }
 
     /**
@@ -80,5 +82,23 @@ class DashboardCashierController extends Controller
 
         return redirect()->back()->with('success', 'Pesanan berhasil diselesaikan dan dihapus dari daftar.');
     }
-    
+
+    public function show_dashboard_statistic()
+    {
+        $pbi59s = DashboardCashier::selectRaw('COUNT(id) as count, DAYNAME(created_at) as dayname')
+            ->groupBy(DB::raw('DAYNAME(created_at)'))
+            ->get();
+        $pbi60s = Kolaborasi::selectRaw('COUNT(id) as count, MONTHNAME(tanggal) as month')
+            ->groupBy(DB::raw('MONTHNAME(tanggal)'))
+            ->get();
+        $pbi61s = Reservasi::selectRaw('COUNT(id) as count, DAYNAME(tanggal) as dayname')
+            ->groupBy(DB::raw('DAYNAME(tanggal)'))
+            ->get();
+        $pbi62s = Melamar::selectRaw('COUNT(id) as count, MONTHNAME(created_at) as month')
+            ->groupBy(DB::raw('MONTHNAME(created_at)'))
+            ->get();
+        $title = "About";
+
+        return view('/admin/dashboard-admin', compact('pbi59s', 'pbi60s', 'pbi61s', 'pbi62s', 'title'));
+    }
 }
