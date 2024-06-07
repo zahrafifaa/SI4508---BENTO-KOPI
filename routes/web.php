@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\DiscountController;
@@ -152,7 +153,7 @@ Route::get('/dashboard', function(){
 // Route::get('/menus/{id}', [MenuController::class, 'addmenutoCart'])->name('addmenu.to.cart');
 // Route::patch('/update-shopping-cart', [MenuController::class, 'updateCart'])->name('update.sopping.cart');
 // Route::delete('/delete-cart-product', [MenuController::class, 'deleteProduct'])->name('delete.cart.product');
-
+Route::get('/', [BerandaController::class, 'index'])->middleware('auth');
 Route::GET('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
 Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy')->middleware('auth');
@@ -166,7 +167,7 @@ Route::get('/checkout/{id}', [CartController::class, 'checkout'])->name('cart.ch
 // Route::get('/cart/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('checkout');
 Route::get('/invoice/{id}', [CartController::class, 'invoice'])->middleware('auth');
 
-Route::get('/', [BerandaController::class, 'beranda'])->middleware('auth');
+
 Route::get('/', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
 Route::post('/dashboardcashier/{id}/update-status', [DashboardCashierController::class, 'updateStatus'])->name('dashboardcashier.updateStatus')->middleware('auth');
 Route::delete('/dashboardcashier/{id}/complete', [DashboardCashierController::class, 'completeOrder'])->name('dashboardcashier.completeOrder')->middleware('auth');
@@ -179,10 +180,6 @@ Route::delete('/discounts/show/{id}', [DiscountController::class, 'destroy'])->n
 Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
 Route::post('/cart/apply-discount', [CartController::class, 'applyDiscount'])->name('cart.applyDiscount');
 
-
-
-
-
 Route::get('/dashboard/kolaborator/new', function () {
     return view("dashboard.kollaborator.new");
 })->middleware('auth');
@@ -194,12 +191,12 @@ Route::get('/dashboard/kolaborasi', [ListKolaboratorController::class, 'index'])
 Route::get('/dashboard/kolaborasi/{id}', [ListKolaboratorController::class, 'show'])->name('showKolaborasi')->middleware('auth');
 Route::get('/dashboard/kolaborasi/{id}/download', [ListKolaboratorController::class, 'download'])->name('download.file')->middleware('auth');
 
-Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
+Route::get('kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index')->middleware('auth');
 Route::get('kolaborasi/ajukan', [KolaborasiController::class, 'create'])->name('kolaborasi.create');
 Route::post('kolaborasi/ajukan', [KolaborasiController::class, 'proses'])->name('kolaborasi.proses');
 Route::get('kolaborasi/{id}', [KolaborasiController::class, 'show'])->name('kolaborasi.show');
 
-Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index');
+Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index')->middleware('auth');
 Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.show');
 Route::get('apply/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
 Route::post('apply/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
@@ -210,3 +207,5 @@ Route::get('/dashboard/pelamar/{id}', [PelamarController::class, 'show'])->name(
 Route::get('/dashboard/pelamar/{id}/downloadFoto', [PelamarController::class, 'downloadFoto'])->name('download.foto')->middleware('auth');
 Route::get('/dashboard/pelamar/{id}/downloadCV', [PelamarController::class, 'downloadCV'])->name('download.cv')->middleware('auth');
 
+Route::get('artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+Route::get('artikel/{slug}', [ArtikelController::class, 'show'])->name('artikel.show');

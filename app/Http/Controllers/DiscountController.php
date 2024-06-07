@@ -13,16 +13,26 @@ class DiscountController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'code' => 'required|unique:discounts|max:255',
-            'amount' => 'required|numeric|min:0',
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'code' => 'required',
+        'amount' => 'required|numeric|min:0',
+    ]);
 
-        Discount::create($validated);
-
-        return redirect()->route('discounts.create')->with('insertdiscountsuccess', 'Diskon berhasil ditambahkan.');
+    // Cek apakah kode sudah ada di database
+    if (Discount::where('code', $request->code)->exists()) {
+        return redirect()->back()->with('insertdiscounterror', 'Kode diskon sudah terdapat di database!');
     }
+
+    // Jika kode belum ada, simpan diskon ke database
+    Discount::create([
+        'code' => $request->code,
+        'amount' => $request->amount,
+    ]);
+
+    return redirect()->back()->with('insertdiscountsuccess', 'Diskon berhasil ditambahkan!');
+}
 
     public function index()
     {

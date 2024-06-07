@@ -61,7 +61,13 @@ class CartController extends Controller
     }
 
     public function destroy($id)
-    {
+
+{
+    $cartItem = CartItem::findOrFail($id);
+    $cartItem->delete();
+    return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang!');
+}
+
 
         CartItem::destroy($id);
         return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang!');
@@ -117,6 +123,27 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+public function applyDiscount(Request $request)
+{
+    $validated = $request->validate([
+        'discount' => 'nullable|string',
+    ]);
+
+    if (empty($validated['discount'])) {
+        return redirect()->back()->with('error', 'Masukkan kode diskon.');
+    }
+
+    $discountAmount = 0;
+    $discount = Discount::where('code', $validated['discount'])->first();
+    if ($discount) {
+        $discountAmount = $discount->amount;
+        session(['discountAmount' => $discountAmount]);
+        session(['discountCode' => $validated['discount']]);
+        return redirect()->back()->with('success', 'Kode diskon berhasil diterapkan.');
+    } else {
+        return redirect()->back()->with('error', 'Kode diskon tidak valid.');
+    }
+}
     public function applyDiscount(Request $request)
     {
         $validated = $request->validate([

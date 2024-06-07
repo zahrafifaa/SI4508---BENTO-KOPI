@@ -7,11 +7,11 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class StoreMessageTest extends DuskTestCase
+class ApplyDiscountSuccessTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
-     * @group storemessage
+     * @group ApplyDiscountSuccess
      */
     public function testExample(): void
     {
@@ -25,10 +25,10 @@ class StoreMessageTest extends DuskTestCase
                     ->assertSee('Menu berhasil ditambahkan')
                     ->click('@cart')
                     ->assertPathIs('/cart')
-                    ->type('special_message','biji kopinya 3')
-                    ->press('Bayar')
-                    ->assertPathIs('/cart/checkout')
-                    ->screenshot('BK.StoreMessage.001');
+                    ->type('@discount', 'YUKSELASA') // Masukkan kode diskon
+                    ->press('#apply-discount-button') // Tekan tombol terapkan diskon
+                    ->assertSee('Kode diskon berhasil diterapkan.')
+                    ->screenshot('BK.ApplyDiscount.001');
         });
     }
 }
