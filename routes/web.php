@@ -100,7 +100,7 @@ Route::get('/dashboard123', function () {
 })->middleware('auth');
 Route::delete('/admin/menu/{id}', [MenuController::class, 'destroy'])->name('admin.menu.destroy');
 
-// Route::get('artikel', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth');
+// Route::get('/artikel', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth');
 
 // Route::get('/artikel', function () {
 //     return view('artikel', [
