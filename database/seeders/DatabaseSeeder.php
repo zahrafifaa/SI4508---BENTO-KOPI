@@ -2,14 +2,16 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Artikel;
+
 use App\Models\Cart;
 use App\Models\KategoriArtikel;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\MenuSeeder;
+use Database\Seeders\DashboardKollabSeeder;
+use Database\Seeders\LowonganSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,13 +20,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         $this->call([
+            AdminSeeder::class,
             MenuSeeder::class,
             KategoriArtikelSeeder::class,
             ArtikelSeeder::class,
@@ -32,7 +29,6 @@ class DatabaseSeeder extends Seeder
             LowonganSeeder::class
         ]);
 
-      
         $user = User::create([
             'name' => 'adminCashier ',
             'username' => 'Cashier',
@@ -40,6 +36,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '08211117827',
             'password' => bcrypt('123456')
         ]);
+
         $cartData = [
             'user_id' => $user->id
         ];
@@ -55,19 +52,19 @@ class DatabaseSeeder extends Seeder
         $cartData = [
             'user_id' => $user->id
         ];
-      
-      $user = User::create([
+
+        $user = User::create([
             'name' => 'user ',
             'username' => 'User1 ',
             'email' => 'user1@gmail.com',
             'phone' => '08211117828',
             'password' => bcrypt('123456')
         ]);
+
         $cartData = [
             'user_id' => $user->id
         ];
 
-      
         User::create([
             'name' => 'faqih ',
             'username' => 'faqih',
@@ -75,11 +72,9 @@ class DatabaseSeeder extends Seeder
             'phone' => '0814211419',
             'password' => bcrypt('123456')
         ]);
-      $cartData = [
+
+        $cartData = [
             'user_id' => $user->id
         ];
-
     }
-
-    
 }

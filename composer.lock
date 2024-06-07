@@ -4,9 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
     "content-hash": "c5ebd19f445b2e5f67e7536b7876f555",
-
     "packages": [
         {
             "name": "brick/math",
@@ -1976,7 +1974,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-02T17:10:37+00:00"
+            "time": "2024-04-24T12:14:15+00:00"
         },
         {
             "name": "midtrans/midtrans-php",
@@ -8412,5 +8410,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
