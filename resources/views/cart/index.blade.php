@@ -28,10 +28,20 @@
             <div class="row">
                 <a href="{{ route('cart.orderSummary') }}" class="btn btn-secondary mt-3"><i class="bi bi-arrow-left"></i> Semua Pesanan Anda</a>
                 @if($carts->isEmpty())
-                <div class="alert alert-warning mt-5" role="alert">
+                <div class="alert alert-warning mt-3" role="alert">
                     Kamu belum ada yang dipesan, yuk pesan!
                 </div>
                 @else
+                @if(session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+                @endif
+                @if(session('error'))
+                <div class="alert alert-danger mt-3">
+                    {{ session('error') }}
+                </div>
+                @endif
                 <div class="col-md-9">
                         @foreach ($carts as $cart)
                             <section class="cart">
@@ -43,7 +53,7 @@
                                         </div>
                                         <div class="hapusMenu">
                                             <!-- Form untuk menghapus item -->
-                                            <form action="{{ route('cart.destroy', $cart->menu_id) }}" method="POST">
+                                            <form action="{{ route('cart.destroy', $cart->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="trash-icon " style="border:none ; background-color: transparent;"><i data-feather='trash-2'></i></button>
@@ -108,7 +118,10 @@
                             <p>Total Menu: {{ $totalItems }}</p>
                             @if(session('discountAmount'))
                                 <p>Diskon: Rp {{ number_format(session('discountAmount'), 2) }}</p>
-                                <p>Total Setelah Diskon: Rp {{ number_format($totalPrice - session('discountAmount'), 2) }}</p>
+                                @php
+                                    $totalAfterDiscount = max($totalPrice - session('discountAmount'), 0);
+                                @endphp
+                                <p>Total Setelah Diskon: Rp {{ number_format($totalAfterDiscount, 2) }}</p>
                             @endif
                         </div>
                     </div>
@@ -118,7 +131,7 @@
                         <form action="{{ route('cart.applyDiscount') }}" method="POST">
                             @csrf
                             <label for="discount" class="form-label mt-2">Kode Diskon</label>
-                            <input class="form-control" id="discount" name="discount" placeholder="Masukkan Kode Diskon">
+                            <input class="form-control" dusk='discount' id="discount" name="discount" placeholder="Masukkan Kode Diskon">
                             <div class="d-grid gap-2 mt-2">
                                 <button type="submit" class="btn btn-primary" id="apply-discount-button">Terapkan Diskon</button>
                             </div>

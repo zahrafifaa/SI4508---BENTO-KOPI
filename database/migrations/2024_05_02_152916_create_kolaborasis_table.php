@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('surat')->nullable();
             $table->string('email')->nullable();
-            $table->integer('nomor')->nullable();
+            $table->string('nomor')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->integer('status');
             $table->timestamps();

@@ -16,7 +16,7 @@ class StoreMenuTest extends DuskTestCase
     public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->loginAs(User::find(1))
+            $browser->loginAs(User::find(3))
                     ->visit('/')
                     ->clickLink('Menu')
                     ->assertPathIs('/menu')

@@ -16,7 +16,7 @@ class PaymentTest extends DuskTestCase
     public function testPaymentSelection(): void
     {
         $this->browse(function (Browser $browser) {
-            $user = User::find(1);
+            $user = User::find(3);
 
             $browser->loginAs($user)
                     ->visit('/')
@@ -27,10 +27,10 @@ class PaymentTest extends DuskTestCase
                     ->click('@cart') // Pastikan @cart telah didefinisikan di Dusk selectors
                     ->assertPathIs('/cart')
                     ->type('special_message', 'biji kopinya 3')
-                    ->press('Bayar')
-                    ->waitForLocation('/cart/checkout', 10) // Menunggu lokasi /cart/checkout
-                    ->waitFor('#pay-button', 15) // Menunggu tombol #pay-button
-                    ->assertSee('Checkout')
+                    ->press('Pesan')
+                    ->waitForLocation('/checkout', 10) // Menunggu lokasi /cart/checkout
+                    ->clickLink('Checkout')
+                    ->assertPathIs('/checkout/1')
                     ->click('#pay-button') // Klik tombol bayar
                     ->pause(10000) // Menunggu 10 detik untuk memuat halaman pembayaran Midtrans
                     ->screenshot('BK.Payment.001'); // Debugging screenshot

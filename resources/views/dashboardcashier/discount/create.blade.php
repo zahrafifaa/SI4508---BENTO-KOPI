@@ -12,6 +12,11 @@
               {{ session('insertdiscountsuccess') }}
             </div>
           @endif
+          @if(session('insertdiscounterror'))
+            <div class="alert alert-danger">
+              {{ session('insertdiscounterror') }}
+            </div>
+          @endif
           <form action="{{ route('discounts.store') }}" method="POST">
             @csrf
             <div class="mb-3">
@@ -40,5 +45,5 @@
     .table-hover tbody tr:hover {
       background-color: #f5f5f5;
     }
-  </style>
+</style>
 @endsection
