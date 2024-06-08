@@ -28,13 +28,13 @@
             </div>
             <div class=" row row-cols-2 row-cols-md-6 g-4">
                 <div class="col d-grid">
-                    <a href="{{ route('allmenu') }}" class="btn tablinks btnsemua px-4 py-1 active"
+                    <a href="{{ route('allmenu') }}" class="tablinks-btn px-4 py-1 active"
                         data-tab="semua">Semua</a>
                 </div>
                 @foreach ($categories as $category)
                     <div class="col d-grid">
                         <a href="{{ route('showmenubycategory', ['kategori' => strtolower($category)]) }}"
-                            class="btn tablinks btn{{ strtolower($category) }} px-4 py-1"
+                            class="tablinks-btn {{ strtolower($category) }} px-4 py-1"
                             data-tab="{{ strtolower($category) }}">{{ $category }}</a
                             href="{{ route('showmenubycategory', ['kategori' => strtolower($category)]) }}">
                     </div>
@@ -62,9 +62,9 @@
                             <div class="row row-cols-2 row-cols-md-4 g-2 g-md-3">
                                 @foreach ($menus->where('kategori', $category) as $menu)
                                     <div class="col">
-                                        <div class="card h-100" data-price="{{ $menu->harga }}">
+                                        <div class="card" data-price="{{ $menu->harga }}">
                                             <img src="{{ $menu->gambar }}"
-                                                style="object-fit:cover;  width: 100%; object-position: 50%;  "
+                                                style="object-fit:cover;  max-width:100%; max-height:190px; object-position: 50%;  "
                                                 class="card-img-top" alt="kopi">
                                             <div class="card-body">
                                                 <div class="row">
@@ -188,7 +188,7 @@
                             <div class="row row-cols-2 row-cols-md-4 g-2 g-md-3">
                                 @foreach ($menus->where('kategori', $category) as $menu)
                                     <div class="col">
-                                        <div class="card h-100" data-price="{{ $menu->harga }}">
+                                        <div class="card" data-price="{{ $menu->harga }}">
                                             <img src="{{ $menu->gambar }}"
                                                 style="object-fit:cover;  width: 100%; object-position: 50%;  "
                                                 class="card-img-top" alt="kopi">

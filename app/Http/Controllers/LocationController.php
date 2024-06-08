@@ -17,7 +17,7 @@ class LocationController extends Controller
             $items->get();
         $data = $items->get();
         return view('pages.location.index', [
-            'title' => 'Daftar Lokasi',
+            'title' => 'Location',
             'items' => $data
         ]);
     }
@@ -26,7 +26,7 @@ class LocationController extends Controller
     {
         $item = Location::findOrFail($id);
         return view('pages.location.show', [
-            'title' => 'Daftar Lokasi',
+            'title' => 'Location',
             'item' => $item
         ]);
     }

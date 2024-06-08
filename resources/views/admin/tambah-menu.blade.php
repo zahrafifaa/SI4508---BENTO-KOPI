@@ -20,12 +20,17 @@
 
 <body>
     <main>
-        <header class="px-5 py-3 mb-5">
+        <!-- <header class="px-5 py-3 mb-5">
             <form action="{{ route('admin.logout') }}" method="post">
                 @csrf
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
-        </header>
+        </header> -->
+        <div class="d-flex pt-3 poppins text-black">
+            <p>
+                <a href="{{ url('/dashboard') }}" class="text-black" style="text-decoration:none;">< Back</a>
+            </p>
+        </div>
         <section>
             <div class="card mx-auto p-5">
                 @if (session('success'))

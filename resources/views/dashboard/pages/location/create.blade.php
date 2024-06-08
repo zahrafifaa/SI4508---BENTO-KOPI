@@ -38,6 +38,16 @@
                             @enderror
                         </div>
                         <div class='form-group mb-3'>
+                            <label for='fasilitas' class='mb-2'>Fasilitas</label>
+                            <textarea name='fasilitas' id='fasilitas' cols='30' rows='3'
+                                class='form-control @error('fasilitas') is-invalid @enderror'>{{ old('fasilitas') }}</textarea>
+                            @error('fasilitas')
+                                <div class='invalid-feedback'>
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class='form-group mb-3'>
                             <label for='jam_buka' class='mb-2'>Jam Buka</label>
                             <input type='time' name='jam_buka' id='jam_buka'
                                 class='form-control @error('jam_buka') is-invalid @enderror' value='{{ old('jam_buka') }}'>

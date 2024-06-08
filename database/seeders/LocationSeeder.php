@@ -17,6 +17,7 @@ class LocationSeeder extends Seeder
         Location::create([
             'nama' => 'Cabang 1',
             'alamat' => 'Bandung',
+            'fasilitas' => 'AC, Mushola, Faqih, Bima',
             'gambar' => NULL,
             'jam_buka' => Carbon::now()->format('H'),
             'jam_tutup' => Carbon::now()->format('H')
@@ -25,6 +26,7 @@ class LocationSeeder extends Seeder
         Location::create([
             'nama' => 'Cabang 2',
             'alamat' => 'Jakarta',
+            'fasilitas' => 'AC, Mushola, Faqih, Bima',
             'gambar' => NULL,
             'jam_buka' => Carbon::now()->format('H'),
             'jam_tutup' => Carbon::now()->format('H')
@@ -32,6 +34,7 @@ class LocationSeeder extends Seeder
         Location::create([
             'nama' => 'Cabang 3',
             'alamat' => 'Makasar',
+            'fasilitas' => 'AC, Mushola, Faqih, Bima',
             'gambar' => NULL,
             'jam_buka' => Carbon::now()->format('H'),
             'jam_tutup' => Carbon::now()->format('H')

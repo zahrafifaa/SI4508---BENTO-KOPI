@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('jam_buka');
             $table->time('jam_tutup');
             $table->string('alamat');
+            $table->text('fasilitas');
             $table->timestamps();
         });
     }

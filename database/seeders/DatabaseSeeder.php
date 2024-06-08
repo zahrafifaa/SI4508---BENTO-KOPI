@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 
 use App\Http\Controllers\Admin\LocationController;
+
 use App\Models\Artikel;
 
 use App\Models\Cart;
@@ -13,6 +14,10 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\MenuSeeder;
 use Database\Seeders\DashboardKollabSeeder;
 use Database\Seeders\LowonganSeeder;
+use Database\Seeders\KolaborasiSeeder;
+use Database\Seeders\MelamarSeeder;
+use Database\Seeders\ReservasiSeeder;
+use Database\Seeders\TransaksiSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,8 +32,13 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             KategoriArtikelSeeder::class,
             ArtikelSeeder::class,
+            MejaSeeder::class,
             DashboardKollabSeeder::class,
-            LowonganSeeder::class
+            LowonganSeeder::class,
+            // KolaborasiSeeder::class,
+            // MelamarSeeder::class,
+            // ReservasiSeeder::class,
+            // TransaksiSeeder::class
         ]);
 
         $user = User::create([

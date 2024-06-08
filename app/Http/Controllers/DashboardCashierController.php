@@ -99,6 +99,6 @@ class DashboardCashierController extends Controller
             ->get();
         $title = "About";
 
-        return view('/admin/dashboard-admin', compact('pbi59s', 'pbi60s', 'pbi61s', 'pbi62s', 'title'));
+        return view('dashboard.kelolamenu.dashboard-admin', compact('pbi59s', 'pbi60s', 'pbi61s', 'pbi62s', 'title'));
     }
 }

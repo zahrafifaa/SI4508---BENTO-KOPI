@@ -26,12 +26,17 @@
 
 <body>
     <main>
-        <header class="px-5 py-3">
+        <!-- <header class="px-5 py-3">
             <form action="{{ route('admin.logout') }}" method="post">
                 @csrf
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
-        </header>
+        </header> -->
+        <div class="d-flex pt-3 poppins text-black">
+            <p>
+                <a href="{{ url('/dashboard') }}" class="text-black" style="text-decoration:none;">< Back</a>
+            </p>
+        </div>
         <section class="p-5">
             <div>
                 <h2>Makanan</h2>

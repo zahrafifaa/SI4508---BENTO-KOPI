@@ -25,12 +25,12 @@
             </div>
             <div class=" row row-cols-2 row-cols-md-6 g-4">
                 <div class="col d-grid">
-                    <a href="{{ route('allmenu') }}" class="btn tablinks btnsemua px-4 py-1 " data-tab="semua">Semua</a>
+                    <a href="{{ route('allmenu') }}" class="tablinks-btn px-4 py-1 " data-tab="semua">Semua</a>
                 </div>
                 @foreach ($categories as $category)
                     <div class="col d-grid">
                         <a href="{{ route('showmenubycategory', ['kategori' => strtolower($category)]) }}"
-                            class="btn tablinks btn{{ strtolower($category) }} px-4 py-1 @if (strtolower($categorynow) == strtolower($category)) active @endif"
+                            class="tablinks-btn {{ strtolower($category) }} px-4 py-1 @if (strtolower($categorynow) == strtolower($category)) active @endif"
                             data-tab="{{ strtolower($category) }}">{{ $category }}</a>
                     </div>
                 @endforeach
@@ -55,8 +55,8 @@
                     <h2>{{ ucfirst($categorynow) }}</h2>
                     <div class="row row-cols-2 row-cols-md-4 g-2 g-md-3">
                         @foreach ($menus as $menu)
-                            <div class="col">
-                                <div class="card h-100" data-price="{{ $menu->harga }}">
+                            <div class="col menu-card">
+                                <div class="card" data-price="{{ $menu->harga }}">
                                     <img src="{{ $menu->gambar }}"
                                         style="object-fit:cover;  width: 100%; object-position: 50%;  "
                                         class="card-img-top" alt="kopi">

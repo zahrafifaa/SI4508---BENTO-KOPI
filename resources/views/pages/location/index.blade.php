@@ -40,7 +40,7 @@
                         img-fluid">
                     </div>
                     <br><br>
-                    <a href="{{ route('location.show', $item->id) }}" class="btn">Explore More</a>
+                    <a href="{{ route('location.show', $item->id) }}" class="btn btn-success">Explore More</a>
                 </div>
             </div>
         @empty

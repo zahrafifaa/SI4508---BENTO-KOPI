@@ -35,7 +35,7 @@
                                         <td>{{ $item->jumlah_pengunjung }}</td>
                                         <td>
                                             @foreach ($item->details as $detail)
-                                                <span class="badge badge-secondary mb-2">
+                                                <span class="badge text-bg-info mb-2">
                                                     {{ $detail->meja->kode . ' | ' . $detail->meja->jenis . ' (' . $detail->meja->jumlah_maksimal . ' Orang)' }}</span><br>
                                             @endforeach
                                         </td>
@@ -70,21 +70,17 @@
                                                 ]) }}"
                                                     class="btn btn-sm py-2 btn-success">Set Setuju</a>
                                             @endif
-                                            @if ($item->status == 0 || $item->status == 2)
-                                                <form action="javascript:void(0)" method="post" class="d-inline"
-                                                    id="formDelete">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btnDelete btn-sm py-2 btn-danger"
-                                                        data-action="{{ route('admin.reservasi.destroy', $item->id) }}">Hapus</button>
+                                            @if ($item->status == 0 || $item->status == 3)
+                                                <form action="{{ route('admin.reservasi.destroy', $item->id) }}" method="POST" class="d-inline" id="formDelete">
+                                                    @csrf 
+                                                    @method('DELETE')
+                                                    <button class="btn btnDelete btn-sm py-2 btn-danger">Hapus</button>
                                                 </form>
                                             @else
-                                                <form action="javascript:void(0)" method="post" class="d-inline"
-                                                    id="formDelete">
+                                                <form action="javascript:void(0)" method="post" class="d-inline" id="formDelete">
                                                     @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-sm py-2 btn-danger disabled"
-                                                        disabled>Hapus</button>
+                                                    @method('DELETE')
+                                                    <button class="btn btn-sm py-2 btn-danger disabled" disabled>Hapus</button>
                                                 </form>
                                             @endif
                                         </td>
