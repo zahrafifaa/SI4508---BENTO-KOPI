@@ -39,7 +39,7 @@
                 <li class="nav-item">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#kolaborasi-collapse" aria-expanded="false">
                         <svg class="bi"><use xlink:href="#people"/></svg>
-                        Kolaborasi
+                        Kelola Kolaborasi
                     </button>
                     <div class="collapse" id="kolaborasi-collapse" style="">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
@@ -49,36 +49,84 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/dashboard/kolaborasi" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
+                                <a href="/dashboard/kolaborasi" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 pb-2 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
                                     List Kolaborator
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-              </ul>
-            </div>
-          </li>
                 <li class="nav-item">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#lowongan-collapse" aria-expanded="false">
                         <svg class="bi"><use xlink:href="#people"/></svg>
-                        Lowongan Kerja
+                        Kelola Lowongan Kerja
                     </button>
                     <div class="collapse" id="lowongan-collapse" style="">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
                             <li>
-                                <a href="/dashboard/kolaborator" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('dashboard/kolaborator') ? 'active' : ''}}">
+                                <a href="{{ route('admin.lowongan.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('admin/lowongan') ? 'active' : ''}}">
                                     Daftar Lowongan
                                 </a>
                             </li>
                             <li>
-                                <a href="   {{ route('pelamar.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/pelamar') ? 'active' : ''}}">
+                                <a href="   {{ route('pelamar.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 pb-2 fs-14 {{ Request::is('dashboard/pelamar') ? 'active' : ''}}">
                                     Pelamar
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#lokasi-collapse" aria-expanded="false">
+                      <svg class="bi"><use xlink:href="#people"/></svg>
+                        Kelola Lokasi
+                    </button>
+                    <div class="collapse" id="lokasi-collapse" style="">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
+                        {{-- <li>
+                          <a href="{{ route('admin.dashboard') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('dashboard/kolaborator') ? 'active' : ''}}">
+                            Dashboard
+                          </a>
+                        </li> --}}
+                        <li>
+                          <a href="{{ route('admin.location.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('admin/location') ? 'active' : ''}}">
+                            Lokasi
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{ route('admin.meja.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('admin/meja') ? 'active' : ''}}">
+                            Meja
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{ route('admin.reservasi.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 py-2 fs-14 {{ Request::is('admin/reservasi') ? 'active' : ''}}">
+                            Reservasi
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+        
+                  <li class="nav-item">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#artikel-collapse" aria-expanded="false">
+                      <svg class="bi"><use xlink:href="#people"/></svg>
+                        Kelola Artikel
+                    </button>
+                    <div class="collapse" id="artikel-collapse" style="">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
+                        <li>
+                          <a href="{{ route('admin.artikel.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('admin/artikel') ? 'active' : ''}}">
+                            Artikel
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{ route('admin.kategori-artikel.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 pb-2 fs-14 {{ Request::is('admin/kategori-artikel') ? 'active' : ''}}">
+                            Kategori Artikel
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
         </ul>
       </div>
     </div>

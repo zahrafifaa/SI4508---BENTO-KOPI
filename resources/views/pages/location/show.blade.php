@@ -18,6 +18,7 @@
             <p>Jam Buka : {{ $item->jam_buka }}</p>
             <p>Jam Tutup : {{ $item->jam_tutup }}</p>
             <p>Alamat : {{ $item->alamat }}</p>
+            <p>Fasilitas : {{ $item->fasilitas }}</p>
         </div>
     </div><!-- /.row -->
 @endsection

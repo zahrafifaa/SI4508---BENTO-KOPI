@@ -57,7 +57,8 @@ class LocationController extends Controller
             'nama' => ['required'],
             'jam_buka' => ['required'],
             'jam_tutup' => ['required'],
-            'alamat' => ['required']
+            'alamat' => ['required'],
+            'fasilitas' => ['required'],
         ]);
 
         $data = request()->all();

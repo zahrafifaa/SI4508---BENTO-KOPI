@@ -8,7 +8,7 @@
                     <form action="{{ route('admin.location.update', $item->id) }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
-                        @method('patch')
+                        @method('put')
                         <div class='form-group mb-3'>
                             <label for='gambar' class='mb-2'>Gambar</label>
                             <input type='file' name='gambar' id='gambar'
@@ -34,6 +34,16 @@
                             <textarea name='alamat' id='alamat' cols='30' rows='3'
                                 class='form-control @error('alamat') is-invalid @enderror'>{{ $item->alamat ?? old('alamat') }}</textarea>
                             @error('alamat')
+                                <div class='invalid-feedback'>
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class='form-group mb-3'>
+                            <label for='fasilitas' class='mb-2'>Fasilitas</label>
+                            <textarea name='fasilitas' id='fasilitas' cols='30' rows='3'
+                                class='form-control @error('fasilitas') is-invalid @enderror'>{{ old('fasilitas') }}</textarea>
+                            @error('fasilitas')
                                 <div class='invalid-feedback'>
                                     {{ $message }}
                                 </div>
@@ -78,7 +88,7 @@
     <script src="{{ asset('assets/vendors/summernote/dist/summernote.min.js') }}"></script>
     <script>
         $(function() {
-            $('#deskripsi').summernote({
+            $('#fasilitas').summernote({
                 height: 220
             });
         })
