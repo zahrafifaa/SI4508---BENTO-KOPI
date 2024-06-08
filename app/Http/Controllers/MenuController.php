@@ -133,6 +133,7 @@ class MenuController extends Controller
                 break;
         }
         if (Auth::check()) {
+            $user = Auth::user();
             $user_id = Auth::id();
             $totalItems = CartItem::where('user_id', $user_id)->sum('jumlah');
         }
