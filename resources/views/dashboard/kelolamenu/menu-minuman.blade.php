@@ -1,31 +1,7 @@
-<!doctype html>
-<html lang="en">
+@extends('dashboard.layout.main')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Menu BentoKopi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <style>
-        .menu .card {
-            background-color: #f1f5f9;
-        }
+@section('isiDashboard')
 
-        .card-img-top {
-            height: 120px;
-        }
-    </style>
-</head>
-
-
-<body>
-    <main>
         <!-- <header class="px-5 py-3">
             <form action="{{ route('admin.logout') }}" method="post">
                 @csrf
@@ -37,10 +13,6 @@
                 <a href="{{ url('/dashboard') }}" class="text-black" style="text-decoration:none;">< Back</a>
             </p>
         </div>
-        <section class="p-5">
-            <div>
-                <h2>Makanan</h2>
-            </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
@@ -53,43 +25,54 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            <div>
+                <h2 class="poppins mb-3">Daftar Minuman</h2>
+            </div>
+           
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-2 g-md-5 menu">
                 @foreach ($menus as $menu)
                     <div class="col">
-                        <div class="card h-100 p-3 border-0">
-                            <h3 class="card-title mb-0">{{ $menu->nama }}</h3>
+                        <div class="card p-3 border-0">
+                            <h5 class="card-title mb-2 poppins">{{ $menu->nama }}</h5>
                             <div class="card-body p-0">
-                                <img src="{{ $menu->gambar  }}"
+                                <img src="{{ $menu->gambar }}"
                                     style="object-fit:cover;  width: 100%; object-position: 50%; " class="card-img-top"
-                                    alt="{{$menu->nama}}">
-                                    <div class="collapse position-relative" id="collapseExample{{ $menu->id }}">
-                        <div class="card card-body position-absolute top-0 bg-white border borer-2 border-dark" style="width: 100%">
-                            <p>Hapus Menu?</p>
-                            <div class="row row-cols-md-2 g-2 g-md-3">
-                                <div class="col">
-                                    <div class="d-grid">
-                                        <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ $menu->id }}" aria-expanded="false" aria-controls="collapseExample{{ $menu->id }}">
-                                            Batal
-                                        </button>
+                                    alt="kopi">
+                                <div class="collapse position-relative" id="collapseExample{{ $menu->id }}">
+                                    <div class="card card-body position-absolute top-0 bg-white border borer-2 border-dark"
+                                        style="width: 100%">
+                                        <p>Hapus Menu?</p>
+                                        <div class="row row-cols-md-2 g-2 g-md-3">
+                                            <div class="col">
+                                                <div class="d-grid">
+                                                    <button class="btn btn-danger" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseExample{{ $menu->id }}"
+                                                        aria-expanded="false"
+                                                        aria-controls="collapseExample{{ $menu->id }}">
+                                                        Batal
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <form action="{{ route('admin.menu.destroy', ['id' => $menu->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <!-- buat hapus -->
+                                                    @method('DELETE')
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-success" type="submit">Iya</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <form action="{{ route('admin.menu.destroy', ['id' => $menu->id]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div class="d-grid">
-                                            <button class="btn btn-success" type="submit">Iya</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                                 <p class="fw-bold m-0">Rp. {{ number_format($menu->harga, 0, ',', '.') }}
                                 <p>{{ $menu->deskripsi }}</p>
                                 </p>
                             </div>
-                            <div class=" p-0 border-0" style="background-color: none">
+                            <div class="card-footer p-0 bg-none border-0">
                                 <div class="row row-cols-md-2 g-2 g-md-3">
                                     <div class="col">
                                         <div class="d-grid">
@@ -210,6 +193,4 @@
         });
     </script>
 
-</body>
-
-</html>
+@endsection

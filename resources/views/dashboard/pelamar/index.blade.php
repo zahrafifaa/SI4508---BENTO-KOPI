@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 poppins fw-bold">
-        <h1 class="h2">Daftar Pelamar Kerja</h1>
+        <h2 class="mb-1">Daftar Pelamar Kerja</h2>
     </div>
 
     @if(session()->has('success'))

@@ -17,7 +17,9 @@ class AdminController extends Controller
         $credential = $request->only('email', 'password');
         if (Auth::guard('admin')->attempt($credential)) {
             $user = Auth::guard('admin')->user();
-            return redirect()->intended('/admin/menu-makanan');
+            // return redirect()->intended('/admin/menu-makanan');
+            // return view('admin.menu-makanan');
+            return redirect()->route('dashboard');
         }
         return redirect('login-admin')->withInput()->withErrors(['login_gagal' => 'These credentials does not match our records']);
     }
