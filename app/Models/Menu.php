@@ -16,8 +16,8 @@ class Menu extends Model
         'jenis',
         'deskripsi',
         'harga',
-        'gambar',
-        'admin_id'
+        'gambar'
+        // 'admin_id'
     ];
 
     public function cartitem()
@@ -35,8 +35,8 @@ class Menu extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function admin(): BelongsTo
-    {
-        return $this->belongsTo(Admin::class);
-    }
+    // public function admin(): BelongsTo
+    // {
+    //     return $this->belongsTo(Admin::class);
+    // }
 }

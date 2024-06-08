@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->text('gambar');
             $table->text('deskripsi');
             $table->integer('harga');
-            $table->unsignedBigInteger('admin_id');
-            $table->foreign('admin_id')->references('id')->on('admins');
+            // $table->unsignedBigInteger('admin_id');
+            // $table->foreign('admin_id')->references('id')->on('admins');
             $table->timestamps();
         });
     }

@@ -69,7 +69,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('pelamar.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/pelamar') ? 'active' : ''}}">
+                                <a href="   {{ route('pelamar.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/pelamar') ? 'active' : ''}}">
                                     Pelamar
                                 </a>
                             </li>

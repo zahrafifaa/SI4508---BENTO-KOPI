@@ -82,3 +82,19 @@
 .card-img-top {
   height: 120px;
 }
+
+.card-body-chart {
+  position: relative;
+  height: 280px; /* Adjust height as needed */
+  overflow: hidden; /* Ensure content does not overflow the card */
+}
+
+.small-chart {
+  display: block;
+  width: 100% !important;
+  height: 90% !important;
+}
+
+.poppins{
+  font-family: "Poppins", sans-serif;
+}

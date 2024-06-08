@@ -42,7 +42,7 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::where('nama', 'like', "%$query%")->get();
         $sort = 'null';
-        $title = 'menu';
+        $title = 'Menu';
         $user = Auth::user();
         if (Auth::check()) {
             $user_id = Auth::id();
@@ -58,7 +58,7 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $menus = Menu::where('kategori', $kategori)->where('nama', 'like', "%$query%")->paginate(4);
         $sort = 'null';
-        $title = 'menu';
+        $title = 'Menu';
         $user = Auth::user();
         if (Auth::check()) {
             $user_id = Auth::id();
@@ -86,7 +86,7 @@ class MenuController extends Controller
     {
         $categories = Menu::pluck('kategori')->unique();
         $sort = $option;
-        $title = 'menu';
+        $title = 'Menu';
         switch ($option) {
             case 'termurah':
                 $menus = Menu::orderBy('harga')->get();
@@ -109,7 +109,7 @@ class MenuController extends Controller
         $menus = Menu::where('kategori', $kategori)->paginate(4);
         $categorynow = $kategori;
         $sort = "null";
-        $title = 'menu';
+        $title = 'Menu';
         $user = Auth::user();
         if (Auth::check()) {
             $user_id = Auth::id();
@@ -123,7 +123,7 @@ class MenuController extends Controller
         $categories = Menu::pluck('kategori')->unique();
         $categorynow = strtolower($kategori); // Convert to lowercase
         $sort = $option;
-        $title = 'menu';
+        $title = 'Menu';
         switch ($option) {
             case 'termurah':
                 $menus = Menu::where('kategori', $kategori)->orderBy('harga')->paginate(4);
@@ -159,6 +159,7 @@ class MenuController extends Controller
 
     public function adminStore(Request $request)
     {
+        // return dd($request);
         try {
             $validatedData = $request->validate([
                 'nama' => 'required|string',
@@ -168,7 +169,7 @@ class MenuController extends Controller
                 'deskripsi' => 'required|string',
                 'harga' => 'required|numeric|min:0',
             ]);
-            $validatedData['admin_id'] = Auth::guard('admin')->user()->id;
+            // $validatedData['admin_id'] = Auth::user()->id;
             if ($request->hasFile('gambar')) {
                 $namaGambar = time() . '.' . $request->file('gambar')->getClientOriginalExtension();
                 $gambarPath = $request->file('gambar')->storeAs('public/images/menu', $namaGambar);
@@ -177,6 +178,7 @@ class MenuController extends Controller
             $menu = Menu::create($validatedData);
             return redirect()->back()->with('success', 'Menu berhasil ditambahkan.');
         } catch (\Exception $e) {
+            return dd($e);
             return redirect()->back()->with('error', 'Terjadi kesalahan. Mohon coba lagi.');
         }
     }

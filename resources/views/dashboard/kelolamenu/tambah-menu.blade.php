@@ -13,9 +13,7 @@
                 <a href="{{ url('/dashboard') }}" class="text-black" style="text-decoration:none;">< Back</a>
             </p>
         </div>
-        <section>
-            <div class="card mx-auto p-5">
-                @if (session('success'))
+            @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -27,9 +25,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+                
                 <div class="card-title">
-                    <h2>Tambah Menu</h2>
+                    <h2 class="poppins mb-2">Tambah Menu</h2>
                 </div>
+            <div class="card mx-auto p-3">
+                
+                
                 <div class="card-body p-0">
                     <form action="{{ route('admin.store.menu') }}" method="post" enctype="multipart/form-data">
                         @csrf

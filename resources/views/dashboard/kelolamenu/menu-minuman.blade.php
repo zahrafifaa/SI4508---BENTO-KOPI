@@ -13,10 +13,6 @@
                 <a href="{{ url('/dashboard') }}" class="text-black" style="text-decoration:none;">< Back</a>
             </p>
         </div>
-        <section class="p-5">
-            <div>
-                <h2>Minuman</h2>
-            </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
@@ -29,11 +25,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            <div>
+                <h2 class="poppins mb-3">Daftar Minuman</h2>
+            </div>
+           
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-2 g-md-5 menu">
                 @foreach ($menus as $menu)
                     <div class="col">
-                        <div class="card h-100 p-3 border-0">
-                            <h3 class="card-title mb-0">{{ $menu->nama }}</h3>
+                        <div class="card p-3 border-0">
+                            <h5 class="card-title mb-2 poppins">{{ $menu->nama }}</h5>
                             <div class="card-body p-0">
                                 <img src="{{ $menu->gambar }}"
                                     style="object-fit:cover;  width: 100%; object-position: 50%; " class="card-img-top"

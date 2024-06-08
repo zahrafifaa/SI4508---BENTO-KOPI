@@ -5,6 +5,42 @@
     font-family: "Plus Jakarta Sans", sans-serif;
 }
 
+  
+  .navbar-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav-item {
+    margin: 0 10px; /* Adjust as needed for spacing between nav items */
+  }
+  
+  .nav-link.active {
+    color: #FFFFFF !important;
+    background-color: #007200;
+    border-radius: 10px;
+    
+  }
+
+  .btn{
+    background-color: #007200;
+    color: white;
+  }
+
+  .tablinks-btn {
+    background-color: white;
+    color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: #007200;
+}
+.tablinks-btn.active {
+    background-color: #007200;
+    color: white;
+}  
+
 /* nav {
     background-color: white;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -20,16 +56,11 @@ nav a {
     font-size: 14px;
     font-weight: 500;
 }
-.tablinks {
-    background-color: #e2e8f0;
-    color: black;
-}
+
 .tablinks:hover {
     background-color: #cbd5e1;
 }
-.tablinks.active {
-    background-color: #059669;
-    color: white;
+ color: white;
 }
 .tablinks.active:hover {
     background-color: #065f46;
@@ -154,11 +185,11 @@ a {
 
 }
 
-.active{
+/* .active{
     background-color: #007200;
     color: white;
     border-radius: 10px;
-}
+} */
 
 
 .preAbout{
@@ -256,12 +287,22 @@ a {
     padding: 1rem;
 }
 
-/* .flexContainer{
+.flexContainer{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+/* .container{
+    display: flex;
+    justify-content: center;
 } */
+
+.end {
+    justify-content: end;
+    width: 300px;
+}
 
 .grid2{
     display: grid;
@@ -292,6 +333,22 @@ a {
     justify-content: left;
     align-content: center;
     border-radius:10px; */
+}
+
+.menu-card {
+    /* Atur tampilan card di sini */
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.menu-card img {
+    /* Atur tampilan gambar di sini */
+    object-fit: cover;
+    width: 100%;
+    object-position: 50%;
 }
 
 .bold{
