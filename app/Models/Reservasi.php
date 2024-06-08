@@ -56,5 +56,5 @@ class Reservasi extends Model
     // 2 = Ditolak
 }
 
-}
+
 

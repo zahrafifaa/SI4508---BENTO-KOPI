@@ -218,7 +218,7 @@ Route::post('lowongan/{id}/apply', [LowonganController::class, 'proses'])->name(
 
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
 Route::get('reservasi/cek', [ReservasiController::class, 'cek'])->name('reservasi.cek');
