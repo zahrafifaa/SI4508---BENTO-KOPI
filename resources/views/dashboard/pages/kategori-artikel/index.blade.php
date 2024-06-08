@@ -26,13 +26,11 @@
                                         <td>
                                             <a href="{{ route('admin.kategori-artikel.edit', $item->id) }}"
                                                 class="btn btn-sm py-2 btn-info">Edit</a>
-                                            <form action="javascript:void(0)" method="post" class="d-inline"
-                                                id="formDelete">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btnDelete btn-sm py-2 btn-danger"
-                                                    data-action="{{ route('admin.kategori-artikel.destroy', $item->id) }}">Hapus</button>
-                                            </form>
+                                                <form action="{{ route('admin.kategori-artikel.destroy', $item->id) }}" method="post" class="d-inline">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-sm py-2 btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">Hapus</button>
+                                                </form>
                                         </td>
                                     </tr>
                                 @endforeach

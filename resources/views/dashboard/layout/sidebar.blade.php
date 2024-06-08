@@ -38,7 +38,7 @@
             <div class="collapse" id="dashboard-collapse" style="">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
                 <li>
-                  <a href="/dashboard/kolaborator" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('dashboard/kolaborator') ? 'active' : ''}}">
+                  <a href="{{ route('admin.lowongan.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 my-2 fs-14 {{ Request::is('dashboard/kolaborator') ? 'active' : ''}}">
                     Daftar Lowongan
                   </a>
                 </li>
@@ -76,6 +76,27 @@
                 <li>
                   <a href="{{ route('admin.reservasi.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
                     Reservasi
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 gap-2 poppins px-40 fs-14 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+              <svg class="bi"><use xlink:href="#people"/></svg>
+                Artikel
+            </button>
+            <div class="collapse" id="dashboard-collapse" style="">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small gap-2 poppins px-40">
+                <li>
+                  <a href="{{ route('admin.artikel.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
+                    Kelola Artikel
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('admin.kategori-artikel.index') }}" class="link-body-emphasis d-inline-flex text-decoration-none rounded px-4 fs-14 {{ Request::is('dashboard/kolaborasi') ? 'active' : ''}}">
+                    Kelola Kategori Artikel
                   </a>
                 </li>
               </ul>

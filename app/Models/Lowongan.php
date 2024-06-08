@@ -20,14 +20,10 @@ class Lowongan extends Model
         }
     }
 
-    protected function casts(): array
-    {
-        return [
-            'tanggal_buka' => 'datetime',
-            'tanggal_tutup' => 'datetime',
-
-        ];
-    }
+    protected $casts = [
+        'tanggal_buka' => 'datetime',
+        'tanggal_tutup' => 'datetime',
+    ];
 
     public function status()
     {

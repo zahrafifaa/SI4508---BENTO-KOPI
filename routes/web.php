@@ -110,19 +110,17 @@ Route::delete('/admin/menu/{id}', [MenuController::class, 'destroy'])->name('adm
 
 // Route::get('artikel', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth');
 
-// Route::get('/artikel', function () {
-//     return view('artikel', [
-//         "title" => "Artikel"
-//     ]);
-// })->middleware('auth');
 
-// Route::get('/location', function () {
-//     return view('location', [
-//         "title" => "Location"
-//     ]);
-// })->middleware('auth');
+// Punya Nisa
 Route::get('/location', [App\Http\Controllers\LocationController::class, 'index'])->name('location.index');
 Route::get('/location/{id}', [App\Http\Controllers\LocationController::class, 'show'])->name('location.show');
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('kategori-artikel', App\Http\Controllers\Admin\KategoriArtikelController::class);
+    Route::resource('artikel', App\Http\Controllers\Admin\ArtikelController::class);
+    Route::resource('lowongan', \App\Http\Controllers\Admin\LowonganController::class);
+});
+// Akhir Punya Nisa
 
 Route::get('/apply', function () {
     return view('apply', [
