@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Reservasi;
 use Illuminate\Http\Request;
 
@@ -13,7 +12,7 @@ class ReservasiControllerAdmin extends Controller
         $items = Reservasi::latest()->get();
         return view('dashboard.pages.reservasi.index', [
             'title' => 'Reservasi',
-            'items'  => $items
+            'items' => $items
         ]);
     }
 
@@ -42,5 +41,13 @@ class ReservasiControllerAdmin extends Controller
         }
 
         return redirect()->back()->with('success', 'Status Reservasi berhasil diupdate.');
+    }
+
+    public function destroy($id)
+    {
+        $item = Reservasi::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('admin.reservasi.index')->with('success', 'Reservasi berhasil dihapus.');
     }
 }

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             KategoriArtikelSeeder::class,
             ArtikelSeeder::class,
+            MejaSeeder::class,
             DashboardKollabSeeder::class,
             LowonganSeeder::class
         ]);
