@@ -21,8 +21,22 @@ class Kolaborasi extends Model
         $val->where('status', 1);
     }
 
+    public function getSurat()
+    {
+        return storage_path('app/public/' . $this->surat);
+    }
+
     public function gambar()
     {
-        return asset('storage/' . $this->gambar);
+        if ($this->gambar) {
+            return asset('storage/' . $this->gambar);
+        } else {
+            return asset('images/bentoKopi.png');
+        }
+    }
+
+    public function getTanggalAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y');
     }
 }

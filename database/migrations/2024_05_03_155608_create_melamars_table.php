@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('melamar', function (Blueprint $table) {
             $table->id();
             $table->foreignId('lowongan_id')->constrained('lowongan')->cascadeOnDelete();
+            $table->foreignID('user_id');
             $table->string('nama');
             $table->string('jenis_kelamin');
             $table->string('tempat_lahir');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->integer('pengalaman_kerja')->nullable();
             $table->string('cv');
             $table->string('foto');
+            $table->string('status')->default('Belum ditinjau');
             $table->timestamps();
         });
     }

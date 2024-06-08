@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('kolaborasi', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('organisasi');
+            $table->string('jabatan');
             $table->string('deskripsi_singkat');
-            $table->text('deskripsi');
-            $table->string('gambar')->nullable();
+            $table->date('tanggal');
+            $table->string('surat')->nullable();
+            $table->string('email')->nullable();
+            $table->string('nomor')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->integer('status');
             $table->timestamps();

@@ -15,8 +15,8 @@
             <div class="text-center mb-5">
                 <img src="{{ $item->gambar() }}" class="img-fluid" style="max-height:320px" alt="">
             </div>
-            <p>Tanggal Dibuka : {{ $item->tanggal_buka->translatedFormat('d F Y') }}</p>
-            <p>Tanggal Ditutup : {{ $item->tanggal_tutup->translatedFormat('d F Y') }}</p>
+            <p>Tanggal Dibuka : {{ $item->tanggal_buka }}</p>
+            <p>Tanggal Ditutup : {{ $item->tanggal_tutup }}</p>
 
             <p>{!! $item->deskripsi !!}</p>
         </div>

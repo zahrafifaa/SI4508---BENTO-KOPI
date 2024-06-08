@@ -78,5 +78,13 @@ class ArtikelSeeder extends Seeder
             'deskripsi' => 'kafe yang menghadirkan pengalaman kuliner yang unik dan menyenangkan. Bento Kopi menawarkan lingkungan yang nyaman dan estetis bagi para pengunjung untuk menikmati waktu bersama keluarga dan teman-teman mereka.',
             'gambar' => NULL
         ]);
+        Artikel::create([
+            'judul' => 'Judul Artikel sembilan',
+            'slug' => 'judul-artikel-sembilan',
+            'deskripsi_singkat' => 'Deskripsi singkat artikel sembilan membahas mengenai minuman yang paling populer dan banyak diminati',
+            'kategori_artikel_id' => KategoriArtikel::inRandomOrder()->first()->id,
+            'deskripsi' => 'kafe yang menghadirkan pengalaman kuliner yang unik dan menyenangkan. Bento Kopi menawarkan lingkungan yang nyaman dan estetis bagi para pengunjung untuk menikmati waktu bersama keluarga dan teman-teman mereka.',
+            'gambar' => NULL
+        ]);
     }
 }

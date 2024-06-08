@@ -14,7 +14,7 @@ class KategoriArtikelSeeder extends Seeder
     public function run(): void
     {
         KategoriArtikel::create([
-            'nama' => 'Ummum',
+            'nama' => 'Umum',
             'slug' => 'umum'
         ]);
         KategoriArtikel::create([
