@@ -7,7 +7,6 @@ use App\Models\Meja;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-
 class MejaSeeder extends Seeder
 {
     /**
@@ -45,7 +44,6 @@ class MejaSeeder extends Seeder
             'status' => '0',
             'jumlah_maksimal' => 2
         ]);
-
 
     }
 }

@@ -13,10 +13,6 @@
                 <a href="{{ url('/dashboard') }}" class="text-black" style="text-decoration:none;">< Back</a>
             </p>
         </div>
-        <section class="p-5">
-            <div>
-                <h2>Minuman</h2>
-            </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
