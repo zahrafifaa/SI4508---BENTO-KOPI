@@ -70,6 +70,8 @@ class LoginController extends Controller
             'password' => 'required|min:5|max:255'
         ],$customMessage);
 
+        // dd($request->all());
+
         $token = PasswordResetToken::where('token',$request->token)->first();
 
         if (!$token) {
