@@ -27,15 +27,8 @@ class RegisterController extends Controller
             'phone' => 'required|min:5|max:255'
         ]);
 
-        // $validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['password'] = Hash::make($validatedData['password']);
-
         $user = User::create($validatedData);
-
-        $cartData = [
-            'user_id' => $user->id
-        ];
-
         return redirect('/login')->with('success', 'Registrasi Berhasil☕');
     }
 

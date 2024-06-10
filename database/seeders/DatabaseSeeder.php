@@ -33,12 +33,21 @@ class DatabaseSeeder extends Seeder
             KategoriArtikelSeeder::class,
             ArtikelSeeder::class,
             MejaSeeder::class,
+            DiskonSeeder::class,
             DashboardKollabSeeder::class,
             LowonganSeeder::class,
             // KolaborasiSeeder::class,
             // MelamarSeeder::class,
             // ReservasiSeeder::class,
             // TransaksiSeeder::class
+        ]);
+
+        $user = User::create([
+            'name' => 'user ',
+            'username' => 'User1 ',
+            'email' => 'user1@gmail.com',
+            'phone' => '08211117828',
+            'password' => bcrypt('123456')
         ]);
 
         $user = User::create([
@@ -65,13 +74,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user->id
         ];
 
-        $user = User::create([
-            'name' => 'user ',
-            'username' => 'User1 ',
-            'email' => 'user1@gmail.com',
-            'phone' => '08211117828',
-            'password' => bcrypt('123456')
-        ]);
+        
 
         $cartData = [
             'user_id' => $user->id

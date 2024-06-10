@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Melamar;
 use App\Models\Favorite;
+use App\Models\Reservasi;
+use App\Models\Kolaborasi;
 use App\Models\OrderTable;
-use App\Models\DashboardCashierTotal;
 use Illuminate\Http\Request;
 use App\Models\CartItemOrder;
 use App\Models\DashboardCashier;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Kolaborasi;
-use App\Models\Reservasi;
-use App\Models\Melamar;
-use DB;
+use App\Models\DashboardCashierTotal;
 
 class DashboardCashierController extends Controller
 {
@@ -24,7 +24,7 @@ class DashboardCashierController extends Controller
 
         $user = Auth::user();
 
-        if ($user->id == 1) {
+        if ($user->id == 2) {
             $dashboardCashiers = DashboardCashier::with(['orderTable.user', 'orderTable.cartItemOrders.menu'])->get();
 
             // Group data by orderTable

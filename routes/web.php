@@ -31,21 +31,6 @@ use App\Http\Controllers\ListKolaboratorController;
 use App\Http\Controllers\DashboardCashierController;
 
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/menuapi', function () {
     return view('menuapi');
 });
@@ -82,12 +67,6 @@ Route::get('/', function () {
 Route::post('/menu/{menu}/favorite', [FavoriteController::class, 'store'])->name('storeMenu')->middleware('auth');
 Route::delete('/favorite/delete/{favorite}', [FavoriteController::class, 'destroy'])->name('destroyMenu')->middleware('auth');
 
-
-// Route::post('/favorites/{menuId}', [FavoriteController::class, 'toggleFavorite'])->name('favorites');
-// Route::get('/favorites', [FavoriteController::class, 'getFavorites']);
-
-
-
 Route::get('/reservasi', function () {
     return view('reservasi', [
         "title" => "Reservasi",
@@ -107,9 +86,6 @@ Route::get('/dashboard123', function () {
     return view('/admin/dashboard');
 })->middleware('auth');
 Route::delete('/admin/menu/{id}', [MenuController::class, 'destroy'])->name('admin.menu.destroy');
-
-// Route::get('/artikel', [DashboardCashierController::class, 'show_dashboard_statistic'])->middleware('auth');
-
 
 // Punya Nisa
 Route::get('/location', [App\Http\Controllers\LocationController::class, 'index'])->name('location.index');
@@ -147,19 +123,6 @@ Route::post('/validate-forgot-password-act', [LoginController::class, 'validate_
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-
-// Route::get('/dashboard', function(){
-//     return view('dashboard.index',[
-//         'title' => 'Dashboard',
-//         'active' => 'Dashboard'
-//     ]);
-// })->middleware('auth')->name('dashboard');
-
-// Route::get('/cartMenu', [MenuController::class, 'indexs']);  
-// Route::get('/shopping-cart', [MenuController::class, 'menuCart'])->name('shopping.cart');
-// Route::get('/menus/{id}', [MenuController::class, 'addmenutoCart'])->name('addmenu.to.cart');
-// Route::patch('/update-shopping-cart', [MenuController::class, 'updateCart'])->name('update.sopping.cart');
-// Route::delete('/delete-cart-product', [MenuController::class, 'deleteProduct'])->name('delete.cart.product');
 Route::get('/', [BerandaController::class, 'index'])->middleware('auth');
 Route::GET('/cart', [CartController::class, 'index'])->middleware('auth')->name('cart');
 Route::post('/menu/{menu}/cart', [CartController::class, 'store'])->middleware('auth')->name('cart.store');
@@ -178,7 +141,6 @@ Route::get('/invoice/{id}', [CartController::class, 'invoice'])->middleware('aut
 Route::get('/', [DashboardCashierController::class, 'index'])->name('dashboard.cashier')->middleware('auth');
 Route::post('/dashboardcashier/{id}/update-status', [DashboardCashierController::class, 'updateStatus'])->name('dashboardcashier.updateStatus')->middleware('auth');
 Route::delete('/dashboardcashier/{id}/complete', [DashboardCashierController::class, 'completeOrder'])->name('dashboardcashier.completeOrder')->middleware('auth');
-
 
 Route::get('/discounts', [DiscountController::class, 'index'])->name('discounts.index');
 Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
@@ -214,8 +176,6 @@ Route::get('lowongan/{id}', [LowonganController::class, 'show'])->name('lowongan
 Route::get('lowongan/{id}/apply', [LowonganController::class, 'apply'])->name('lowongan.apply');
 Route::post('lowongan/{id}/apply', [LowonganController::class, 'proses'])->name('lowongan.proses');
 
-
-
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
@@ -233,9 +193,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('reservasi', ReservasiControllerAdmin::class)->only(['index', 'destroy']);
 });
 // AKhir Punya Fitri
-
-
-
 
 Route::get('apply', [LowonganController::class, 'index'])->name('lowongan.index')->middleware('auth');
 Route::get('apply/{id}', [LowonganController::class, 'show'])->name('lowongan.show');

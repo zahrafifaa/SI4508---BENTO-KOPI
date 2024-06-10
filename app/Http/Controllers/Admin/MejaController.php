@@ -20,7 +20,7 @@ class MejaController extends Controller
     public function create()
     {
         $getNewCode = Meja::getNewCode();
-        return view('admin.pages.meja.create', [
+        return view('dashboard.pages.meja.create', [
             'title' => 'Tambah Meja',
             'getNewCode' => $getNewCode
         ]);
@@ -42,7 +42,7 @@ class MejaController extends Controller
     public function edit($id)
     {
         $item = Meja::findOrFail($id);
-        return view('admin.pages.meja.edit', [
+        return view('dashboard.pages.meja.edit', [
             'title' => 'Edit Meja',
             'item' => $item
         ]);
